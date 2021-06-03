@@ -1,32 +1,9 @@
 ![](RackMultipart20210603-4-1ha91kc_html_cdf7c04903083f0e.gif)
 
-# **Projektname**
+# **NFController**
 
 # Dokumentation
 
-# Version 1.0.0, 3. Februar 2020 | Projektteam: Person 1, Person 2
-
-![](RackMultipart20210603-4-1ha91kc_html_b81a80fdcdbfa84a.gif) ![](RackMultipart20210603-4-1ha91kc_html_601e8f22d5ca4683.png) ![](RackMultipart20210603-4-1ha91kc_html_f53323f407892050.png) ![](RackMultipart20210603-4-1ha91kc_html_ebac3685538a4a2f.png)
-
-# Inhalt
-
-**[1](#_Toc31364897)****Einleitung 2**
-
-**[2](#_Toc31364898)****Abstract 2**
-
-**[3](#_Toc31364899)****Anforderungsanalyse 2**
-
-[3.1User Stories 2](#_Toc31364900)
-
-**[4](#_Toc31364901)****GUI Design 3**
-
-[4.1Screen Design 3](#_Toc31364902)
-
-[4.2ERM 3](#_Toc31364903)
-
-**[5](#_Toc31364904)****Abgabe 3**
-
-**[6](#_Toc31364905)****Fazit 3**
 
 1.
 # Einleitung
