@@ -2,10 +2,7 @@
 
 # **NFController**
 
-# Dokumentation
 
-
-1.
 # Einleitung
 
 Die im Verlauf des Projekts entstandenen Dokumentationsteile müssen jeweils zu den kommunizierten Terminen abgegeben werden. Alle geforderten Inhalte sind genügend genau beschrieben, so dass eine andere Gruppe das Projekt später weiterführen könnte.
@@ -16,15 +13,15 @@ Die im Verlauf des Projekts entstandenen Dokumentationsteile müssen jeweils zu 
 
 **Wichtig: Die gelb markierten Teile sind nicht Teil der Abgabe, bitte löschen oder ersetzen!**
 
-1.
+
 # Abstract
 
 Eine Beschreibung, welche einen Überblick über das ganze Projekt gibt. (Kopie vom Projektantrag.)
 
-1.
+
 # Anforderungsanalyse
 
-  1.
+  
 ## User Stories
 
 Zu Beginn von jedem Softwareprojekt steht die Anforderungsanalyse (Requirements Engineering). Hier werden die Anforderungen an das zukünftige Produkt formuliert. User Stories werden in der Business Sprache verfasst, d.h. verwende möglichst keine technischen Begriffe. Die User Stories sind priorisiert, vom Wichtigen zum Unwichtigen. Schreibe die User Stories in der abzuarbeitenden Rheinfolge:
@@ -45,20 +42,14 @@ Funktionale-US- **01**
 | Art | Muss-Ziel |
 | Akzeptanzkriterien | Mit den Akzeptanzkriterien beschreibt der Anforderer, wie er die korrekte Umsetzung der User Story testen würde |
 
-1.
+
 # GUI Design
 
-  1.
+  
 ## Screen Design
 
 Dieser Abschnitt enthält alle Screen Designs inklusiv einer Textbeschreibung zu jedem Screen Design.
 
-  1.
-## ERM
-
-Ein vollständiges Entity-Relationship-Model der Datenbank.
-
-1.
 # Abgabe
 
 Die Abgabe des Produktes erfolgt über **git** :
@@ -72,7 +63,7 @@ Die Abgabe des Produktes erfolgt über **git** :
 
 ![](RackMultipart20210603-4-1ha91kc_html_5ed24ab4a0fb81cb.png)
 
-1.
+
 # Fazit
 
 Hier kommt eure Reflexion zum Projekt.
