@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/llBody"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <RelativeLayout
+        android:id="@+id/rlReadNFCTAG"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/bg_home"
+        android:gravity="center">
+
+
+        <TextView
+            android:id="@+id/tvReadWithNfc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/str_Read_with_nfc"
+            android:textColor="@android:color/white"
+            android:textSize="40sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlWriteWithNFC"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/bg_home"
+        android:gravity="center">
+
+
+        <TextView
+            android:id="@+id/tvWriteWithNfc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/str_Write_with_nfc"
+            android:textColor="@android:color/white"
+            android:textSize="40sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlWipeWithNFC"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/bg_home"
+        android:gravity="center">
+
+
+        <TextView
+            android:id="@+id/tvWipeWithNfc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/str_Wipe_with_nfc"
+            android:textColor="@android:color/white"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+
+
+</LinearLayout>
+
+

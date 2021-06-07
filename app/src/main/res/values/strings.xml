@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">NFControll</string>
+    <string name="message_write_error">Error Writing Message !</string>
+    <string name="message_write_success">Successfully written to Tag !</string>
+    <string name="message_wipe_success">Successfully wiped Tag !</string>
+    <string name="str_Read_with_nfc">Read NFC Tag</string>
+    <string name="str_Write_with_nfc">Write NFC Tag</string>
+    <string name="str_Wipe_with_nfc">Wipe NFC Tag</string>
+    <string name="Wipetag_alert">Are you shure you want to erase all data from this nfc tag?</string>
+    <string name="Wipe_Tag">Wipe the tag</string>
+    <string name="cancel">Dont wipe it</string>
+    <string name="todo">todo</string>
+    <string name="str_reading">Reading</string>
+</resources>
