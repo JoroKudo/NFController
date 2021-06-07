@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/str_Write_with_nfc"
+        android:text="@string/str_Wipe_with_nfc"
         android:textColor="@android:color/white"
         android:textSize="@dimen/_20sdp" />
 

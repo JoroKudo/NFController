@@ -83,9 +83,7 @@ public class NFCWipe extends Activity {
                             Toast.makeText(this, (getString(R.string.message_write_error)), Toast.LENGTH_SHORT).show();
                         }
                     })
-                    .setNegativeButton(R.string.cancel, (dialog, id) -> {
-                        finish();
-                    });
+                    .setNegativeButton(R.string.cancel, (dialog, id) -> finish());
             builder.show();
 
 

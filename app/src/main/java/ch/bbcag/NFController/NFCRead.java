@@ -1,5 +1,6 @@
 package ch.bbcag.NFController;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -141,6 +142,7 @@ public class NFCRead extends Activity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void readFromNFC(Tag tag, Intent intent) {
 
         try {
