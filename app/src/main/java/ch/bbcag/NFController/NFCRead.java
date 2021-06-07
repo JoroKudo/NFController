@@ -127,6 +127,7 @@ public class NFCRead extends Activity {
         }
 
         nParcel = Parcel.obtain();
+        assert id != null;
         nParcel.writeInt(id.length);
         nParcel.writeByteArray(id);
         nParcel.writeInt(oTechList.length);

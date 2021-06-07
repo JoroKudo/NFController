@@ -1,7 +1,7 @@
 package ch.bbcag.NFController.NFCInfo;
 
 class TagWrapper {
-    private String id;
+    private final String id;
     TagTechList techList = new TagTechList();
 
     public TagWrapper(final String tagId) {
