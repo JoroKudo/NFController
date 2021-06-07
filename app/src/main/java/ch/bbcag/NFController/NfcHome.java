@@ -5,15 +5,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bbcag.NFController.R;
+
+import ch.bbcag.NFController.NFCInfo.NFCInfo;
 
 public class NfcHome extends Activity implements View.OnClickListener {
 
     private RelativeLayout rlRead;
     private RelativeLayout rlWrite;
     private RelativeLayout rlWipe;
+    private ImageView Detailscan;
 
 
 
@@ -25,6 +29,7 @@ public class NfcHome extends Activity implements View.OnClickListener {
         rlRead.setOnClickListener(this);
         rlWrite.setOnClickListener(this);
         rlWipe.setOnClickListener(this);
+        Detailscan.setOnClickListener(this);
 
     }
 
@@ -33,6 +38,7 @@ public class NfcHome extends Activity implements View.OnClickListener {
         rlRead = findViewById(R.id.rlReadNFCTAG);
         rlWrite = findViewById(R.id.rlWriteWithNFC);
         rlWipe = findViewById(R.id.rlWipeWithNFC);
+        Detailscan = findViewById(R.id.DetailScan);
 
     }
 
@@ -53,6 +59,11 @@ public class NfcHome extends Activity implements View.OnClickListener {
                 break;
             case R.id.rlWipeWithNFC:
                 intent = new Intent(this, NFCWipe.class);
+                this.startActivity(intent);
+                break;
+
+            case R.id.DetailScan:
+                intent = new Intent(this, NFCInfo.class);
                 this.startActivity(intent);
                 break;
 

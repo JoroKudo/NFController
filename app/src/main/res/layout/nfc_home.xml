@@ -69,14 +69,12 @@
             android:textSize="40sp" />
     </RelativeLayout>
     <ImageView
-        android:id="@+id/ivHomeicon"
+        android:id="@+id/DetailScan"
         android:layout_width="wrap_content"
         android:layout_height="88dp"
         android:src="@drawable/ic_launcher"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
         android:layout_marginTop="10dp"
-       />
+        android:contentDescription="https://git.bbcag.ch/inf-bl/zh/2020/mobileapp/mathias/nfcontroller" />
 
 
 
