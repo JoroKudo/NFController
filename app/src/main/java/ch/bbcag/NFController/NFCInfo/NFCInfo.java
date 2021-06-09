@@ -1,8 +1,6 @@
 package ch.bbcag.NFController.NFCInfo;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -27,17 +25,19 @@ import androidx.annotation.RequiresApi;
 
 import com.bbcag.NFController.R;
 
-import java.io.UnsupportedEncodingException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
-public class NFCInfo extends Activity {
-    static private final ArrayList<ch.bbcag.NFController.NFCInfo.TagWrapper> tags = new ArrayList<>();
-    static private int currentTagIndex = -1;
+import ch.bbcag.NFController.NFCBase;
 
-    private NfcAdapter adapter = null;
-    private PendingIntent pendingIntent = null;
+public class NFCInfo extends NFCBase {
+
+    static private final ArrayList<LinkedHashMap<String, List<String>>> tags = new ArrayList<>();
+    static private int currentTagIndex = -1;
+    private  String tagId;
 
     private TextView currentTagView;
     private ExpandableListView expandableListView;
@@ -58,8 +58,7 @@ public class NFCInfo extends Activity {
         expandableListView.setOnTouchListener((v, event) -> {
             final float swipeThreshold = 150;
 
-            switch(event.getAction())
-            {
+            switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     touchDownX = event.getX();
                     break;
@@ -80,36 +79,11 @@ public class NFCInfo extends Activity {
             return false;
         });
 
-        adapter = NfcAdapter.getDefaultAdapter(this);
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
 
     @SuppressLint("SetTextI18n")
-    @Override
-    public void onResume() {
-        super.onResume();
 
-        if (!adapter.isEnabled()) {
-            Utils.showNfcSettingsDialog(this);
-            return;
-        }
-
-        if (pendingIntent == null) {
-            pendingIntent = PendingIntent.getActivity(this, 0,
-                    new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-
-            currentTagView.setText("Scan a tag");
-        }
-
-        showTag();
-
-        adapter.enableForegroundDispatch(this, pendingIntent, null, null);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        adapter.disableForegroundDispatch(this);
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -118,11 +92,11 @@ public class NFCInfo extends Activity {
 
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         assert tag != null;
-        String tagId = Utils.bytesToHex(tag.getId());
-        TagWrapper tagWrapper = new TagWrapper(tagId);
+        tagId = Utils.bytesToHex(tag.getId());
+        LinkedHashMap<String, List<String>> techList = new LinkedHashMap<>();
 
         ArrayList<String> misc = new ArrayList<>();
-        misc.add("scanned at: " + Utils.now());
+
 
         Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
 
@@ -133,50 +107,48 @@ public class NFCInfo extends Activity {
             NdefMessage msg = (NdefMessage) rawMsgs[0];
             NdefRecord cardRecord = msg.getRecords()[0];
             try {
-                try {
-                    tagData = readRecord(cardRecord.getPayload());
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                    tagData ="encoding brokey";
-                }
+
+                tagData = readRecord(cardRecord.getPayload());
+
             } catch (StringIndexOutOfBoundsException e) {
                 e.printStackTrace();
-                tagData ="StringOutofbound";
+                tagData = "StringOutofbound";
             }
 
         }
 
 
         misc.add("tag data: " + tagData);
-        tagWrapper.techList.put("Misc", misc);
+        techList.put("Misc", misc);
 
         for (String tech : tag.getTechList()) {
             tech = tech.replace("android.nfc.tech.", "");
             List<String> info = getTagInfo(tag, tech);
-            tagWrapper.techList.put("Technology: " + tech, info);
+            techList.put("Technology: " + tech, info);
         }
 
         if (tags.size() == 1) {
             Toast.makeText(this, "Swipe right to see previous tags", Toast.LENGTH_LONG).show();
         }
 
-        tags.add(tagWrapper);
+        tags.add(techList);
         currentTagIndex = tags.size() - 1;
         showTag();
     }
 
-    String readRecord(byte[] payload) throws StringIndexOutOfBoundsException, UnsupportedEncodingException {
+    String readRecord(byte[] payload) throws StringIndexOutOfBoundsException {
+        //UnsupportedEncodingException
         //String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16";
         //int languageCodeLength = payload[0] & 63;
         //return new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
         String text = new String(payload);
 
-        if(text.isEmpty()){
+        if (text.isEmpty()) {
             return "Empty Tag";
+        } else {
+            return text;
         }
-        else{
-            return text;}
 
 
     }
@@ -198,18 +170,18 @@ public class NFCInfo extends Activity {
     private void showTag() {
         if (tags.size() == 0) return;
 
-        final TagWrapper tagWrapper = tags.get(currentTagIndex);
-        final TagTechList techList = tagWrapper.techList;
-        final ArrayList<String> expandableListTitle = new ArrayList<>(techList.keySet());
+
+
+        final ArrayList<String> expandableListTitle = new ArrayList<>(tags.get(currentTagIndex).keySet());
 
         expandableListView.setAdapter(
-                new CustomExpandableListAdapter(this, expandableListTitle, techList));
+                new CustomExpandableListAdapter(this, expandableListTitle, tags.get(currentTagIndex)));
 
         final int count = expandableListView.getCount();
         for (int i = 0; i < count; i++) expandableListView.expandGroup(i);
 
-        currentTagView.setText("Tag " + tagWrapper.getId() +
-                " (" + (currentTagIndex+1) + "/" + tags.size() + ")");
+        currentTagView.setText("Tag " + tagId +
+                " (" + (currentTagIndex + 1) + "/" + tags.size() + ")");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -237,7 +209,7 @@ public class NFCInfo extends Activity {
 
             case "NfcV":
                 info.add("aka ISO 15693");
-                
+
                 NfcV nfcVTag = NfcV.get(tag);
                 info.add("dsfId: " + nfcVTag.getDsfId());
                 info.add("responseFlags: " + nfcVTag.getResponseFlags());

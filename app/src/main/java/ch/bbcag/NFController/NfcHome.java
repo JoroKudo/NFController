@@ -20,7 +20,6 @@ public class NfcHome extends Activity implements View.OnClickListener {
     private ImageView Detailscan;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

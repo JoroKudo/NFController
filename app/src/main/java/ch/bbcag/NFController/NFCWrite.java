@@ -1,9 +1,6 @@
 package ch.bbcag.NFController;
 
-import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -19,10 +16,10 @@ import com.bbcag.NFController.R;
 
 import java.io.IOException;
 
-public class NFCWrite extends Activity {
+public class NFCWrite extends NFCBase {
 
     private EditText evTagMessage;
-    private NfcAdapter mNfcAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +30,10 @@ public class NFCWrite extends Activity {
 
     }
 
-    private void initViews() {
+    @Override
+    protected void initViews() {
         evTagMessage = findViewById(R.id.evTagMessage);
-        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        this.mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
 
     public boolean writeTag(Tag tag, NdefMessage message) {
@@ -44,12 +42,10 @@ public class NFCWrite extends Activity {
             Ndef ndef = Ndef.get(tag);
             if (ndef != null) {
                 ndef.connect();
-                if (!ndef.isWritable()) {
+                if (!ndef.isWritable() || ndef.getMaxSize() < size) {
                     return false;
                 }
-                if (ndef.getMaxSize() < size) {
-                    return false;
-                }
+
                 ndef.writeNdefMessage(message);
                 return true;
             } else {
@@ -71,27 +67,6 @@ public class NFCWrite extends Activity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
-        IntentFilter ndefDetected = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
-        IntentFilter techDetected = new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED);
-        IntentFilter[] nfcIntentFilter = new IntentFilter[]{techDetected, tagDetected, ndefDetected};
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(
-                this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-        if (mNfcAdapter != null)
-            mNfcAdapter.enableForegroundDispatch(this, pendingIntent, nfcIntentFilter, null);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (mNfcAdapter != null)
-            mNfcAdapter.disableForegroundDispatch(this);
-    }
 
     @Override
     protected void onNewIntent(Intent intent) {
