@@ -2,6 +2,7 @@ package ch.bbcag.NFController;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -68,11 +69,10 @@ public class NFCRead extends NFCBase {
                                 NdefRecord record = ndefMessages[i].getRecords()[j];
                                 byte[] payload = record.getPayload();
                                 String text = new String(payload);
-                                //ndefRecordStringContent.add(text);
-                                //ndefRecordStringContent.toString();
-                                Log.e("tag" , text);
+                                byte[] typeAsType = record.getType();
                             }
                         }
+                        AudioManager audioManager = (AudioManager);
 
 /*
 
