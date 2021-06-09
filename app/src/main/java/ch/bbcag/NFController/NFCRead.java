@@ -4,16 +4,22 @@ import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.net.wifi.WifiManager;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.Settings;
+import android.util.Log;
 import android.widget.TextView;
 
+
+import androidx.annotation.RequiresApi;
 
 import com.bbcag.NFController.R;
 
@@ -41,6 +47,7 @@ public class NFCRead extends NFCBase {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onNewIntent(Intent intent) {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -50,6 +57,7 @@ public class NFCRead extends NFCBase {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("SetTextI18n")
     private void readFromNFC(Tag tag, Intent intent) {
 
@@ -73,6 +81,8 @@ public class NFCRead extends NFCBase {
                                 String text = new String(payload);
 
                                 WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                                AudioManager audioManager = (AudioManager)getApplication().getSystemService(Context.AUDIO_SERVICE);
+
 
 
 
@@ -89,6 +99,18 @@ public class NFCRead extends NFCBase {
                                     case "1ifi0":
                                         wifi.setWifiEnabled(false);
                                         break;
+                                    case "tone":
+                                        audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                                        break;
+                                    case "mute":
+                                        startActivityForResult(new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
+                                        audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                                        Log.e("test", "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST");
+                                        break;
+
+                                    case "vibrate":
+                                        audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+                                        break;
 
                                 }
 
@@ -96,10 +118,13 @@ public class NFCRead extends NFCBase {
                                     listTitle.setText("Empty Tag");
                                 } else {
 
-
                                     listTitle.setText(text);
+
                                 }
+
                             }
+
+
                         }
 
 
