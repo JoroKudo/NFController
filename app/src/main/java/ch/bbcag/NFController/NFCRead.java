@@ -9,18 +9,18 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.widget.TextView;
 
 
 import com.bbcag.NFController.R;
 
+import java.util.ArrayList;
+
 
 public class NFCRead extends NFCBase {
-
-
-
-
     private TextView listTitle;
+    private ArrayList<String> ndefRecordStringContent = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,16 +62,25 @@ public class NFCRead extends NFCBase {
                         for (int i = 0; i < messages.length; i++) {
                             ndefMessages[i] = (NdefMessage) messages[i];
                         }
-                        NdefRecord record = ndefMessages[0].getRecords()[0];
 
-                        byte[] payload = record.getPayload();
-                        String text = new String(payload);
+                        for (int i = 0; i <= ndefMessages.length; i++) {
+                            for (int j = 0; j <= ndefMessages[i].getRecords().length; j++) {
+                                NdefRecord record = ndefMessages[i].getRecords()[j];
+                                byte[] payload = record.getPayload();
+                                String text = new String(payload);
+                                //ndefRecordStringContent.add(text);
+                                //ndefRecordStringContent.toString();
+                                Log.e("tag" , text);
+                            }
+                        }
+
+/*
 
                         if (text.isEmpty()) {
                             listTitle.setText("Empty Tag");
                         } else {
                             listTitle.setText(text);
-                        }
+                        }*/
 
                         ndef.close();
 
