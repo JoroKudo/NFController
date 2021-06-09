@@ -1,8 +1,10 @@
 package ch.bbcag.NFController;
 
 import android.annotation.SuppressLint;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
+import android.net.wifi.WifiManager;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -10,7 +12,6 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.util.Log;
 import android.widget.TextView;
 
 
@@ -22,20 +23,22 @@ import java.util.ArrayList;
 public class NFCRead extends NFCBase {
     private TextView listTitle;
     private ArrayList<String> ndefRecordStringContent = new ArrayList<String>();
+    private BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nfc_read);
         initViews();
 
     }
+
     @Override
     protected void initViews() {
         listTitle = findViewById(R.id.listTitle);
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
-
 
 
     @Override
@@ -63,16 +66,45 @@ public class NFCRead extends NFCBase {
                         for (int i = 0; i < messages.length; i++) {
                             ndefMessages[i] = (NdefMessage) messages[i];
                         }
-
                         for (int i = 0; i <= ndefMessages.length; i++) {
                             for (int j = 0; j <= ndefMessages[i].getRecords().length; j++) {
-                                NdefRecord record = ndefMessages[i].getRecords()[j];
+                                NdefRecord record = ndefMessages[0].getRecords()[0];
                                 byte[] payload = record.getPayload();
                                 String text = new String(payload);
-                                byte[] typeAsType = record.getType();
+
+                                WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+
+
+
+                                switch (text) {
+                                    case "blue1":
+                                        bAdapter.enable();
+                                        break;
+                                    case "blue0":
+                                        bAdapter.disable();
+                                        break;
+                                    case "wifi1":
+                                        wifi.setWifiEnabled(true);
+                                        break;
+                                    case "1ifi0":
+                                        wifi.setWifiEnabled(false);
+                                        break;
+
+                                }
+
+                                if (text.isEmpty()) {
+                                    listTitle.setText("Empty Tag");
+                                } else {
+
+
+                                    listTitle.setText(text);
+                                }
                             }
                         }
-                        AudioManager audioManager = (AudioManager);
+
+
+
+
 
 /*
 
