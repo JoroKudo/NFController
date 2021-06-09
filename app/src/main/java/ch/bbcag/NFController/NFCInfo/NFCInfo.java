@@ -166,11 +166,19 @@ public class NFCInfo extends Activity {
     }
 
     String readRecord(byte[] payload) throws StringIndexOutOfBoundsException, UnsupportedEncodingException {
-        String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16";
+        //String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16";
+        //int languageCodeLength = payload[0] & 63;
+        //return new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
 
-        int languageCodeLength = payload[0] & 63;
+        String text = new String(payload);
 
-        return new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
+        if(text.isEmpty()){
+            return "Empty Tag";
+        }
+        else{
+            return text;}
+
+
     }
 
 
