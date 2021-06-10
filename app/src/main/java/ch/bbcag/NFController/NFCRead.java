@@ -25,13 +25,11 @@ import androidx.annotation.RequiresApi;
 
 import com.bbcag.NFController.R;
 
-import java.util.ArrayList;
-
 
 public class NFCRead extends NFCBase {
     private TextView listTitle;
-    private AudioManager audioManager ;
-    private  NotificationManager notificationManager;
+    private AudioManager audioManager;
+    private NotificationManager notificationManager;
 
     private TextToSpeech tts;
     private final BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -54,7 +52,6 @@ public class NFCRead extends NFCBase {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -65,11 +62,10 @@ public class NFCRead extends NFCBase {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("SetTextI18n")
     private void readFromNFC(Tag tag, Intent intent) {
         notificationManager = (NotificationManager) getApplication().getSystemService(Context.NOTIFICATION_SERVICE);
-        audioManager= (AudioManager) getApplication().getSystemService(Context.AUDIO_SERVICE);
+        audioManager = (AudioManager) getApplication().getSystemService(Context.AUDIO_SERVICE);
         wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         try {
             Ndef ndef = Ndef.get(tag);
@@ -90,7 +86,6 @@ public class NFCRead extends NFCBase {
                                 byte[] payload = record.getPayload();
                                 String text = new String(payload);
 
-                               
 
                                 //String[] spliced = text.split(",");
                                 String[] splitted = text.split("\\s+");
@@ -105,7 +100,7 @@ public class NFCRead extends NFCBase {
                                         }
                                         break;
                                     case "wifi":
-                                        if (Build.VERSION.SDK_INT <= 28) {
+                                        if (Build.VERSION.SDK_INT >= 29) {
                                             if (splitted[1].equals("1")) {
                                                 wifi.setWifiEnabled(true);
                                             } else if (splitted[1].equals("0")) {
@@ -201,10 +196,14 @@ public class NFCRead extends NFCBase {
         audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     private void checkIfNotificationPermissionIsGranted() {
-        if (!notificationManager.isNotificationPolicyAccessGranted()) {
-            startActivityForResult(new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!notificationManager.isNotificationPolicyAccessGranted()) {
+                startActivityForResult(new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
+            } else {
+                Toast.makeText(this, ("This function is not working on this version of android"), Toast.LENGTH_SHORT).show();
+
+            }
         }
     }
 }
