@@ -1,6 +1,7 @@
 package ch.bbcag.NFController;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
-import android.util.Log;
+
 import android.widget.TextView;
 
 
@@ -30,6 +31,10 @@ public class NFCRead extends NFCBase {
     private TextView listTitle;
     private ArrayList<String> ndefRecordStringContent = new ArrayList<String>();
     private BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
+
+    WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+    AudioManager audioManager = (AudioManager) getApplication().getSystemService(Context.AUDIO_SERVICE);
+    NotificationManager notificationManager = (NotificationManager) getApplication().getSystemService(Context.NOTIFICATION_SERVICE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,7 @@ public class NFCRead extends NFCBase {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onNewIntent(Intent intent) {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -57,7 +62,7 @@ public class NFCRead extends NFCBase {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("SetTextI18n")
     private void readFromNFC(Tag tag, Intent intent) {
 
@@ -79,73 +84,50 @@ public class NFCRead extends NFCBase {
                                 NdefRecord record = ndefMessages[0].getRecords()[0];
                                 byte[] payload = record.getPayload();
                                 String text = new String(payload);
-
-                                WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-                                AudioManager audioManager = (AudioManager)getApplication().getSystemService(Context.AUDIO_SERVICE);
-
-
-
-
                                 switch (text) {
+
                                     case "blue1":
                                         bAdapter.enable();
                                         break;
+
                                     case "blue0":
                                         bAdapter.disable();
                                         break;
+
                                     case "wifi1":
                                         wifi.setWifiEnabled(true);
                                         break;
+
                                     case "1ifi0":
                                         wifi.setWifiEnabled(false);
                                         break;
+
                                     case "tone":
-                                        audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                                        checkIfNotificationPermissionIsGranted();
+                                        setToTone();
                                         break;
+
                                     case "mute":
-                                        startActivityForResult(new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
-                                        audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                                        Log.e("test", "TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST");
+                                        checkIfNotificationPermissionIsGranted();
+                                        setTomute();
                                         break;
 
                                     case "vibrate":
-                                        audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+                                        checkIfNotificationPermissionIsGranted();
+                                        setToVibrate();
                                         break;
-
                                 }
-
                                 if (text.isEmpty()) {
                                     listTitle.setText("Empty Tag");
                                 } else {
-
                                     listTitle.setText(text);
-
                                 }
-
                             }
-
-
                         }
-
-
-
-
-
-/*
-
-                        if (text.isEmpty()) {
-                            listTitle.setText("Empty Tag");
-                        } else {
-                            listTitle.setText(text);
-                        }*/
-
                         ndef.close();
-
                     }
-
                 } else {
                     listTitle.setText("Empty Tag");
-
                 }
             } else {
                 listTitle.setText("Empty Tag");
@@ -154,5 +136,21 @@ public class NFCRead extends NFCBase {
             e.printStackTrace();
         }
 
+    }
+
+    private void setTomute(){
+        audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+    }
+    private void setToTone() {
+        audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+    }
+    private void setToVibrate() {
+        audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+    }
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void checkIfNotificationPermissionIsGranted() {
+        if (!notificationManager.isNotificationPolicyAccessGranted()) {
+            startActivityForResult(new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
+        }
     }
 }
