@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bbcag.NFController.R;
 
 
-public class NFCBase extends Activity {
+public class NFCBase extends AppCompatActivity {
     protected NfcAdapter mNfcAdapter;
 
     @Override
