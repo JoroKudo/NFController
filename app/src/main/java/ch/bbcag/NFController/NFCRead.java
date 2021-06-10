@@ -24,12 +24,12 @@ import com.bbcag.NFController.R;
 
 public class NFCRead extends NFCBase {
     private TextView listTitle;
-
+private Tasks tasks;
 
     private TextToSpeech tts;
     private final BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
 
-    private Tasks tasks;
+
 
 
     @Override
@@ -60,7 +60,10 @@ public class NFCRead extends NFCBase {
 
     @SuppressLint("SetTextI18n")
     private void readFromNFC(Tag tag, Intent intent) {
-        tasks = new Tasks(this)
+        NotificationManager notificationManager = (NotificationManager) getApplication().getSystemService(Context.NOTIFICATION_SERVICE);
+        AudioManager audioManager = (AudioManager) getApplication().getSystemService(Context.AUDIO_SERVICE);
+        WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        tasks = new Tasks(this,notificationManager,wifi,audioManager);
         try {
             Ndef ndef = Ndef.get(tag);
             if (ndef != null) {
