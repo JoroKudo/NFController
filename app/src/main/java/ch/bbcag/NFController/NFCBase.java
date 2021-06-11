@@ -9,7 +9,7 @@ import android.nfc.NfcAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bbcag.NFController.R;
+
 
 
 public class NFCBase extends AppCompatActivity {

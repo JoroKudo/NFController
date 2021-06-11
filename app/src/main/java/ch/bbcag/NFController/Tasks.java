@@ -1,11 +1,13 @@
 package ch.bbcag.NFController;
 
+
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 
+import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
 import android.media.AudioManager;
@@ -17,16 +19,13 @@ import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
-
-import java.security.Policy;
 
 public class Tasks {
 
-    private Activity activity;
-    private NotificationManager notificationManager;
-    private WifiManager wifi;
-    private AudioManager audioManager;
+    private final Activity activity;
+    private final NotificationManager notificationManager;
+    private final WifiManager wifi;
+    private final AudioManager audioManager;
 
 
     private TextToSpeech tts;
@@ -105,8 +104,8 @@ public class Tasks {
     public void TextToSpeech(String speech) {
         tts = new TextToSpeech(activity, status -> {
             if (status == TextToSpeech.SUCCESS) {
-                String textToSay = speech;
-                tts.speak(textToSay, TextToSpeech.QUEUE_ADD, null);
+
+                tts.speak(speech, TextToSpeech.QUEUE_ADD, null);
             }
         });
         tts.speak(speech, TextToSpeech.QUEUE_ADD, null);
@@ -149,6 +148,30 @@ public class Tasks {
     }
 
 
+    public void flash(String switcher) {
+
+        CameraManager camManager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
+        String cameraId;
+        try {
+            cameraId = camManager.getCameraIdList()[0];
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (switcher.equals("1")) {
+                    camManager.setTorchMode(cameraId, true);
+                } else if (switcher.equals("0")) {
+                    camManager.setTorchMode(cameraId, false);
+                }
+            }
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void sendWhatsapp(String nr, String message) {
+        Intent In_Whats = new Intent(Intent.ACTION_VIEW);
+        In_Whats.setData(Uri.parse("http://api.whatsapp.com/send?phone="+nr+"&&text="+message));
+        activity.startActivity(In_Whats);
+    }
 
 
 }

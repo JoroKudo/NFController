@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.bbcag.NFController.R;
+import ch.bbcag.NFController.R;
 
 public class SplashActivity extends Activity {
 

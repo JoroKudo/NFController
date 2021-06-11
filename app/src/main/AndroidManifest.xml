@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.bbcag.NFController">
+    package="ch.bbcag.NFController">
 
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
-    <uses-permission android:name="com.android.alarm.permission.SET_TIMER"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_TIMER" />
 
-    <permission android:name="android.permission.FLASHLIGHT"/>
-    <permission android:name="android.permission.CAMERA"/>
+    <permission android:name="android.permission.FLASHLIGHT" />
+    <permission android:name="android.permission.CAMERA" />
 
 
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -24,10 +24,14 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
 
-
-
-
+    <!--    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>-->
 
 
     <uses-feature
@@ -35,10 +39,10 @@
         android:required="true" />
 
     <application
+        android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.AppCompat"
-        android:allowBackup="true">
+        android:theme="@style/Theme.AppCompat">
         <activity
             android:name="ch.bbcag.NFController.SplashActivity"
             android:label="@string/app_name"
@@ -51,19 +55,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <intent-filter>
-                <action android:name="android.nfc.action.TECH_DISCOVERED" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data
-                android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/nfc_tech_filter" />
-        </activity>
-
-        <activity
-            android:name="ch.bbcag.NFController.NFCInfo.NFCInfo"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" >
 
         </activity>
         <activity
@@ -74,9 +65,15 @@
             android:name="ch.bbcag.NFController.NfcHome"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+
         <activity
             android:name="ch.bbcag.NFController.NFCRead"
-            android:screenOrientation="fullSensor" />
+            android:screenOrientation="fullSensor">
+
+
+
+
+        </activity>
         <activity
             android:name="ch.bbcag.NFController.NFCWrite"
             android:screenOrientation="fullSensor" />

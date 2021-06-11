@@ -15,7 +15,16 @@ import android.nfc.tech.Ndef;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import ch.bbcag.NFController.R;
+import com.google.android.material.snackbar.Snackbar;
+
+
 import com.bbcag.NFController.R;
 import static ch.bbcag.NFController.NFCTest.PERMISSIONS_MULTIPLE_REQUEST;
 
@@ -109,6 +118,14 @@ public class NFCRead extends NFCBase {
                                     case "location":
             /*                            nfcTest.requestMultiplePermissions();
                                         nfcTest.onRequestPermissionsResult(PERMISSIONS_MULTIPLE_REQUEST, nfcTest.getPermissions(), nfcTest.getPassedGrandResults());*/
+                                    case "flash":
+                                        tasks.flash(splitted[1]);
+                                        break;
+                                    case "send":
+                                        tasks.sendWhatsapp(splitted[1],splitted[2]);
+                                        break;
+
+
                                 }
                                 if (text.isEmpty()) {
                                     listTitle.setText("Empty Tag");

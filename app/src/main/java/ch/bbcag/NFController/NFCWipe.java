@@ -15,7 +15,7 @@ import android.os.Bundle;
 
 import android.widget.Toast;
 
-import com.bbcag.NFController.R;
+import ch.bbcag.NFController.R;
 
 
 public class NFCWipe extends NFCBase {

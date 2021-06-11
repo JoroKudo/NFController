@@ -1,5 +1,6 @@
 package ch.bbcag.NFController;
 
+
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -12,14 +13,13 @@ import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.bbcag.NFController.R;
+
 
 import java.io.IOException;
 
 public class NFCWrite extends NFCBase {
 
     private EditText evTagMessage;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class NFCWrite extends NFCBase {
         int size = message.toByteArray().length;
         try {
             Ndef ndef = Ndef.get(tag);
+
             if (ndef != null) {
                 ndef.connect();
                 if (!ndef.isWritable() || ndef.getMaxSize() < size) {
@@ -70,6 +71,7 @@ public class NFCWrite extends NFCBase {
 
     @Override
     protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 
         if (tag != null) {
