@@ -5,6 +5,9 @@ import android.app.NotificationManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
+
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
@@ -13,6 +16,10 @@ import android.provider.AlarmClock;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+
+import java.security.Policy;
 
 public class Tasks {
 
@@ -26,8 +33,7 @@ public class Tasks {
     private final BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
 
 
-
-    public  Tasks(Activity activity, NotificationManager notificationManager, WifiManager wifi, AudioManager audioManager){
+    public Tasks(Activity activity, NotificationManager notificationManager, WifiManager wifi, AudioManager audioManager) {
 
 
         this.activity = activity;
@@ -58,6 +64,7 @@ public class Tasks {
         }
 
     }
+
     public void setTomute() {
         checkIfNotificationPermissionIsGranted();
         audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
@@ -77,8 +84,7 @@ public class Tasks {
         if (Build.VERSION.SDK_INT >= 23) {
             if (!notificationManager.isNotificationPolicyAccessGranted()) {
                 activity.startActivityForResult(new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
-            }
-            else {
+            } else {
                 Toast.makeText(activity, ("This function is not working on this version of android"), Toast.LENGTH_SHORT).show();
 
             }
@@ -106,7 +112,7 @@ public class Tasks {
         tts.speak(speech, TextToSpeech.QUEUE_ADD, null);
     }
 
-    public void openApp( String packageName) {
+    public void openApp(String packageName) {
 
 
         Intent launch = activity.getPackageManager().getLaunchIntentForPackage(packageName);
@@ -141,6 +147,8 @@ public class Tasks {
         timer.putExtra(AlarmClock.EXTRA_MESSAGE, "Good Morning");
         activity.startActivity(timer);
     }
+
+
 
 
 }
