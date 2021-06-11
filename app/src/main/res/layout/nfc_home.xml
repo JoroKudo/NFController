@@ -67,6 +67,27 @@
             android:textColor="@android:color/white"
             android:textSize="40sp" />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlTestWithNFC"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/bg_home"
+        android:gravity="center"
+        android:onClick="onClick">
+
+
+        <TextView
+            android:id="@+id/tvTestWithNfc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/str_GPS_permissions"
+            android:textColor="@android:color/white"
+            android:textSize="40sp" />
+    </RelativeLayout>
     <ImageView
         android:id="@+id/DetailScan"
         android:layout_width="wrap_content"

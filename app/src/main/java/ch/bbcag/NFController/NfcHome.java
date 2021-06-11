@@ -17,6 +17,7 @@ public class NfcHome extends Activity implements View.OnClickListener {
     private RelativeLayout rlRead;
     private RelativeLayout rlWrite;
     private RelativeLayout rlWipe;
+    private RelativeLayout rlTest;
     private ImageView Detailscan;
 
 
@@ -28,6 +29,7 @@ public class NfcHome extends Activity implements View.OnClickListener {
         rlRead.setOnClickListener(this);
         rlWrite.setOnClickListener(this);
         rlWipe.setOnClickListener(this);
+        rlTest.setOnClickListener(this);
         Detailscan.setOnClickListener(this);
 
     }
@@ -37,6 +39,7 @@ public class NfcHome extends Activity implements View.OnClickListener {
         rlRead = findViewById(R.id.rlReadNFCTAG);
         rlWrite = findViewById(R.id.rlWriteWithNFC);
         rlWipe = findViewById(R.id.rlWipeWithNFC);
+        rlTest = findViewById(R.id.rlTestWithNFC);
         Detailscan = findViewById(R.id.DetailScan);
 
     }
@@ -58,6 +61,10 @@ public class NfcHome extends Activity implements View.OnClickListener {
                 break;
             case R.id.rlWipeWithNFC:
                 intent = new Intent(this, NFCWipe.class);
+                this.startActivity(intent);
+                break;
+            case R.id.rlTestWithNFC:
+                intent = new Intent(this, NFCTest.class);
                 this.startActivity(intent);
                 break;
 
