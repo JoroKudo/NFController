@@ -136,6 +136,9 @@ private Tasks tasks;
                                     case "timer":
                                        tasks.setTimer(Integer.parseInt(splitted[1]));
                                         break;
+
+
+
                                 }
                                 if (text.isEmpty()) {
                                     listTitle.setText("Empty Tag");
