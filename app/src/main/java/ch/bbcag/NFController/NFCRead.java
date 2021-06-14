@@ -17,16 +17,10 @@ import android.os.Parcelable;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import ch.bbcag.NFController.R;
-import com.google.android.material.snackbar.Snackbar;
+import java.io.IOException;
 
 
-import com.bbcag.NFController.R;
-import static ch.bbcag.NFController.NFCTest.PERMISSIONS_MULTIPLE_REQUEST;
 
 public class NFCRead extends NFCBase {
 
@@ -51,13 +45,18 @@ public class NFCRead extends NFCBase {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        intent.setType("tag/nc");
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         if (tag != null) {
+
             readFromNFC(tag, intent);
         }
     }
     @SuppressLint({"SetTextI18n", "ServiceCast"})
     private void readFromNFC(Tag tag, Intent intent) {
+
+
+
         NotificationManager notificationManager = (NotificationManager) getApplication().getSystemService(Context.NOTIFICATION_SERVICE);
         AudioManager audioManager = (AudioManager) getApplication().getSystemService(Context.AUDIO_SERVICE);
         WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -79,7 +78,19 @@ public class NFCRead extends NFCBase {
                             for (int j = 0; j <= ndefMessages[i].getRecords().length; j++) {
                                 NdefRecord record = ndefMessages[i].getRecords()[j];
                                 byte[] payload = record.getPayload();
+
                                 String text = new String(payload);
+
+                                byte[] type = record.getType();
+                                String mimetype = new String(type);
+
+
+
+
+
+
+
+
 
 
                                 String[] splitted = text.split("\\s+");
@@ -124,13 +135,18 @@ public class NFCRead extends NFCBase {
                                     case "send":
                                         tasks.sendWhatsapp(splitted[1],splitted[2]);
                                         break;
+                                    case "web":
+                                        tasks.opensite(splitted[1]);
+                                        break;
 
 
                                 }
                                 if (text.isEmpty()) {
                                     listTitle.setText("Empty Tag");
                                 } else {
+
                                     listTitle.setText(text);
+                                    Log.e("MIMETYPE", mimetype);
                                 }
                             }
                         }

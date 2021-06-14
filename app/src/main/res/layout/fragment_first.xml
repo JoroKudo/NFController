@@ -1,32 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-
-    android:layout_height="match_parent">
-
-    <com.google.android.material.appbar.AppBarLayout
-
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:gravity="center|bottom">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/simpleTabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-
-    <FrameLayout android:layout_height="match_parent" android:layout_width="match_parent" android:id="@+id/simpleFrameLayout"/>
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/simpleViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    android:layout_height="match_parent"
+  >
 
     <LinearLayout
 
@@ -128,6 +104,5 @@
 
 
     </LinearLayout>
-</LinearLayout>
 
-
+</RelativeLayout>

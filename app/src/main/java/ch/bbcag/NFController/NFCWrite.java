@@ -33,6 +33,7 @@ public class NFCWrite extends NFCBase {
     @Override
     protected void initViews() {
         evTagMessage = findViewById(R.id.evTagMessage);
+
         this.mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
 
@@ -48,6 +49,10 @@ public class NFCWrite extends NFCBase {
                 }
 
                 ndef.writeNdefMessage(message);
+
+
+
+
                 return true;
             } else {
                 NdefFormatable format = NdefFormatable.get(tag);
@@ -72,6 +77,7 @@ public class NFCWrite extends NFCBase {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 
         if (tag != null) {
@@ -81,6 +87,8 @@ public class NFCWrite extends NFCBase {
             if (!TextUtils.equals(messageToWrite, "null") && !TextUtils.isEmpty(messageToWrite)) {
                 NdefRecord record = NdefRecord.createMime(messageToWrite, messageToWrite.getBytes());
                 NdefMessage message = new NdefMessage(new NdefRecord[]{record});
+
+
 
                 if (writeTag(tag, message)) {
                     Toast.makeText(this, (getString(R.string.message_write_success)), Toast.LENGTH_SHORT).show();

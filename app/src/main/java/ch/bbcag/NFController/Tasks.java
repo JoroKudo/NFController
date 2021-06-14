@@ -7,7 +7,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 
-import android.content.pm.PackageManager;
+
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
 import android.media.AudioManager;
@@ -90,6 +90,14 @@ public class Tasks {
         }
     }
 
+    public void opensite(String url) {
+        if (!url.startsWith("http://") && !url.startsWith("https://")){
+            url = "http://" + url;}
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        activity.startActivity(browserIntent);
+
+    }
+
 
     public void changeVolume(String adjuster) {
         if (adjuster.equals("+")) {
@@ -169,7 +177,7 @@ public class Tasks {
 
     public void sendWhatsapp(String nr, String message) {
         Intent In_Whats = new Intent(Intent.ACTION_VIEW);
-        In_Whats.setData(Uri.parse("http://api.whatsapp.com/send?phone="+nr+"&&text="+message));
+        In_Whats.setData(Uri.parse("http://api.whatsapp.com/send?phone=" + nr + "&&text=" + message));
         activity.startActivity(In_Whats);
     }
 

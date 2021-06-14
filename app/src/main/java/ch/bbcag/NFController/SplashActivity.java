@@ -21,6 +21,7 @@ public class SplashActivity extends Activity {
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             Intent i = new Intent(context, NfcHome.class);
+
             startActivity(i);
             finish();
         }, 2000);

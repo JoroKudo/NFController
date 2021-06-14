@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "627767778154",
+    "project_id": "nfcontroller",
+    "storage_bucket": "nfcontroller.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627767778154:android:f2552ebcc51420d8c06313",
+        "android_client_info": {
+          "package_name": "ch.bbcag.NFController"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627767778154-82o6nkc9chi5qq8lobmtt5bariktmofi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDFvGBUycdB5ypZatytQWyw9yGuj81weI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627767778154-82o6nkc9chi5qq8lobmtt5bariktmofi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
