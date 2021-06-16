@@ -52,37 +52,37 @@ public class NFCommands extends NFCBase implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Intent intent;
+
         switch (view.getId()) {
-            case R.id.rlReadNFCTAG:
+            case R.id.rlbluetooth:
                 task ="blue";
                 break;
 
-            case R.id.rlWriteWithNFC:
+            case R.id.rlwifi:
                 task ="wifi";
                 break;
-            case R.id.rlWipeWithNFC:
+            case R.id.rltone:
                 task ="tone";
                 break;
-            case R.id.rlTestWithNFC:
+            case R.id.rlmute:
                 task ="mute";
                 break;
-            case R.id.rlTestWithNFC1:
+            case R.id.rlvibrate:
                 task ="vibrate";
                 break;
-            case R.id.rlTestWithNFC2:
+            case R.id.rlvol:
                 task ="vol";
                 break;
-            case R.id.rlTestWithNFC3:
+            case R.id.rltts:
                 task ="tts lol";
                 break;
-            case R.id.rlTestWithNFC4:
+            case R.id.rlopenapp:
                 task ="open";
                 break;
-            case R.id.rlTestWithNFC5:
+            case R.id.rlalarm:
                 task ="alarm";
                 break;
-            case R.id.rlTestWithNFC6:
+            case R.id.rltimer:
                 task ="timer";
                 break;
 
@@ -93,15 +93,15 @@ public class NFCommands extends NFCBase implements View.OnClickListener {
     @Override
     protected void initViews() {
 
-        rl1 = findViewById(R.id.rlReadNFCTAG);
-        rl2 = findViewById(R.id.rlWriteWithNFC);
-        rl3 = findViewById(R.id.rlWipeWithNFC);
-        rl4 = findViewById(R.id.rlTestWithNFC1);
-        rl5 = findViewById(R.id.rlTestWithNFC2);
-        rl6 = findViewById(R.id.rlTestWithNFC3);
-        rl7 = findViewById(R.id.rlTestWithNFC4);
-        rl8 = findViewById(R.id.rlTestWithNFC5);
-        rl9 = findViewById(R.id.rlTestWithNFC6);
+        rl1 = findViewById(R.id.rlbluetooth);
+        rl2 = findViewById(R.id.rlwifi);
+        rl3 = findViewById(R.id.rltone);
+        rl4 = findViewById(R.id.rlmute);
+        rl5 = findViewById(R.id.rlvibrate);
+        rl6 = findViewById(R.id.rlvol);
+        rl7 = findViewById(R.id.rltts);
+        rl8 = findViewById(R.id.rlopenapp);
+        rl9 = findViewById(R.id.rlalarm);
         this.mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
 
