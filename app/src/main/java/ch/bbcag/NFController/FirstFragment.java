@@ -1,5 +1,6 @@
 package ch.bbcag.NFController;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,14 +11,10 @@ import android.widget.RelativeLayout;
 
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.tabs.TabLayout;
+
 
 public class FirstFragment extends Fragment implements View.OnClickListener{
     private final Activity activity;
-    private RelativeLayout rlRead;
-    private RelativeLayout rlWrite;
-    private RelativeLayout rlWipe;
-    private RelativeLayout rlTest;
 
     public FirstFragment(Activity activity){
         this.activity=activity;
@@ -27,47 +24,49 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        rlRead.setOnClickListener(this);
-        rlWrite.setOnClickListener(this);
-        rlWipe.setOnClickListener(this);
-        rlTest.setOnClickListener(this);
+
+
 
     }
-    private void initViews() {
 
-        rlRead = activity.findViewById(R.id.rlReadNFCTAG);
-        rlWrite = activity.findViewById(R.id.rlWriteWithNFC);
-        rlWipe = activity.findViewById(R.id.rlWipeWithNFC);
-        rlTest = activity.findViewById(R.id.rlTestWithNFC);
-
-    }
  
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false);
+        final View view =  inflater.inflate(R.layout.fragment_first, container,
+                false);
+        RelativeLayout rlRead = view.findViewById(R.id.rlReadNFCTAG);
+        RelativeLayout rlWrite = view.findViewById(R.id.rlWriteWithNFC);
+        RelativeLayout rlWipe = view.findViewById(R.id.rlWipeWithNFC);
+        RelativeLayout rlTest = view.findViewById(R.id.rlTestWithNFC);
+        rlRead.setOnClickListener(this);
+        rlWrite.setOnClickListener(this);
+        rlWipe.setOnClickListener(this);
+        rlTest.setOnClickListener(this);
+        return view;
+
     }
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
             case R.id.rlReadNFCTAG:
                 intent = new Intent(activity, NFCRead.class);
-                this.startActivity(intent);
+                activity.startActivity(intent);
                 break;
 
             case R.id.rlWriteWithNFC:
                 intent = new Intent(activity, NFCWrite.class);
-                this.startActivity(intent);
+                activity.startActivity(intent);
                 break;
             case R.id.rlWipeWithNFC:
                 intent = new Intent(activity, NFCWipe.class);
-                this.startActivity(intent);
+                activity.startActivity(intent);
                 break;
             case R.id.rlTestWithNFC:
                 intent = new Intent(activity, NFCTest.class);
-                this.startActivity(intent);
+                activity.startActivity(intent);
                 break;
 
 

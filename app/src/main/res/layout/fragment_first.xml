@@ -16,7 +16,7 @@
         <RelativeLayout
             android:id="@+id/rlReadNFCTAG"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="117dp"
             android:background="@drawable/bg_home"
             android:gravity="center">
 
@@ -36,7 +36,7 @@
         <RelativeLayout
             android:id="@+id/rlWriteWithNFC"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="113dp"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/bg_home"
             android:gravity="center">
@@ -56,7 +56,7 @@
         <RelativeLayout
             android:id="@+id/rlWipeWithNFC"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="88dp"
 
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/bg_home"
@@ -94,13 +94,7 @@
                 android:textSize="40sp" />
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/DetailScan"
-            android:layout_width="wrap_content"
-            android:layout_height="88dp"
-            android:layout_marginTop="10dp"
-            android:contentDescription="@string/todo"
-            android:src="@drawable/ic_launcher" />
+
 
 
     </LinearLayout>
