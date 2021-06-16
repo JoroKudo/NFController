@@ -1,8 +1,7 @@
-package ch.bbcag.NFController;
+package ch.bbcag.nfcontroller;
 
 import android.annotation.SuppressLint;
 import android.app.NotificationManager;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -14,22 +13,15 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.TextView;
-
-import java.io.IOException;
 
 
 
 public class NFCRead extends NFCBase {
 
     private TextView listTitle;
-    private Tasks tasks;
-    private TextToSpeech tts;
-    private final BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
 
-    NFCTest nfcTest = new NFCTest();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +29,13 @@ public class NFCRead extends NFCBase {
         setContentView(R.layout.nfc_read);
         initViews();
     }
+
     @Override
     protected void initViews() {
         listTitle = findViewById(R.id.listTitle);
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -52,15 +46,15 @@ public class NFCRead extends NFCBase {
             readFromNFC(tag, intent);
         }
     }
+
     @SuppressLint({"SetTextI18n", "ServiceCast"})
     private void readFromNFC(Tag tag, Intent intent) {
-
 
 
         NotificationManager notificationManager = (NotificationManager) getApplication().getSystemService(Context.NOTIFICATION_SERVICE);
         AudioManager audioManager = (AudioManager) getApplication().getSystemService(Context.AUDIO_SERVICE);
         WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        tasks = new Tasks(this, notificationManager, wifi, audioManager);
+        Tasks tasks = new Tasks(this, notificationManager, wifi, audioManager);
         try {
             Ndef ndef = Ndef.get(tag);
             if (ndef != null) {
@@ -83,14 +77,6 @@ public class NFCRead extends NFCBase {
 
                                 byte[] type = record.getType();
                                 String mimetype = new String(type);
-
-
-
-
-
-
-
-
 
 
                                 String[] splitted = text.split("\\s+");
@@ -133,7 +119,7 @@ public class NFCRead extends NFCBase {
                                         tasks.flash(splitted[1]);
                                         break;
                                     case "send":
-                                        tasks.sendWhatsapp(splitted[1],splitted[2]);
+                                        tasks.sendWhatsapp(splitted[1], splitted[2]);
                                         break;
                                     case "web":
                                         tasks.opensite(splitted[1]);

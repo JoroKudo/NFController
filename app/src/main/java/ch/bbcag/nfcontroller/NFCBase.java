@@ -1,4 +1,4 @@
-package ch.bbcag.NFController;
+package ch.bbcag.nfcontroller;
 
 
 import android.app.AlertDialog;
@@ -17,11 +17,12 @@ public class NFCBase extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+
+        super.onResume();
         if (!mNfcAdapter.isEnabled()) {
             showNfcSettingsDialog();
 
         }
-        super.onResume();
 
         IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
         IntentFilter ndefDetected = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
@@ -56,4 +57,5 @@ public class NFCBase extends AppCompatActivity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
 }

@@ -1,8 +1,8 @@
-package ch.bbcag.NFController;
+package ch.bbcag.nfcontroller;
 
-import android.app.Activity;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,18 +10,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.tabs.TabLayout;
 
-public class NfcHome extends AppCompatActivity {
-    private final Activity nfchome = this;
-    private Fragment fragment = new FirstFragment(nfchome);
+public class NfcHome extends NFCBase {
+    private final NFCBase nfchome = this;
+    private Fragment fragment = new HomeTab1(nfchome);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         setContentView(R.layout.nfc_home);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.simpleTabLayout);
+        TabLayout tabLayout = findViewById(R.id.simpleTabLayout);
         TabLayout.Tab firstTab = tabLayout.newTab();
         firstTab.setText("First");
         tabLayout.addTab(firstTab);
@@ -38,10 +38,10 @@ public class NfcHome extends AppCompatActivity {
                 fragment = null;
                 switch (tab.getPosition()) {
                     case 0:
-                        fragment = new FirstFragment(nfchome);
+                        fragment = new HomeTab1(nfchome);
                         break;
                     case 1:
-                        fragment = new SecondFragment(nfchome);
+                        fragment = new HomeTab2(nfchome);
                         break;
 
 
@@ -62,18 +62,17 @@ public class NfcHome extends AppCompatActivity {
 
     }
 
-public void fragmentlauncher(){
-    FragmentManager fm = getSupportFragmentManager();
-    FragmentTransaction ft = fm.beginTransaction();
-    assert fragment != null;
-    ft.replace(R.id.simpleFrameLayout, fragment);
-    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-    ft.commit();
-}
-    @Override
-    public void onResume() {
-        super.onResume();
+
+    public void fragmentlauncher() {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        assert fragment != null;
+        ft.replace(R.id.simpleFrameLayout, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.commit();
     }
+
+
 
     @Override
     public void onPause() {

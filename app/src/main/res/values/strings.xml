@@ -16,7 +16,7 @@
     <string name="negative">Dont Enable NFC</string>
     <string name="positive">Enable NFC</string>
 
-    <string name="str_blue">blue</string>
+    <string name="str_bluetooth">blue</string>
     <string name="str_wifi">wifi</string>
     <string name="str_tone">tone</string>
     <string name="str_mute">mute</string>

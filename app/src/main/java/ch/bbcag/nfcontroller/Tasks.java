@@ -1,4 +1,4 @@
-package ch.bbcag.NFController;
+package ch.bbcag.nfcontroller;
 
 
 import android.app.Activity;

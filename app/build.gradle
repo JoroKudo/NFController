@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "ch.bbcag.NFController"
-        minSdkVersion 19
+        applicationId "ch.bbcag.nfcontroller"
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -36,6 +37,11 @@ dependencies {
     implementation 'androidx.fragment:fragment:1.3.4'
     implementation platform('com.google.firebase:firebase-bom:28.1.0')
     implementation 'com.google.firebase:firebase-analytics'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 
+}
+repositories {
+    mavenCentral()
 }

@@ -1,4 +1,4 @@
-package ch.bbcag.NFController;
+package ch.bbcag.nfcontroller;
 
 
 import android.content.Intent;
@@ -10,98 +10,32 @@ import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
+
 
 import java.io.IOException;
 
-public class NFCommands extends NFCBase implements View.OnClickListener {
+public class TaskWriter extends NFCBase {
 
 
-    private RelativeLayout rl1;
-    private RelativeLayout rl2;
-    private RelativeLayout rl3;
-    private RelativeLayout rl4;
-    private RelativeLayout rl5;
-    private RelativeLayout rl6;
-    private RelativeLayout rl7;
-    private RelativeLayout rl8;
-    private RelativeLayout rl9;
-    private String task;
+    private EditText attributer;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.nfc_ommands);
+        setContentView(R.layout.task_writer);
         initViews();
 
 
-        rl1.setOnClickListener(this);
-        rl2.setOnClickListener(this);
-        rl3.setOnClickListener(this);
-        rl4.setOnClickListener(this);
-        rl5.setOnClickListener(this);
-        rl6.setOnClickListener(this);
-        rl7.setOnClickListener(this);
-        rl8.setOnClickListener(this);
-        rl9.setOnClickListener(this);
-
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        switch (view.getId()) {
-            case R.id.rlbluetooth:
-                task ="blue";
-                break;
-
-            case R.id.rlwifi:
-                task ="wifi";
-                break;
-            case R.id.rltone:
-                task ="tone";
-                break;
-            case R.id.rlmute:
-                task ="mute";
-                break;
-            case R.id.rlvibrate:
-                task ="vibrate";
-                break;
-            case R.id.rlvol:
-                task ="vol";
-                break;
-            case R.id.rltts:
-                task ="tts lol";
-                break;
-            case R.id.rlopenapp:
-                task ="open";
-                break;
-            case R.id.rlalarm:
-                task ="alarm";
-                break;
-            case R.id.rltimer:
-                task ="timer";
-                break;
-
-
-        }
     }
 
     @Override
     protected void initViews() {
+        attributer = findViewById(R.id.evTagMessage);
 
-        rl1 = findViewById(R.id.rlbluetooth);
-        rl2 = findViewById(R.id.rlwifi);
-        rl3 = findViewById(R.id.rltone);
-        rl4 = findViewById(R.id.rlmute);
-        rl5 = findViewById(R.id.rlvibrate);
-        rl6 = findViewById(R.id.rlvol);
-        rl7 = findViewById(R.id.rltts);
-        rl8 = findViewById(R.id.rlopenapp);
-        rl9 = findViewById(R.id.rlalarm);
         this.mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
 
@@ -147,11 +81,11 @@ public class NFCommands extends NFCBase implements View.OnClickListener {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 
         if (tag != null) {
-
-            String messageToWrite = task;
+            String attribute = attributer.getText().toString();
+            String messageToWrite = Const.task +" "+ attribute;
 
             if (!TextUtils.equals(messageToWrite, "null") && !TextUtils.isEmpty(messageToWrite)) {
-                NdefRecord record = NdefRecord.createMime(messageToWrite, messageToWrite.getBytes());
+                NdefRecord record = NdefRecord.createMime("app/ch.bbcag.nfcontroller", messageToWrite.getBytes());
                 NdefMessage message = new NdefMessage(new NdefRecord[]{record});
 
 
@@ -161,6 +95,8 @@ public class NFCommands extends NFCBase implements View.OnClickListener {
                 } else {
                     Toast.makeText(this, (getString(R.string.message_write_error)), Toast.LENGTH_SHORT).show();
                 }
+            } else {
+                attributer.setError("Please enter the text to write");
             }
 
         }

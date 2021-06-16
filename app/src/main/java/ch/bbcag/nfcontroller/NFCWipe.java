@@ -1,4 +1,4 @@
-package ch.bbcag.NFController;
+package ch.bbcag.nfcontroller;
 
 
 import android.app.AlertDialog;
@@ -32,6 +32,7 @@ public class NFCWipe extends NFCBase {
 
     @Override
     protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 
         if (tag != null) {

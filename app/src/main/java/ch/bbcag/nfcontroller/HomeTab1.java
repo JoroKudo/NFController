@@ -1,4 +1,4 @@
-package ch.bbcag.NFController;
+package ch.bbcag.nfcontroller;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -13,10 +13,10 @@ import androidx.fragment.app.Fragment;
 
 
 
-public class FirstFragment extends Fragment implements View.OnClickListener{
+public class HomeTab1 extends Fragment implements View.OnClickListener{
     private final Activity activity;
 
-    public FirstFragment(Activity activity){
+    public HomeTab1(Activity activity){
         this.activity=activity;
     }
 
@@ -33,7 +33,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view =  inflater.inflate(R.layout.fragment_first, container,
+        final View view =  inflater.inflate(R.layout.home_tab_1, container,
                 false);
         RelativeLayout rlRead = view.findViewById(R.id.rlReadNFCTAG);
         RelativeLayout rlWrite = view.findViewById(R.id.rlWriteWithNFC);

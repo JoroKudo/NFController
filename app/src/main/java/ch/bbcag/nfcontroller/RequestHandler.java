@@ -1,4 +1,4 @@
-package ch.bbcag.NFController;
+package ch.bbcag.nfcontroller;
 
 
 import java.io.BufferedReader;
@@ -8,20 +8,12 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 
 public class RequestHandler {
 
-    private final String baseUrl = "https://nfcontroller-default-rtdb.europe-west1.firebasedatabase.app/";
-
-
-
-
-
-
-
 
     public void addThing(String user) throws IOException {
+        String baseUrl = "https://nfcontroller-default-rtdb.europe-west1.firebasedatabase.app/";
         URL url = new URL(baseUrl + "fighters/" + user + ".json");
         HttpURLConnection con = this.initializeConnection(url, "PUT");
         con.setDoOutput(true);
