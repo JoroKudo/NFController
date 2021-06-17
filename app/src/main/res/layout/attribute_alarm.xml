@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TimePicker
+        android:id="@+id/timePicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numbersSelectorColor="@color/colorpurple" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+
+        android:background="@color/colorpurple" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:gravity="bottom|start"
+        android:paddingStart="@dimen/_5sdp"
+        android:text="Message"
+        android:textColor="@android:color/white"
+        android:textSize="23sp"
+        tools:ignore="RtlSymmetry" />
+
+    <EditText
+        android:id="@+id/Alarmmessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:imeOptions="actionDone"
+        android:inputType="text" />
+
+</LinearLayout>
+
+

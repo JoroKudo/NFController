@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
 
-    package="ch.bbcag.nfcontroller">
+    package="ch.bbcag.NFController">
 
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -20,11 +20,13 @@
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
 
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission
         android:name="android.permission.WRITE_SETTINGS"
@@ -46,7 +48,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <activity
-            android:name="ch.bbcag.nfcontroller.SplashActivity"
+            android:name="ch.bbcag.NFController.SplashActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="fullSensor"
@@ -59,44 +61,52 @@
             </intent-filter>
 
 
+        </activity>
+        <activity
+            android:name="ch.bbcag.NFController.NFCTest"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name="ch.bbcag.NFController.TaskWriter"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name="ch.bbcag.NFController.NfcHome"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+
+
+        <activity
+            android:name="ch.bbcag.NFController.NFCRead"
+            android:screenOrientation="fullSensor">
 
 
         </activity>
         <activity
-        android:name="ch.bbcag.nfcontroller.NFCTest"
-        android:screenOrientation="portrait"
-        tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name="ch.bbcag.nfcontroller.TaskWriter"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name="ch.bbcag.nfcontroller.NfcHome"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            android:name="ch.bbcag.NFController.AttributeSetter"
+            android:screenOrientation="fullSensor">
 
 
+        </activity>
+
         <activity
-            android:name="ch.bbcag.nfcontroller.NFCRead"
+            android:name="ch.bbcag.NFController.NFCWrite"
             android:screenOrientation="fullSensor">
 
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
-                <data android:scheme="http"
-                    android:host="bbcag.ch"
-                    android:path="/nfcontroller"
-                    />
                 <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="my/tag" />
 
             </intent-filter>
-            <meta-data android:name="android.nfc.action.TECH_DISCOVERED"
+
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter" />
         </activity>
         <activity
-            android:name="ch.bbcag.nfcontroller.NFCWrite"
-            android:screenOrientation="fullSensor" />
-        <activity
-            android:name="ch.bbcag.nfcontroller.NFCWipe"
+            android:name="ch.bbcag.NFController.NFCWipe"
             android:screenOrientation="fullSensor" />
 
 

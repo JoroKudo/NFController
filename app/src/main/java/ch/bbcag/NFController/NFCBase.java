@@ -1,5 +1,4 @@
-package ch.bbcag.nfcontroller;
-
+package ch.bbcag.NFController;
 
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -10,8 +9,6 @@ import android.nfc.NfcAdapter;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-
-
 public class NFCBase extends AppCompatActivity {
     protected NfcAdapter mNfcAdapter;
 
@@ -19,6 +16,7 @@ public class NFCBase extends AppCompatActivity {
     protected void onResume() {
 
         super.onResume();
+
         if (!mNfcAdapter.isEnabled()) {
             showNfcSettingsDialog();
 

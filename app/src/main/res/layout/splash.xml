@@ -7,10 +7,10 @@
         android:id="@+id/ivSplashIcon"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
-        android:src="@drawable/ic_launcher"
-        android:scaleType="fitXY"
         android:layout_centerInParent="true"
-        android:contentDescription="@string/todo" />
+        android:contentDescription="@string/todo"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher" />
 
     <TextView
         android:layout_width="wrap_content"

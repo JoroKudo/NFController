@@ -1,4 +1,4 @@
-package ch.bbcag.nfcontroller;
+package ch.bbcag.NFController;
 
 
 import android.app.Activity;
@@ -91,8 +91,9 @@ public class Tasks {
     }
 
     public void opensite(String url) {
-        if (!url.startsWith("http://") && !url.startsWith("https://")){
-            url = "http://" + url;}
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "http://" + url;
+        }
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         activity.startActivity(browserIntent);
 
@@ -135,23 +136,23 @@ public class Tasks {
         activity.startActivity(launch);
     }
 
-    public void setAlarm(int hour, int minute) {
+    public void setAlarm(int hour, int minute, String message) {
 
 
         Intent alarm = new Intent(AlarmClock.ACTION_SET_ALARM);
         alarm.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
         alarm.putExtra(AlarmClock.EXTRA_HOUR, hour);
         alarm.putExtra(AlarmClock.EXTRA_MINUTES, minute);
-        alarm.putExtra(AlarmClock.EXTRA_MESSAGE, "Good Morning");
+        alarm.putExtra(AlarmClock.EXTRA_MESSAGE, message);
         activity.startActivity(alarm);
     }
 
-    public void setTimer(int seconds) {
-
+    public void setTimer(int h, int m, int s, String message) {
+        int timerLength = 60 * (h * 60 + m) + s;
         Intent timer = new Intent(AlarmClock.ACTION_SET_TIMER);
         timer.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
-        timer.putExtra(AlarmClock.EXTRA_LENGTH, seconds);
-        timer.putExtra(AlarmClock.EXTRA_MESSAGE, "Good Morning");
+        timer.putExtra(AlarmClock.EXTRA_LENGTH, timerLength);
+        timer.putExtra(AlarmClock.EXTRA_MESSAGE, message);
         activity.startActivity(timer);
     }
 

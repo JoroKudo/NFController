@@ -1,4 +1,4 @@
-package ch.bbcag.nfcontroller;
+package ch.bbcag.NFController;
 
 
 import android.app.AlertDialog;
@@ -14,7 +14,6 @@ import android.nfc.tech.Ndef;
 import android.os.Bundle;
 
 import android.widget.Toast;
-
 
 
 public class NFCWipe extends NFCBase {

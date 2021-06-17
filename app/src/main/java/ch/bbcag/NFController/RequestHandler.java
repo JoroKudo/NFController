@@ -1,4 +1,4 @@
-package ch.bbcag.nfcontroller;
+package ch.bbcag.NFController;
 
 
 import java.io.BufferedReader;

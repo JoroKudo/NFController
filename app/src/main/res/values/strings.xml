@@ -16,17 +16,5 @@
     <string name="negative">Dont Enable NFC</string>
     <string name="positive">Enable NFC</string>
 
-    <string name="str_bluetooth">blue</string>
-    <string name="str_wifi">wifi</string>
-    <string name="str_tone">tone</string>
-    <string name="str_mute">mute</string>
-    <string name="str_vibrate">vibrate</string>
-    <string name="str_vol">vol</string>
-    <string name="str_tts">tts</string>
-    <string name="str_open">open</string>
-    <string name="str_alarm">alarm</string>
-    <string name="str_timer">timer</string>
-    <string name="str_location">location</string>
-    <string name="str_flash">flash</string>
-    <string name="str_send">send</string>
+
 </resources>

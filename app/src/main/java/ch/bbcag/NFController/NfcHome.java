@@ -1,4 +1,4 @@
-package ch.bbcag.nfcontroller;
+package ch.bbcag.NFController;
 
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
@@ -71,7 +71,6 @@ public class NfcHome extends NFCBase {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
     }
-
 
 
     @Override

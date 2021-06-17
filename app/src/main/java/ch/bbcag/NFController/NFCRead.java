@@ -1,4 +1,4 @@
-package ch.bbcag.nfcontroller;
+package ch.bbcag.NFController;
 
 import android.annotation.SuppressLint;
 import android.app.NotificationManager;
@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.widget.TextView;
-
 
 
 public class NFCRead extends NFCBase {
@@ -107,10 +106,10 @@ public class NFCRead extends NFCBase {
                                         tasks.openApp(splitted[1]);
                                         break;
                                     case "alarm":
-                                        tasks.setAlarm(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]));
+                                        tasks.setAlarm(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), splitted[3]);
                                         break;
                                     case "timer":
-                                        tasks.setTimer(Integer.parseInt(splitted[1]));
+                                        tasks.setTimer(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), splitted[4]);
                                         break;
                                     case "location":
             /*                            nfcTest.requestMultiplePermissions();
@@ -139,6 +138,7 @@ public class NFCRead extends NFCBase {
                         ndef.close();
                     }
                 } else {
+
                     listTitle.setText("Empty Tag");
                 }
             } else {

@@ -1,4 +1,4 @@
-package ch.bbcag.nfcontroller;
+package ch.bbcag.NFController;
 
 
 import android.content.Intent;
@@ -16,17 +16,14 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
-public class TaskWriter extends NFCBase {
+public class NFCWrite extends NFCBase {
 
-
-    private EditText attributer;
-
-
+    private EditText evTagMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.task_writer);
+        setContentView(R.layout.nfc_write);
         initViews();
 
 
@@ -34,7 +31,7 @@ public class TaskWriter extends NFCBase {
 
     @Override
     protected void initViews() {
-        attributer = findViewById(R.id.evTagMessage);
+        evTagMessage = findViewById(R.id.evTagMessage);
 
         this.mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
@@ -81,11 +78,11 @@ public class TaskWriter extends NFCBase {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 
         if (tag != null) {
-            String attribute = attributer.getText().toString();
-            String messageToWrite = Const.task +" "+ attribute;
+
+            String messageToWrite = evTagMessage.getText().toString();
 
             if (!TextUtils.equals(messageToWrite, "null") && !TextUtils.isEmpty(messageToWrite)) {
-                NdefRecord record = NdefRecord.createMime("app/ch.bbcag.nfcontroller", messageToWrite.getBytes());
+                NdefRecord record = NdefRecord.createMime(messageToWrite, messageToWrite.getBytes());
                 NdefMessage message = new NdefMessage(new NdefRecord[]{record});
 
 
@@ -96,7 +93,7 @@ public class TaskWriter extends NFCBase {
                     Toast.makeText(this, (getString(R.string.message_write_error)), Toast.LENGTH_SHORT).show();
                 }
             } else {
-                attributer.setError("Please enter the text to write");
+                evTagMessage.setError("Please enter the text to write");
             }
 
         }

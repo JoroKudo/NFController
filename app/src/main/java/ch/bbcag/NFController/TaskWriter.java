@@ -1,4 +1,4 @@
-package ch.bbcag.nfcontroller;
+package ch.bbcag.NFController;
 
 
 import android.content.Intent;
@@ -10,21 +10,18 @@ import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.EditText;
 import android.widget.Toast;
-
 
 
 import java.io.IOException;
 
-public class NFCWrite extends NFCBase {
+public class TaskWriter extends NFCBase {
 
-    private EditText evTagMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.nfc_write);
+        setContentView(R.layout.task_writer);
         initViews();
 
 
@@ -32,7 +29,6 @@ public class NFCWrite extends NFCBase {
 
     @Override
     protected void initViews() {
-        evTagMessage = findViewById(R.id.evTagMessage);
 
         this.mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
@@ -49,8 +45,6 @@ public class NFCWrite extends NFCBase {
                 }
 
                 ndef.writeNdefMessage(message);
-
-
 
 
                 return true;
@@ -82,12 +76,11 @@ public class NFCWrite extends NFCBase {
 
         if (tag != null) {
 
-            String messageToWrite = evTagMessage.getText().toString();
+            String messageToWrite = Const.fulltask[0] + " " + Const.fulltask[1] + " " + Const.fulltask[2] + " " + Const.fulltask[3];
 
             if (!TextUtils.equals(messageToWrite, "null") && !TextUtils.isEmpty(messageToWrite)) {
                 NdefRecord record = NdefRecord.createMime(messageToWrite, messageToWrite.getBytes());
                 NdefMessage message = new NdefMessage(new NdefRecord[]{record});
-
 
 
                 if (writeTag(tag, message)) {
@@ -96,8 +89,6 @@ public class NFCWrite extends NFCBase {
                 } else {
                     Toast.makeText(this, (getString(R.string.message_write_error)), Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                evTagMessage.setError("Please enter the text to write");
             }
 
         }

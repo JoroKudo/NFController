@@ -1,4 +1,4 @@
-package ch.bbcag.nfcontroller;
+package ch.bbcag.NFController;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -54,7 +54,6 @@ public class NFCTest extends AppCompatActivity {
             }
         }
     }
-
 
 
 }

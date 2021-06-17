@@ -1,4 +1,4 @@
-package ch.bbcag.nfcontroller;
+package ch.bbcag.NFController;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,28 +12,24 @@ import android.widget.RelativeLayout;
 import androidx.fragment.app.Fragment;
 
 
-
-public class HomeTab1 extends Fragment implements View.OnClickListener{
+public class HomeTab1 extends Fragment implements View.OnClickListener {
     private final Activity activity;
 
-    public HomeTab1(Activity activity){
-        this.activity=activity;
+    public HomeTab1(Activity activity) {
+        this.activity = activity;
     }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
     }
 
- 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view =  inflater.inflate(R.layout.home_tab_1, container,
+        final View view = inflater.inflate(R.layout.home_tab_1, container,
                 false);
         RelativeLayout rlRead = view.findViewById(R.id.rlReadNFCTAG);
         RelativeLayout rlWrite = view.findViewById(R.id.rlWriteWithNFC);
@@ -46,6 +42,7 @@ public class HomeTab1 extends Fragment implements View.OnClickListener{
         return view;
 
     }
+
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
@@ -70,9 +67,7 @@ public class HomeTab1 extends Fragment implements View.OnClickListener{
                 break;
 
 
-
-
         }
     }
- 
+
 }
