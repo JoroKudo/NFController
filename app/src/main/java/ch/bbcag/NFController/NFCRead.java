@@ -78,7 +78,7 @@ public class NFCRead extends NFCBase {
                                 String mimetype = new String(type);
 
 
-                                String[] splitted = text.split("\\s+");
+                                String[] splitted = text.split(Const.SPACER);
 
                                 switch (splitted[0]) {
                                     case "blue":
