@@ -16,7 +16,6 @@ public class SelectGeofencingRadiusActivity extends AppCompatActivity {
     Intent intent;
     EditText editText;
     double radius;
-    FloatingActionButton floatingActionButton;
 
     public SelectGeofencingRadiusActivity() {
     }
@@ -26,19 +25,21 @@ public class SelectGeofencingRadiusActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_geofencing_radius);
 
+        FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_expiration_time);
         floatingActionButton.setOnClickListener(v -> {
             editText = findViewById(R.id.radius_input_field);
             String temp = editText.getText().toString();
             try {
                 radius = Double.parseDouble(temp);
+                if (radius >= 100) {
+                    intent = new Intent(SelectGeofencingRadiusActivity.this, SelectGeofencingExpirationTimeActivity.class);
+                    startActivity(intent);
+                } else
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.geofencing_value_too_small_toast), Toast.LENGTH_SHORT).show();
             } catch (NumberFormatException e) {
                 Toast.makeText(getApplicationContext(), getResources().getString(R.string.geofencing_wrong_data_type_toast), Toast.LENGTH_SHORT).show();
             }
-            if (radius < 100) {
-                intent = new Intent(SelectGeofencingRadiusActivity.this, SelectGeofencingExpirationTimeActivity.class);
-                getApplicationContext().startActivity(intent);
-            } else
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.geofencing_value_too_small_toast), Toast.LENGTH_SHORT).show();
+
 
 
         });

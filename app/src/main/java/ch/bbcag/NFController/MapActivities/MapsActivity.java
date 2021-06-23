@@ -66,7 +66,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_radius);
         floatingActionButton.setOnClickListener(v -> {
-            Const.fulltask[0] = "geofencing";
             Intent intent = new Intent(getApplicationContext(), SelectGeofencingRadiusActivity.class);
             startActivity(intent);
         });
