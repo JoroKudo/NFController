@@ -15,6 +15,17 @@
     <string name="str_scan">Scan a Tag</string>
     <string name="negative">Dont Enable NFC</string>
     <string name="positive">Enable NFC</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search...</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDmjg1GfxqjVmhrp-2QtTTOt7gznCQXGQE</string>
+    <string name="radius_input_information">Please enter a Radius of the geofence</string>
+    <string name="radius_input_field_hint">Radius in meters</string>
+    <string name="expiration_time_input_information">for how long should your geofence be existing?</string>
+    <string name="expiration_time_title">set Title</string>
+    <string name="geofencing_wrong_data_type_toast">Please Enter a number</string>
+    <string name="geofencing_value_too_small_toast">Value must be at least 100</string>
+    <string name="geofencing_expiration_time_0_value_toast">please enter a time greater than 0s</string>
 
 
 </resources>

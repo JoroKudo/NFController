@@ -12,7 +12,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class NfcHome extends NFCBase {
     private final NFCBase nfchome = this;
-    private Fragment fragment = new HomeTab1(nfchome);
+    private Fragment fragment = new HomeTab1();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,10 @@ public class NfcHome extends NFCBase {
                 fragment = null;
                 switch (tab.getPosition()) {
                     case 0:
-                        fragment = new HomeTab1(nfchome);
+                        fragment = new HomeTab1();
                         break;
                     case 1:
-                        fragment = new HomeTab2(nfchome);
+                        fragment = new HomeTab2();
                         break;
 
 
@@ -70,6 +70,8 @@ public class NfcHome extends NFCBase {
         ft.replace(R.id.simpleFrameLayout, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
+
+
     }
 
 

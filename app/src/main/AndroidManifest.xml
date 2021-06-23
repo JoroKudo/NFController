@@ -1,41 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-
     package="ch.bbcag.NFController">
-
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-
     <uses-permission android:name="com.android.alarm.permission.SET_TIMER" />
 
     <permission android:name="android.permission.FLASHLIGHT" />
     <permission android:name="android.permission.CAMERA" />
 
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
-
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission
-        android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
-
-    <!--    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
-        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>-->
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
         android:name="android.hardware.nfc"
@@ -46,9 +32,16 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".MapActivities.SelectGeoFencingFeatureActivity"></activity>
+        <activity android:name=".MapActivities.SelectGeofencingExpirationTimeActivity" />
+        <activity android:name=".MapActivities.SelectGeofencingRadiusActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
         <activity
-            android:name="ch.bbcag.NFController.SplashActivity"
+            android:name=".SplashActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="fullSensor"
@@ -56,60 +49,53 @@
             tools:ignore="MissingClass">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
-
-
         </activity>
         <activity
-            android:name="ch.bbcag.NFController.NFCTest"
+            android:name=".NFCTest"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="ch.bbcag.NFController.TaskWriter"
+            android:name=".TaskWriter"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="ch.bbcag.NFController.NfcHome"
+            android:name=".NfcHome"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-
-
         <activity
-            android:name="ch.bbcag.NFController.NFCRead"
-            android:screenOrientation="fullSensor">
-
-
-        </activity>
+            android:name=".NFCRead"
+            android:screenOrientation="fullSensor" />
         <activity
-            android:name="ch.bbcag.NFController.AttributeSetter"
-            android:screenOrientation="fullSensor">
-
-
-        </activity>
-
+            android:name=".AttributeSetter"
+            android:screenOrientation="fullSensor" />
         <activity
-            android:name="ch.bbcag.NFController.NFCWrite"
+            android:name=".NFCWrite"
             android:screenOrientation="fullSensor">
-
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="my/tag" />
-
             </intent-filter>
-
 
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter" />
         </activity>
         <activity
-            android:name="ch.bbcag.NFController.NFCWipe"
+            android:name=".NFCWipe"
             android:screenOrientation="fullSensor" />
+        <activity
+            android:name=".MapActivities.MapsActivity"
+            android:label="@string/title_activity_maps" />
 
+        <receiver android:name=".MapActivities.GeofencingBroadcastReceiver" />
 
+        <activity android:name=".MapActivities.GeofencingActivity" />
     </application>
 
 </manifest>

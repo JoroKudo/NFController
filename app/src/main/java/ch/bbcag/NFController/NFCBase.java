@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class NFCBase extends AppCompatActivity {
+
     protected NfcAdapter mNfcAdapter;
 
     @Override

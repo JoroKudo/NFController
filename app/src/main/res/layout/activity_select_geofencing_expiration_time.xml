@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapActivities.SelectGeofencingExpirationTimeActivity">
+
+    <View
+        android:id="@+id/NP_Expiration_Time_Border_Top"
+        android:layout_width="match_parent"
+
+        android:layout_height="2dp"
+        android:background="@color/colorpurple"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="327dp"
+        android:gravity="center"
+        android:weightSum="30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NP_Expiration_Time_HMS">
+
+        <NumberPicker
+            android:id="@+id/NPhoursForExpirationTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:hapticFeedbackEnabled="true"
+
+            android:theme="@style/DefaultNumberPickerTheme"
+            android:transitionGroup="false" />
+
+
+        <NumberPicker
+            android:id="@+id/NPminutesForExpirationTime"
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:hapticFeedbackEnabled="true"
+
+            android:theme="@style/DefaultNumberPickerTheme" />
+
+        <NumberPicker
+            android:id="@+id/NPsecondsForExpirationTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:hapticFeedbackEnabled="true"
+
+            android:theme="@style/DefaultNumberPickerTheme" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/setTimeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:gravity="center"
+        android:text="@string/expiration_time_title"
+        android:textColor="@android:color/white"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.048" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/continue_to_final_geofencing_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.861"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.928"
+        app:srcCompat="@drawable/ic_baseline_arrow_forward_24" />
+
+
+    <TextView
+        android:id="@+id/expiration_time_input_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/expiration_time_input_information"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.581"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.182" />
+
+    <LinearLayout
+        android:id="@+id/NP_Expiration_Time_HMS"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:hapticFeedbackEnabled="true"
+        android:orientation="horizontal"
+        android:weightSum="30"
+        app:layout_constraintTop_toBottomOf="@+id/expiration_time_input_information">
+
+        <TextView
+            android:id="@+id/NP_Expiration_Time_H"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="center"
+            android:text="H"
+
+            android:textColor="@color/colorpurple"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/NP_Expiration_Time_M"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="center"
+
+            android:text="M"
+
+            android:textColor="@color/colorpurple"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/NP_Expiration_Time_S"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="center"
+            android:text="S"
+
+            android:textColor="@color/colorpurple"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/NP_Expiration_Time_Border_Bottom"
+        android:layout_width="match_parent"
+
+        android:layout_height="2dp"
+        android:background="@color/colorpurple"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -157,6 +157,8 @@ public class Tasks {
     }
 
 
+
+
     public void flash(String switcher) {
 
         CameraManager camManager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);

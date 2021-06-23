@@ -11,14 +11,10 @@ import android.widget.RelativeLayout;
 
 import androidx.fragment.app.Fragment;
 
+import ch.bbcag.NFController.MapActivities.SelectGeofencingRadiusActivity;
+
 
 public class HomeTab1 extends Fragment implements View.OnClickListener {
-    private final Activity activity;
-
-    public HomeTab1(Activity activity) {
-        this.activity = activity;
-    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,21 +45,21 @@ public class HomeTab1 extends Fragment implements View.OnClickListener {
         Intent intent;
         switch (view.getId()) {
             case R.id.rlReadNFCTAG:
-                intent = new Intent(activity, NFCRead.class);
-                activity.startActivity(intent);
+                intent = new Intent(getContext(), NFCRead.class);
+                startActivity(intent);
                 break;
 
             case R.id.rlWriteWithNFC:
-                intent = new Intent(activity, NFCWrite.class);
-                activity.startActivity(intent);
+                intent = new Intent(getContext(), NFCWrite.class);
+                startActivity(intent);
                 break;
             case R.id.rlWipeWithNFC:
-                intent = new Intent(activity, NFCWipe.class);
-                activity.startActivity(intent);
+                intent = new Intent(getContext(), NFCWipe.class);
+                startActivity(intent);
                 break;
             case R.id.rlTestWithNFC:
-                intent = new Intent(activity, NFCTest.class);
-                activity.startActivity(intent);
+                intent = new Intent(getContext(), NFCTest.class);
+                startActivity(intent);
                 break;
 
 
