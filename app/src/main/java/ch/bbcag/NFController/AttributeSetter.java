@@ -40,6 +40,8 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
                 ((AlarmAttribute) fragment).setAlarm();
             } else if (fragment instanceof TimerAttribute) {
                 ((TimerAttribute) fragment).setTimer();
+            } else if (fragment instanceof WhatsAppAttribute) {
+                ((WhatsAppAttribute) fragment).setmessage();
             }
         }
         intent = new Intent(this, TaskWriter.class);
@@ -92,6 +94,14 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
             case "timer":
                 fragment = new TimerAttribute();
             case "geofencing":
+
+                break;
+
+            case "send":
+                fragment = new WhatsAppAttribute();
+                break;
+            case "open":
+                fragment = new AppSelector();
                 break;
         }
         return Const.fulltask[0];
