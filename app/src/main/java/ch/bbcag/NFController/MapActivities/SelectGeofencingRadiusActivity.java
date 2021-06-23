@@ -24,10 +24,12 @@ public class SelectGeofencingRadiusActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_geofencing_radius);
+        editText = findViewById(R.id.radius_input_field);
+
+        editText.setHint(getResources().getString(R.string.radius_input_field_hint));
 
         FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_expiration_time);
         floatingActionButton.setOnClickListener(v -> {
-            editText = findViewById(R.id.radius_input_field);
             String temp = editText.getText().toString();
             try {
                 radius = Double.parseDouble(temp);

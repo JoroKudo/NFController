@@ -25,7 +25,7 @@ public class SelectGeofencingExpirationTimeActivity extends AppCompatActivity {
     private int m;
     private int s;
     long expirationTimeInMilliseconds;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,22 +35,23 @@ public class SelectGeofencingExpirationTimeActivity extends AppCompatActivity {
         numberPickerMinutes = findViewById(R.id.NP_Expiration_Time_M);
         numberPickerSeconds = findViewById(R.id.NP_Expiration_Time_S);
 
+        setMaxValueOfNumberPickers();
 
         FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_final_geofencing_view);
         floatingActionButton.setOnClickListener(v -> {
-            setMaxValueOfNumberPickers();
             formatNumberPickers();
-                if (h != 0 && m != 0 && s != 0) {
-                    setExpirationTime(h, m, s);
-                    intent = new Intent(getApplicationContext(), SelectGeoFencingFeatureActivity.class);
-                    startActivity(intent);
-                }else
-                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.geofencing_expiration_time_0_value_toast), Toast.LENGTH_SHORT).show();
+            setExpirationTime(h, m, s);
+            if (getExpirationTimeInMilliseconds() > 0) {
+                intent = new Intent(getApplicationContext(), SelectGeoFencingFeatureActivity.class);
+                startActivity(intent);
+            } else
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.geofencing_expiration_time_0_value_toast), Toast.LENGTH_SHORT).show();
 
         });
 
 
     }
+
     private void setMaxValueOfNumberPickers() {
 
         for (NumberPicker numberPicker : Arrays.asList(numberPickerHours, numberPickerMinutes, numberPickerSeconds)) {
@@ -73,7 +74,10 @@ public class SelectGeofencingExpirationTimeActivity extends AppCompatActivity {
     }
 
     public void setExpirationTime(int h, int m, int s) {
-        expirationTimeInMilliseconds = (60 * (h * 60 + m) + s)*1000;
+        expirationTimeInMilliseconds = (60 * (h * 60 + m) + s) * 1000;
     }
 
+    public long getExpirationTimeInMilliseconds() {
+        return expirationTimeInMilliseconds;
+    }
 }
