@@ -31,6 +31,10 @@ public class SelectGeofencingExpirationTimeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_geofencing_expiration_time);
 
+        numberPickerHours = findViewById(R.id.NP_Expiration_Time_H);
+        numberPickerMinutes = findViewById(R.id.NP_Expiration_Time_M);
+        numberPickerSeconds = findViewById(R.id.NP_Expiration_Time_S);
+
 
         FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_final_geofencing_view);
         floatingActionButton.setOnClickListener(v -> {
@@ -39,7 +43,7 @@ public class SelectGeofencingExpirationTimeActivity extends AppCompatActivity {
                 if (h != 0 && m != 0 && s != 0) {
                     setExpirationTime(h, m, s);
                     intent = new Intent(getApplicationContext(), SelectGeoFencingFeatureActivity.class);
-                    getApplicationContext().startActivity(intent);
+                    startActivity(intent);
                 }else
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.geofencing_expiration_time_0_value_toast), Toast.LENGTH_SHORT).show();
 
