@@ -1,6 +1,11 @@
 package ch.bbcag.NFController;
 
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +15,14 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class RequestHandler {
+    FirebaseDatabase database = FirebaseDatabase.getInstance("https://nfcontroller-default-rtdb.europe-west1.firebasedatabase.app/");
+    FirebaseApp firebaseApp = database.getApp();
 
+    public void writeit() {
+        FirebaseDatabase databaset = FirebaseDatabase.getInstance("https://nfcontroller-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference mDbRef = databaset.getReference("Donor/Name");
+        mDbRef.setValue("Parinitha Krishna");
+    }
 
     public void addThing(String user) throws IOException {
         String baseUrl = "https://nfcontroller-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -33,6 +45,8 @@ public class RequestHandler {
             System.out.println(response);
         }
     }
+
+
 
     private HttpURLConnection initializeConnection(URL url, String requestMethod) throws IOException {
         HttpURLConnection con = (HttpURLConnection) url.openConnection();

@@ -11,8 +11,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import ch.bbcag.NFController.AttributeFragments.*;
-import ch.bbcag.NFController.MapActivities.MapsActivity;
-import ch.bbcag.NFController.MapActivities.SelectGeofencingRadiusActivity;
 
 
 public class AttributeSetter extends AppCompatActivity implements View.OnClickListener {
@@ -34,14 +32,14 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         Intent intent;
         if (view.getId() == R.id.rlWriteTask) {
-            if (fragment instanceof TextAttribute) {
-                ((TextAttribute) fragment).setText();
+            if (fragment instanceof TextParameter) {
+                ((TextParameter) fragment).setText();
             } else if (fragment instanceof AlarmAttribute) {
                 ((AlarmAttribute) fragment).setAlarm();
             } else if (fragment instanceof TimerAttribute) {
                 ((TimerAttribute) fragment).setTimer();
-            } else if (fragment instanceof WhatsAppAttribute) {
-                ((WhatsAppAttribute) fragment).setmessage();
+            } else if (fragment instanceof MessageParameter) {
+                ((MessageParameter) fragment).setMessage();
             }
         }
         intent = new Intent(this, TaskWriter.class);
@@ -82,7 +80,7 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
             case "tts":
             case "web":
 
-                fragment = new TextAttribute();
+                fragment = new TextParameter();
                 break;
             case "tone":
             case "mute":
@@ -98,7 +96,7 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case "send":
-                fragment = new WhatsAppAttribute();
+                fragment = new MessageParameter();
                 break;
             case "open":
                 fragment = new AppSelector();

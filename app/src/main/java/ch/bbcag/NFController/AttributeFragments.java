@@ -1,15 +1,15 @@
 package ch.bbcag.NFController;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.NumberPicker;
@@ -37,14 +37,15 @@ public class AttributeFragments {
             View view = inflater.inflate(R.layout.attribute_io, container,
                     false);
 
-            RadioButton radioon = view.findViewById(R.id.radioon);
-            radioon.setOnClickListener(this);
+            RadioButton radioOn = view.findViewById(R.id.radioon);
+            radioOn.setOnClickListener(this);
 
-            RadioButton radiooff = view.findViewById(R.id.radiooff);
-            radiooff.setOnClickListener(this);
+            RadioButton radioOff = view.findViewById(R.id.radiooff);
+            radioOff.setOnClickListener(this);
             return view;
         }
 
+        @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(View view) {
             boolean checked = ((RadioButton) view).isChecked();
@@ -66,18 +67,32 @@ public class AttributeFragments {
     }
 
     public static class AppSelector extends Fragment {
-        private List<ResolveInfo> pkgAppsList;
-        private String[] lol;
+
+        private String[] pkgNames;
+        private String[] appNames;
+        private Drawable[] appIcons;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
             mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-            pkgAppsList = getContext().getPackageManager().queryIntentActivities(mainIntent, 0);
-            lol = new String[pkgAppsList.size()];
-            for (int i = 0; i < pkgAppsList.size()-1; i++) {
-                lol[i] = pkgAppsList.get(i).resolvePackageName;
+            List<ResolveInfo> pkgAppsList = requireContext().getPackageManager().queryIntentActivities(mainIntent, 0);
+            appNames = new String[pkgAppsList.size()];
+            pkgNames = new String[pkgAppsList.size()];
+            appIcons = new Drawable[pkgAppsList.size()];
+            for (int i = 0; i < pkgAppsList.size(); i++) {
+                pkgNames[i] = pkgAppsList.get(i).toString().split(" ")[1].split("/")[0];
+                PackageManager packageManager = requireActivity().getApplicationContext().getPackageManager();
+
+                try {
+                    appIcons[i] = packageManager.getApplicationIcon(appNames[i]);
+                    appNames[i] = (String) packageManager.getApplicationLabel(packageManager.getApplicationInfo(appNames[i], PackageManager.GET_META_DATA));
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+
             }
         }
 
@@ -87,23 +102,23 @@ public class AttributeFragments {
             View view = inflater.inflate(R.layout.task_list, container,
                     false);
 
-            ListView listView = view.findViewById(R.id.mobile_list);
-            ArrayAdapter adapter = new ArrayAdapter<>(getContext(), R.layout.task_list_item, pkgAppsList);
+            ListView listView = (ListView) view.findViewById(R.id.mobile_list);
 
 
-            listView.setAdapter(adapter);
-            listView.setOnItemClickListener((parent, viewv, position, id) -> {
-                Const.fulltask[0] = Const.TASKS[position];
+            // For populating list data
+            CustomList customCountryList = new CustomList(getActivity(), appNames, appIcons);
+            listView.setAdapter(customCountryList);
 
-            });
+
+            listView.setOnItemClickListener((parent, clickView, position, id) -> Const.fulltask[1] = pkgNames[position]);
             return view;
         }
 
 
     }
 
-    public static class TextAttribute extends Fragment {
-        EditText attributer;
+    public static class TextParameter extends Fragment {
+        EditText textInput;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -116,7 +131,7 @@ public class AttributeFragments {
                                  Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.attribute_text, container,
                     false);
-            attributer = view.findViewById(R.id.wowidc);
+            textInput = view.findViewById(R.id.wowidc);
 
 
             return view;
@@ -125,14 +140,14 @@ public class AttributeFragments {
 
 
         public void setText() {
-            Const.fulltask[1] = attributer.getText().toString();
+            Const.fulltask[1] = textInput.getText().toString();
 
         }
 
     }
 
-    public static class WhatsAppAttribute extends Fragment {
-        EditText msgp;
+    public static class MessageParameter extends Fragment {
+        EditText msgInput;
         CountryCodePicker ccp;
 
         @Override
@@ -146,7 +161,7 @@ public class AttributeFragments {
                                  Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.attribute_whatsapp, container,
                     false);
-            msgp = view.findViewById(R.id.wowidc);
+            msgInput = view.findViewById(R.id.wowidc);
 
             ccp = (CountryCodePicker) view.findViewById(R.id.ccp);
             ccp.registerCarrierNumberEditText(view.findViewById(R.id.wew));
@@ -155,9 +170,9 @@ public class AttributeFragments {
         }
 
 
-        public void setmessage() {
+        public void setMessage() {
             Const.fulltask[1] = ccp.getFullNumberWithPlus();
-            Const.fulltask[2] = msgp.getText().toString();
+            Const.fulltask[2] = msgInput.getText().toString();
 
 
         }
@@ -165,7 +180,7 @@ public class AttributeFragments {
     }
 
     public static class AlarmAttribute extends Fragment {
-        EditText alertmessage;
+        EditText alertMessage;
         TimePicker timePicker;
 
         @Override
@@ -180,7 +195,7 @@ public class AttributeFragments {
                     false);
 
             timePicker = view.findViewById(R.id.timePicker1);
-            alertmessage = view.findViewById(R.id.Alarmmessage);
+            alertMessage = view.findViewById(R.id.Alarmmessage);
 
 
             return view;
@@ -190,7 +205,7 @@ public class AttributeFragments {
         public void setAlarm() {
             Const.fulltask[1] = timePicker.getCurrentHour().toString();
             Const.fulltask[2] = timePicker.getCurrentMinute().toString();
-            Const.fulltask[3] = alertmessage.getText().toString();
+            Const.fulltask[3] = alertMessage.getText().toString();
         }
 
 
@@ -198,10 +213,10 @@ public class AttributeFragments {
 
     public static class TimerAttribute extends Fragment {
 
-        NumberPicker hourpicker;
-        NumberPicker minutepicker;
-        NumberPicker secondpicker;
-        EditText timermessage;
+        NumberPicker hourPicker;
+        NumberPicker minutePicker;
+        NumberPicker secondPicker;
+        EditText timerMessage;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -213,16 +228,16 @@ public class AttributeFragments {
                                  Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.attribute_timer, container,
                     false);
-            hourpicker = view.findViewById(R.id.NPhours);
-            minutepicker = view.findViewById(R.id.NPminutes);
-            secondpicker = view.findViewById(R.id.NPseconds);
-            timermessage = view.findViewById(R.id.Timermessage);
+            hourPicker = view.findViewById(R.id.NPhours);
+            minutePicker = view.findViewById(R.id.NPminutes);
+            secondPicker = view.findViewById(R.id.NPseconds);
+            timerMessage = view.findViewById(R.id.Timermessage);
 
 
-            for (NumberPicker numberPicker : Arrays.asList(hourpicker, minutepicker, secondpicker)) {
+            for (NumberPicker numberPicker : Arrays.asList(hourPicker, minutePicker, secondPicker)) {
                 numberPicker.setTextColor(Color.WHITE);
                 numberPicker.setMinValue(0);
-                if (numberPicker == hourpicker) {
+                if (numberPicker == hourPicker) {
                     numberPicker.setMaxValue(23);
                 } else {
                     numberPicker.setMaxValue(59);
@@ -236,10 +251,10 @@ public class AttributeFragments {
 
         public void setTimer() {
 
-            Const.fulltask[1] = Integer.toString(hourpicker.getValue());
-            Const.fulltask[2] = Integer.toString(minutepicker.getValue());
-            Const.fulltask[3] = Integer.toString(secondpicker.getValue());
-            Const.fulltask[4] = timermessage.getText().toString();
+            Const.fulltask[1] = Integer.toString(hourPicker.getValue());
+            Const.fulltask[2] = Integer.toString(minutePicker.getValue());
+            Const.fulltask[3] = Integer.toString(secondPicker.getValue());
+            Const.fulltask[4] = timerMessage.getText().toString();
         }
 
 

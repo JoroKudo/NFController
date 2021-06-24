@@ -7,6 +7,9 @@
     android:layout_height="match_parent"
     android:paddingStart="@dimen/_15sdp"
     android:gravity="start"
+
+
+    android:drawablePadding="5dp"
     android:textColor="@android:color/white"
     android:textSize="35sp" />
 
