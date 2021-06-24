@@ -7,12 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
-
 import ch.bbcag.NFController.MapActivities.MapsActivity;
-import ch.bbcag.NFController.MapActivities.SelectGeofencingRadiusActivity;
+
 
 
 public class HomeTab2 extends Fragment {
@@ -37,14 +34,14 @@ public class HomeTab2 extends Fragment {
                 false);
         ListView listView = view.findViewById(R.id.mobile_list);
 
-        ArrayAdapter adapter = new ArrayAdapter<>(getContext(), R.layout.task_list_item, mobileArray);
+        ArrayAdapter<?> adapter = new ArrayAdapter<>(getContext(), R.layout.task_list_item, mobileArray);
 
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, viewv, position, id) -> {
                 Const.fulltask[0] = Const.TASKS[position];
             Intent intent;
-            if (Const.fulltask[0] != "geofencing"){
+            if (!Const.fulltask[0].equals("geofencing")){
                 intent = new Intent(getContext(), AttributeSetter.class);
             }else {
                 intent = new Intent(getContext(), MapsActivity.class);
