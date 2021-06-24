@@ -27,6 +27,11 @@
     <string name="geofencing_value_too_small_toast">Value must be at least 100</string>
     <string name="geofencing_expiration_time_0_value_toast">Please enter a time greater than 0s</string>
     <string name="title_activity_final_geo_fencing_view">Map</string>
+    <string name="time_title">Duration:</string>
+    <string name="radius_title">Radius</string>
+    <string name="address_title">Address:</string>
+    <string name="feature_title">Feature:</string>
+
 
 
 </resources>

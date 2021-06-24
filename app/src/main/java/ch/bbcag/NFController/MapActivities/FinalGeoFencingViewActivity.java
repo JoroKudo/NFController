@@ -1,5 +1,6 @@
 package ch.bbcag.NFController.MapActivities;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Build;
@@ -25,11 +26,17 @@ import java.util.concurrent.TimeUnit;
 
 import ch.bbcag.NFController.Const;
 import ch.bbcag.NFController.R;
+import ch.bbcag.NFController.databinding.ActivityFinalGeoFencingViewBinding;
 import ch.bbcag.NFController.databinding.FragmentMapsBinding;
 
 import static android.graphics.Color.TRANSPARENT;
 
 public class FinalGeoFencingViewActivity extends FragmentActivity implements OnMapReadyCallback {
+
+    TextView addressText;
+    TextView radiusText;
+    TextView timeText;
+    TextView featureText;
 
     Marker marker;
     Circle circle;
@@ -42,17 +49,24 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     private final LatLng placeLatLng = new LatLng(latitude, longitude);
     private final int radius = Integer.parseInt(Const.fulltask[5]);
     private final long expirationTimeInMilliseconds = Long.parseLong(Const.fulltask[6]);
-    private FragmentMapsBinding binding;
+    private ActivityFinalGeoFencingViewBinding binding;
 
     private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = FragmentMapsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        binding = ActivityFinalGeoFencingViewBinding.inflate(getLayoutInflater());
+        ConstraintLayout root = binding.getRoot();
+        setContentView(root);
         Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
         loadMap();
+
+        addressText = findViewById(R.id.address);
+        radiusText = findViewById(R.id.radius);
+        timeText = findViewById(R.id.time);
+        featureText = findViewById(R.id.feature);
+
         setText();
 
         FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_NFC_writer);
@@ -66,7 +80,7 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         marker = mMap.addMarker(new MarkerOptions().position(placeLatLng).title(address));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(placeLatLng, 10));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(placeLatLng, 17));
         circle = mMap.addCircle(new CircleOptions().center(placeLatLng).radius(radius).strokeColor(TRANSPARENT).fillColor(0x50021CDE));
     }
 
@@ -82,17 +96,14 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     }
 
     private void setText() {
-        TextView addressText = findViewById(R.id.address);
-        TextView radiusText = findViewById(R.id.radius);
-        TextView timeText = findViewById(R.id.time);
-        TextView featureText = findViewById(R.id.feature);
+
 
         convertMillisecondsToTime();
 
         addressText.setText(address);
         radiusText.setText(String.valueOf(radius));
         timeText.setText(h + "h " + m + "m " + s + "s");
-        featureText.setText(Const.fulltask[6]);
+        featureText.setText(Const.fulltask[9]);
 
 }
 

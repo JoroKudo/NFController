@@ -36,6 +36,7 @@ public class geofencingFeatureSelector extends Fragment {
 
         listView.setOnItemClickListener((parent, clickView, position, id) -> {
             Const.fulltask[7] = Const.GEOTASKS[position];
+            Const.fulltask[9] = entries[position];
             areOptionsAvailable(position);
             Intent intent = new Intent(getContext(), FinalGeoFencingViewActivity.class);
             startActivity(intent);
