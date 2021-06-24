@@ -1,7 +1,6 @@
 package ch.bbcag.NFController;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -66,13 +65,21 @@ public class NFCRead extends NFCBase {
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
         try {
+
             Ndef ndef = Ndef.get(tag);
+
+
             if (ndef != null) {
                 ndef.connect();
+                RequestHandler rh =new RequestHandler();
+
+
                 NdefMessage ndefMessage = ndef.getNdefMessage();
 
                 if (ndefMessage != null) {
                     Parcelable[] messages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+                    rh.SaveTagdata(ndef,messages,ndef.getNdefMessage().getRecords());
+
                     if (messages != null) {
                         NdefMessage[] ndefMessages = new NdefMessage[messages.length];
                         for (int i = 0; i < messages.length; i++) {
@@ -90,20 +97,19 @@ public class NFCRead extends NFCBase {
                     }
                 } else {
 
-                    listTitle.setText("Empty Tag");
+                    listTitle.setText("Empty Tag1");
                 }
             } else {
-                listTitle.setText("Empty Tag");
+                listTitle.setText("Empty Tag2");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-
     }
 
-    private void whichActionIsOnTag(byte[] payload,NdefRecord record,  AudioManager audioManager, NotificationManager notificationManager, WifiManager wifiManager) {
+    private void whichActionIsOnTag(byte[] payload, NdefRecord record, AudioManager audioManager, NotificationManager notificationManager, WifiManager wifiManager) {
         String text = new String(payload);
         byte[] type = record.getType();
         String mimetype = new String(type);
@@ -111,11 +117,11 @@ public class NFCRead extends NFCBase {
 
         int subFeaturePosition;
 
-        if (splitted[0].equals("geofencing")){
+        if (splitted[0].equals("geofencing")) {
             subFeaturePosition = 7;
             //TODO Implement what should be done if geofencing is selected
 
-        }else
+        } else
             subFeaturePosition = 0;
 
         switch (splitted[subFeaturePosition]) {
@@ -174,7 +180,7 @@ public class NFCRead extends NFCBase {
 
         }
         if (text.isEmpty()) {
-            listTitle.setText("Empty Tag");
+            listTitle.setText("Empty Tag3");
         } else {
 
             listTitle.setText(text);

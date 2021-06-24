@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.tabs.TabLayout;
 
 public class NfcHome extends NFCBase {
-    private final NFCBase nfchome = this;
     private Fragment fragment = new HomeTab1();
 
     @Override
@@ -29,7 +28,7 @@ public class NfcHome extends NFCBase {
         TabLayout.Tab secondTab = tabLayout.newTab();
         secondTab.setText("Second");
         tabLayout.addTab(secondTab);
-        fragmentlauncher();
+        fragmentLauncher();
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -46,7 +45,7 @@ public class NfcHome extends NFCBase {
 
 
                 }
-                fragmentlauncher();
+                fragmentLauncher();
             }
 
             @Override
@@ -63,7 +62,7 @@ public class NfcHome extends NFCBase {
     }
 
 
-    public void fragmentlauncher() {
+    public void fragmentLauncher() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         assert fragment != null;

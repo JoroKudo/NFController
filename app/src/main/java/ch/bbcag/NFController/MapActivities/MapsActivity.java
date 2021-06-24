@@ -122,7 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latLng.latitude, latLng.longitude)).title(latLng.latitude + ", " + latLng.longitude));
             Const.fulltask[2] = String.valueOf(latLng.latitude);
             Const.fulltask[3] = String.valueOf(latLng.longitude);
-            Const.fulltask[4] = "No Address available";
+            Const.fulltask[4] = "No_Address_available";
 
         });
     }

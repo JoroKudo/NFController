@@ -49,9 +49,9 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_final_geo_fencing_view);
         binding = FragmentMapsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
+                Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
         loadMap();
         setText();
 
