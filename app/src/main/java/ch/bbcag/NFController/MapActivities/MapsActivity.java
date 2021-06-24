@@ -4,6 +4,8 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +27,7 @@ import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -122,7 +125,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latLng.latitude, latLng.longitude)).title(latLng.latitude + ", " + latLng.longitude));
             Const.fulltask[2] = String.valueOf(latLng.latitude);
             Const.fulltask[3] = String.valueOf(latLng.longitude);
-            Const.fulltask[4] = "No_Address_available";
+
+            try {
+                List<Address> addresses = new Geocoder(getApplicationContext()).getFromLocation(latLng.latitude, latLng.longitude, 1);
+                Const.fulltask[4] = addresses.get(0).getAddressLine(0) ;
+            } catch (IOException e) {
+                e.printStackTrace();
+                Const.fulltask[4] = "No_Address_available";
+            }
 
         });
     }

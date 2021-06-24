@@ -3,6 +3,7 @@ package ch.bbcag.NFController.MapActivities;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 import ch.bbcag.NFController.Const;
 import ch.bbcag.NFController.R;
+import ch.bbcag.NFController.TaskWriter;
 import ch.bbcag.NFController.databinding.ActivityFinalGeoFencingViewBinding;
 import ch.bbcag.NFController.databinding.FragmentMapsBinding;
 
@@ -71,8 +73,9 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
 
         FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_NFC_writer);
         floatingActionButton.setOnClickListener(v -> {
-
             Const.fulltask[1] = "ID";
+            Intent intent = new Intent(getApplicationContext(), TaskWriter.class);
+            startActivity(intent);
         });
     }
 

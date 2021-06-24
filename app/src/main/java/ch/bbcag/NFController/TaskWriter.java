@@ -76,7 +76,9 @@ public class TaskWriter extends NFCBase {
 
         if (tag != null) {
 
-            String messageToWrite = Const.fulltask[0] + Const.SPACER + Const.fulltask[1] + Const.SPACER + Const.fulltask[2] + Const.SPACER + Const.fulltask[3]+ Const.SPACER + Const.fulltask[4];
+            String messageToWrite = Const.fulltask[0] + Const.SPACER + Const.fulltask[1] + Const.SPACER + Const.fulltask[2]
+                    + Const.SPACER + Const.fulltask[3]+ Const.SPACER + Const.fulltask[4]+ Const.SPACER + Const.fulltask[5]
+                    + Const.SPACER + Const.fulltask[6] + Const.SPACER + Const.fulltask[7]+ Const.SPACER + Const.fulltask[8]+ Const.SPACER + Const.fulltask[9];
 
             if (!TextUtils.equals(messageToWrite, "null") && !TextUtils.isEmpty(messageToWrite)) {
                 NdefRecord record = NdefRecord.createMime(messageToWrite, messageToWrite.getBytes());
