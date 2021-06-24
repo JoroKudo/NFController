@@ -24,10 +24,10 @@ import java.util.List;
 
 public class GeofencingActivity extends AppCompatActivity {
 
-    private static final String myId = "10";
-    private static final int LATITUDE = 10;
-    private static final int LONGITUDE = 10;
-    private static final int RADIUS = 10;
+    private String myId;
+    private int latitude;
+    private int longitude;
+    private int radius;
     private static final int EXPIRATION_TIME_IN_MILISECONDS = 10;
     private static final String ACCESS_BACKGROUND_LOCATION = Manifest.permission.ACCESS_BACKGROUND_LOCATION;
     private static final String ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -39,19 +39,20 @@ public class GeofencingActivity extends AppCompatActivity {
     private PendingIntent geofencePendingIntent;
     GeofencingClient geofencingClient;
 
+    public GeofencingActivity(String myId, int latitude, int longitude, int radius) {
+        this.myId = myId;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.radius = radius;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
         geofencingClient = new GeofencingClient(this);
 
-        startGeoFenceMonitoring();
-
-/*        Button button = findViewById(R.id.buttonMaps);
-        button.setOnClickListener(v -> {
-            startActivity(new Intent(this, MapsActivity.class));
-        });*/
+        startGeoFenceMonitoring(myId, latitude, longitude, radius);
     }
 
 
@@ -92,7 +93,7 @@ public class GeofencingActivity extends AppCompatActivity {
         return builder.build();
     }
 
-    private void createGeofence(String id, int latitude, int longitude, int radius) {
+    private void createGeofence(String id, double latitude, double longitude, int radius) {
         geofenceList.add(new Geofence.Builder()
                 // Set the request ID of the geofence. This is a string to identify this
                 // geofence.
@@ -133,10 +134,10 @@ public class GeofencingActivity extends AppCompatActivity {
                 == PackageManager.PERMISSION_GRANTED;
     }
 
-    private void startGeoFenceMonitoring() {
+    private void startGeoFenceMonitoring(String myId, double latitude, double longitude, int radius) {
         try {
             requestMultiplePermissions();
-            createGeofence(myId, LATITUDE, LONGITUDE, RADIUS);
+            createGeofence(myId, latitude, longitude, radius);
             addGeofence();
         } catch (Exception e) {
             e.printStackTrace();

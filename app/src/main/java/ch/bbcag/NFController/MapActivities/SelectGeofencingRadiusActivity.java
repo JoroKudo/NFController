@@ -9,13 +9,14 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import ch.bbcag.NFController.Const;
 import ch.bbcag.NFController.R;
 
 public class SelectGeofencingRadiusActivity extends AppCompatActivity {
 
     Intent intent;
     EditText editText;
-    double radius;
+    int radius;
 
     public SelectGeofencingRadiusActivity() {
     }
@@ -32,8 +33,9 @@ public class SelectGeofencingRadiusActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(v -> {
             String temp = editText.getText().toString();
             try {
-                radius = Double.parseDouble(temp);
+                radius = Integer.parseInt(temp);
                 if (radius >= 100) {
+                    Const.fulltask[5] = String.valueOf(radius);
                     intent = new Intent(SelectGeofencingRadiusActivity.this, SelectGeofencingExpirationTimeActivity.class);
                     startActivity(intent);
                 } else
@@ -47,7 +49,7 @@ public class SelectGeofencingRadiusActivity extends AppCompatActivity {
         });
     }
 
-    public double getRadius() {
+    public int getRadius() {
         return radius;
     }
 }

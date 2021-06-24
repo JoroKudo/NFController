@@ -13,6 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Arrays;
 
+import ch.bbcag.NFController.Const;
 import ch.bbcag.NFController.R;
 
 public class SelectGeofencingExpirationTimeActivity extends AppCompatActivity {
@@ -41,6 +42,7 @@ public class SelectGeofencingExpirationTimeActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(v -> {
             formatNumberPickers();
             setExpirationTime(h, m, s);
+            Const.fulltask[6] = String.valueOf(expirationTimeInMilliseconds);
             if (getExpirationTimeInMilliseconds() > 0) {
                 intent = new Intent(getApplicationContext(), SelectGeoFencingFeatureActivity.class);
                 startActivity(intent);
@@ -77,7 +79,20 @@ public class SelectGeofencingExpirationTimeActivity extends AppCompatActivity {
         expirationTimeInMilliseconds = (60 * (h * 60 + m) + s) * 1000;
     }
 
+
     public long getExpirationTimeInMilliseconds() {
         return expirationTimeInMilliseconds;
+    }
+
+    public int getH() {
+        return h;
+    }
+
+    public int getM() {
+        return m;
+    }
+
+    public int getS() {
+        return s;
     }
 }

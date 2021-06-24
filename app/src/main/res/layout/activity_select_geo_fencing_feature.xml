@@ -18,9 +18,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.089" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="ch.bbcag.NFController.HomeTab2"
+    <FrameLayout
+        android:id="@+id/simpleFrameLayoutGeofencing"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"

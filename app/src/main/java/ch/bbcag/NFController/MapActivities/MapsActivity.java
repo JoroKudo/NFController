@@ -44,6 +44,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     double placeLatitude;
     double placeLongitude;
+    String address;
 
     public MapsActivity(){
     }
@@ -68,6 +69,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_radius);
         floatingActionButton.setOnClickListener(v -> {
+
             Intent intent = new Intent(getApplicationContext(), SelectGeofencingRadiusActivity.class);
             startActivity(intent);
         });
@@ -84,6 +86,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng placeLatLng = place.getLatLng();
             placeLatitude = placeLatLng.latitude;
             placeLongitude = placeLatLng.longitude;
+            address = place.getAddress();
+
+            Const.fulltask[2] = String.valueOf(place.getLatLng().latitude);
+            Const.fulltask[3] = String.valueOf(place.getLatLng().longitude);
+            Const.fulltask[4] = address;
 
             if (marker!= null){
                 marker.remove();
@@ -113,6 +120,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 marker.remove();
             }
             marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latLng.latitude, latLng.longitude)).title(latLng.latitude + ", " + latLng.longitude));
+            Const.fulltask[2] = String.valueOf(latLng.latitude);
+            Const.fulltask[3] = String.valueOf(latLng.longitude);
+            Const.fulltask[4] = "No Address available";
+
         });
     }
 

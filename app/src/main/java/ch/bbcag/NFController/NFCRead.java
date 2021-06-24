@@ -112,8 +112,9 @@ public class NFCRead extends NFCBase {
         int subFeaturePosition;
 
         if (splitted[0].equals("geofencing")){
-            subFeaturePosition = 4;
+            subFeaturePosition = 7;
             //TODO Implement what should be done if geofencing is selected
+
         }else
             subFeaturePosition = 0;
 
@@ -170,7 +171,6 @@ public class NFCRead extends NFCBase {
                 Website website = new Website(this);
                 website.opensite(splitted[subFeaturePosition + 1]);
                 break;
-
 
         }
         if (text.isEmpty()) {

@@ -70,8 +70,6 @@ public class NfcHome extends NFCBase {
         ft.replace(R.id.simpleFrameLayout, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
-
-
     }
 
 
