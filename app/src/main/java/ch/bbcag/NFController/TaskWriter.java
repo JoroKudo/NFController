@@ -76,22 +76,36 @@ public class TaskWriter extends NFCBase {
 
         if (tag != null) {
 
-            String messageToWrite = Const.fulltask[0] + Const.SPACER + Const.fulltask[1] + Const.SPACER + Const.fulltask[2]
-                    + Const.SPACER + Const.fulltask[3]+ Const.SPACER + Const.fulltask[4]+ Const.SPACER + Const.fulltask[5]
-                    + Const.SPACER + Const.fulltask[6] + Const.SPACER + Const.fulltask[7]+ Const.SPACER + Const.fulltask[8]+ Const.SPACER + Const.fulltask[9];
 
-            if (!TextUtils.equals(messageToWrite, "null") && !TextUtils.isEmpty(messageToWrite)) {
-                NdefRecord record = NdefRecord.createMime(messageToWrite, messageToWrite.getBytes());
-                NdefMessage message = new NdefMessage(new NdefRecord[]{record});
+            NdefRecord[] rec = new NdefRecord[Const.taskcontainer.size()];
+            for (int i = 0; i < Const.taskcontainer.size(); i++) {
+
+                String messageToWrite =  Const.taskcontainer.get(i)[0]
+                        + Const.SPACER + Const.taskcontainer.get(i)[1]
+                        + Const.SPACER + Const.taskcontainer.get(i)[2]
+                        + Const.SPACER + Const.taskcontainer.get(i)[3]
+                        + Const.SPACER + Const.taskcontainer.get(i)[4]
+                        + Const.SPACER + Const.taskcontainer.get(i)[5]
+                        + Const.SPACER + Const.taskcontainer.get(i)[6]
+                        + Const.SPACER + Const.taskcontainer.get(i)[7]
+                        + Const.SPACER + Const.taskcontainer.get(i)[8]
+                        + Const.SPACER + Const.taskcontainer.get(i)[9];
 
 
-                if (writeTag(tag, message)) {
-                    Toast.makeText(this, (getString(R.string.message_write_success)), Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    Toast.makeText(this, (getString(R.string.message_write_error)), Toast.LENGTH_SHORT).show();
-                }
+                rec[i] = NdefRecord.createMime(messageToWrite, messageToWrite.getBytes());
+
             }
+            NdefMessage message = new NdefMessage(rec);
+
+
+            if (writeTag(tag, message)) {
+                Toast.makeText(this, (getString(R.string.message_write_success)), Toast.LENGTH_SHORT).show();
+                Const.taskcontainer.clear();
+                finish();
+            } else {
+                Toast.makeText(this, (getString(R.string.message_write_error)), Toast.LENGTH_SHORT).show();
+            }
+
 
         }
     }

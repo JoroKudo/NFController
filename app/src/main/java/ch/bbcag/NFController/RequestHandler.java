@@ -1,7 +1,6 @@
 package ch.bbcag.NFController;
 
 
-import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.tech.Ndef;
 import android.os.Parcelable;
@@ -19,8 +18,10 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import static android.content.ContentValues.TAG;
 
@@ -58,7 +59,7 @@ public class RequestHandler {
 
         e = e.split("_")[3];
 
-        String path = "Tag/Data/" + e + "_"+new String(records[0].getPayload()) + "/";
+        String path = "Tag/Data/" + e + "_" + now() + "/";
 
 
         database.getReference(path + "ndef").push().setValue(ndef.toString());
@@ -66,11 +67,18 @@ public class RequestHandler {
             database.getReference(path + "messages").push().setValue(messages[i].toString());
         }
 
-        for (int j = 0; j <= records.length; j++) {
+        for (int j = 0; j < records.length; j++) {
             database.getReference(path + "Type").push().setValue(records[j].getType().toString());
             database.getReference(path + "TagData").push().setValue(new String(records[j].getPayload()));
         }
 
 
+    }
+
+    public String now() {
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        df.setTimeZone(tz);
+        return df.format(new Date());
     }
 }

@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 
-import ch.bbcag.NFController.MapActivities.SelectGeofencingRadiusActivity;
-
 
 public class SplashActivity extends Activity {
 

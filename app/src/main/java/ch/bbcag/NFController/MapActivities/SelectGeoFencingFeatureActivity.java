@@ -5,18 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import ch.bbcag.NFController.AttributeSetter;
-import ch.bbcag.NFController.Const;
 import ch.bbcag.NFController.R;
 
 public class SelectGeoFencingFeatureActivity extends AppCompatActivity {
