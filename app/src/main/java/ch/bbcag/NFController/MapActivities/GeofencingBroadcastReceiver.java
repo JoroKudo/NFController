@@ -15,6 +15,15 @@ import java.util.List;
 import static android.content.ContentValues.TAG;
 
 public class GeofencingBroadcastReceiver extends BroadcastReceiver {
+
+    private final int subFeaturePosition = 7;
+
+    private final GeofencingActivity geofencingActivity;
+
+public GeofencingBroadcastReceiver(GeofencingActivity geofencingActivity) {
+    this.geofencingActivity = geofencingActivity;
+}
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -33,6 +42,9 @@ public class GeofencingBroadcastReceiver extends BroadcastReceiver {
         if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
                 geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
 
+            if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER){
+
+            }
             // Get the geofences that were triggered. A single event can trigger
             // multiple geofences.
             List<Geofence> triggeringGeofences = geofencingEvent.getTriggeringGeofences();

@@ -91,8 +91,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             placeLongitude = placeLatLng.longitude;
             address = place.getAddress();
 
-            Const.fulltask[2] = String.valueOf(place.getLatLng().latitude);
-            Const.fulltask[3] = String.valueOf(place.getLatLng().longitude);
+            Const.fulltask[2] = String.valueOf(placeLatitude);
+            Const.fulltask[3] = String.valueOf(placeLongitude);
             Const.fulltask[4] = address;
 
             if (marker!= null){

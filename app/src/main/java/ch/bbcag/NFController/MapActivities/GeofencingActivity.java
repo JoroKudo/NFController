@@ -22,37 +22,32 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Collections;
 import java.util.List;
 
+import ch.bbcag.NFController.Const;
+import ch.bbcag.NFController.NFCRead;
+
 public class GeofencingActivity extends AppCompatActivity {
 
-    private String myId;
-    private int latitude;
-    private int longitude;
-    private int radius;
-    private static final int EXPIRATION_TIME_IN_MILISECONDS = 10;
-    private static final String ACCESS_BACKGROUND_LOCATION = Manifest.permission.ACCESS_BACKGROUND_LOCATION;
-    private static final String ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    public static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
+    private final String MYID = Const.fulltask[1];
+    private final double LATITUDE = Double.parseDouble(Const.fulltask[2]);
+    private final double LONGITUDE = Double.parseDouble(Const.fulltask[3]);
+    private final float RADIUS = Float.parseFloat(Const.fulltask[5]);
+    private final long EXPIRATION_TIME_IN_MILISECONDS = Long.parseLong(Const.fulltask[6]);
+    private final String ACCESS_BACKGROUND_LOCATION = Manifest.permission.ACCESS_BACKGROUND_LOCATION;
+    private final String ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private final String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private final int PERMISSIONS_MULTIPLE_REQUEST = 123;
     private final String[] permissions = new String[]{ACCESS_BACKGROUND_LOCATION, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION};
 
     List<Geofence> geofenceList = Collections.emptyList();
     private PendingIntent geofencePendingIntent;
     GeofencingClient geofencingClient;
 
-    public GeofencingActivity(String myId, int latitude, int longitude, int radius) {
-        this.myId = myId;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.radius = radius;
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         geofencingClient = new GeofencingClient(this);
 
-        startGeoFenceMonitoring(myId, latitude, longitude, radius);
+        startGeoFenceMonitoring(MYID, LATITUDE, LONGITUDE, RADIUS);
     }
 
 
@@ -93,7 +88,7 @@ public class GeofencingActivity extends AppCompatActivity {
         return builder.build();
     }
 
-    private void createGeofence(String id, double latitude, double longitude, int radius) {
+    private void createGeofence(String id, double latitude, double longitude, float radius) {
         geofenceList.add(new Geofence.Builder()
                 // Set the request ID of the geofence. This is a string to identify this
                 // geofence.
@@ -134,7 +129,7 @@ public class GeofencingActivity extends AppCompatActivity {
                 == PackageManager.PERMISSION_GRANTED;
     }
 
-    private void startGeoFenceMonitoring(String myId, double latitude, double longitude, int radius) {
+    private void startGeoFenceMonitoring(String myId, double latitude, double longitude, float radius) {
         try {
             requestMultiplePermissions();
             createGeofence(myId, latitude, longitude, radius);

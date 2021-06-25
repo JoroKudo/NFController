@@ -25,11 +25,16 @@ import ch.bbcag.NFController.Features.Volume;
 import ch.bbcag.NFController.Features.Website;
 import ch.bbcag.NFController.Features.WhatsappTexter;
 import ch.bbcag.NFController.Features.Wifi;
+import ch.bbcag.NFController.MapActivities.GeofencingActivity;
 
 
 public class NFCRead extends NFCBase {
 
     private TextView listTitle;
+
+    NotificationManager notificationManager = (NotificationManager) getApplication().getSystemService(Context.NOTIFICATION_SERVICE);
+    AudioManager audioManager = (AudioManager) getApplication().getSystemService(Context.AUDIO_SERVICE);
+    WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
 
     @Override
@@ -58,11 +63,6 @@ public class NFCRead extends NFCBase {
 
     @SuppressLint({"SetTextI18n", "ServiceCast"})
     private void readFromNFC(Tag tag, Intent intent) {
-
-
-        NotificationManager notificationManager = (NotificationManager) getApplication().getSystemService(Context.NOTIFICATION_SERVICE);
-        AudioManager audioManager = (AudioManager) getApplication().getSystemService(Context.AUDIO_SERVICE);
-        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
         try {
 
@@ -113,16 +113,28 @@ public class NFCRead extends NFCBase {
         String text = new String(payload);
         byte[] type = record.getType();
         String mimetype = new String(type);
-        String[] splitted = text.split(Const.SPACER);
 
         int subFeaturePosition;
+        String[] splitted = text.split(Const.SPACER);
 
         if (splitted[0].equals("geofencing")) {
-            subFeaturePosition = 7;
-            //TODO Implement what should be done if geofencing is selected
+            Intent intent = new Intent(getApplicationContext(), GeofencingActivity.class);
+            startActivity(intent);
+        }
+        subFeaturePosition = 0;
 
-        } else
-            subFeaturePosition = 0;
+        featureActivator(subFeaturePosition, splitted);
+
+        if (text.isEmpty()) {
+            listTitle.setText("Empty Tag3");
+        } else {
+
+            listTitle.setText(text);
+            Log.e("MIMETYPE", mimetype);
+        }
+    }
+
+    public void featureActivator(int subFeaturePosition, String[] splitted) {
 
         switch (splitted[subFeaturePosition]) {
             case "blue":
@@ -178,13 +190,6 @@ public class NFCRead extends NFCBase {
                 website.opensite(splitted[subFeaturePosition + 1]);
                 break;
 
-        }
-        if (text.isEmpty()) {
-            listTitle.setText("Empty Tag3");
-        } else {
-
-            listTitle.setText(text);
-            Log.e("MIMETYPE", mimetype);
         }
     }
 

@@ -74,6 +74,7 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_NFC_writer);
         floatingActionButton.setOnClickListener(v -> {
             Const.fulltask[1] = "ID";
+
             Intent intent = new Intent(getApplicationContext(), TaskWriter.class);
             startActivity(intent);
         });
