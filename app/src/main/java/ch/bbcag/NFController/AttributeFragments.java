@@ -25,6 +25,8 @@ import java.util.List;
 
 public class AttributeFragments {
     public static class IOAttribute extends Fragment implements View.OnClickListener {
+String state;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -52,17 +54,19 @@ public class AttributeFragments {
             switch (view.getId()) {
                 case R.id.radioon:
                     if (checked)
-                        Const.fulltask[1] = "1";
+                        state = "1";
 
                     break;
                 case R.id.radiooff:
                     if (checked)
-                        Const.fulltask[1] = "0";
+                        state = "0";
 
                     break;
             }
         }
-
+public String getstate(){
+            return state;
+}
 
     }
 
@@ -71,6 +75,7 @@ public class AttributeFragments {
         private String[] pkgNames;
         private String[] appNames;
         private Drawable[] appIcons;
+        String app;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -102,23 +107,27 @@ public class AttributeFragments {
             View view = inflater.inflate(R.layout.task_list, container,
                     false);
 
-            ListView listView = (ListView) view.findViewById(R.id.mobile_list);
+            ListView listView = view.findViewById(R.id.mobile_list);
 
 
             // For populating list data
-            CustomList customCountryList = new CustomList(getActivity(), appNames, appIcons);
-            listView.setAdapter(customCountryList);
+            CustomList appList = new CustomList(getActivity(), appNames, appIcons);
+            listView.setAdapter(appList);
 
 
-            listView.setOnItemClickListener((parent, clickView, position, id) -> Const.fulltask[1] = pkgNames[position]);
+            listView.setOnItemClickListener((parent, clickView, position, id) -> app = pkgNames[position]);
             return view;
         }
+        public String getapp() {
+            return app;
 
+        }
 
     }
 
     public static class TextParameter extends Fragment {
         EditText textInput;
+
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -139,8 +148,8 @@ public class AttributeFragments {
         }
 
 
-        public void setText() {
-            Const.fulltask[1] = textInput.getText().toString();
+        public String getTextinput() {
+            return textInput.getText().toString();
 
         }
 
@@ -149,6 +158,7 @@ public class AttributeFragments {
     public static class MessageParameter extends Fragment {
         EditText msgInput;
         CountryCodePicker ccp;
+
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -170,9 +180,8 @@ public class AttributeFragments {
         }
 
 
-        public void setMessage() {
-            Const.fulltask[1] = ccp.getFullNumberWithPlus();
-            Const.fulltask[2] = msgInput.getText().toString();
+        public String[] getMessage() {
+            return new String[]{ccp.getFullNumberWithPlus(), msgInput.getText().toString()};
 
 
         }
@@ -182,6 +191,7 @@ public class AttributeFragments {
     public static class AlarmAttribute extends Fragment {
         EditText alertMessage;
         TimePicker timePicker;
+
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -202,10 +212,12 @@ public class AttributeFragments {
 
         }
 
-        public void setAlarm() {
-            Const.fulltask[1] = timePicker.getCurrentHour().toString();
-            Const.fulltask[2] = timePicker.getCurrentMinute().toString();
-            Const.fulltask[3] = alertMessage.getText().toString();
+        public String[] setAlarm() {
+            return new String[]
+                    {timePicker.getCurrentHour().toString(),
+                            timePicker.getCurrentMinute().toString(),
+                            alertMessage.getText().toString()};
+
         }
 
 
@@ -217,6 +229,7 @@ public class AttributeFragments {
         NumberPicker minutePicker;
         NumberPicker secondPicker;
         EditText timerMessage;
+
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -249,12 +262,13 @@ public class AttributeFragments {
 
         }
 
-        public void setTimer() {
+        public String[] getTimer() {
 
-            Const.fulltask[1] = Integer.toString(hourPicker.getValue());
-            Const.fulltask[2] = Integer.toString(minutePicker.getValue());
-            Const.fulltask[3] = Integer.toString(secondPicker.getValue());
-            Const.fulltask[4] = timerMessage.getText().toString();
+            return new String[]
+                    {Integer.toString(hourPicker.getValue()),
+                            Integer.toString(minutePicker.getValue()),
+                            Integer.toString(secondPicker.getValue()),
+                            timerMessage.getText().toString()};
         }
 
 

@@ -5,9 +5,6 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.widget.Toast;
 
-import ch.bbcag.NFController.Const;
-import ch.bbcag.NFController.MapActivities.SelectGeoFencingFeatureActivity;
-
 public class Wifi {
 
     private final WifiManager wifi;
