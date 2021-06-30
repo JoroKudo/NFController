@@ -1,79 +1,69 @@
 package ch.bbcag.NFController;
 
-import android.nfc.NfcAdapter;
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 
-import com.google.android.material.tabs.TabLayout;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class NfcHome extends NFCBase {
-    private Fragment fragment = new HomeTab1();
+
+public class NfcHome extends AppCompatActivity implements View.OnClickListener {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         setContentView(R.layout.nfc_home);
-
-        TabLayout tabLayout = findViewById(R.id.simpleTabLayout);
-        TabLayout.Tab firstTab = tabLayout.newTab();
-        firstTab.setText("First");
-        tabLayout.addTab(firstTab);
-
-        TabLayout.Tab secondTab = tabLayout.newTab();
-        secondTab.setText("Second");
-        tabLayout.addTab(secondTab);
-        fragmentLauncher();
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-                fragment = null;
-                switch (tab.getPosition()) {
-                    case 0:
-                        fragment = new HomeTab1();
-                        break;
-                    case 1:
-                        fragment = new HomeTab2();
-                        break;
-
-
-                }
-                fragmentLauncher();
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
+        RelativeLayout rlRead = findViewById(R.id.rlReadNFCTAG);
+        RelativeLayout rlWrite = findViewById(R.id.rlWriteWithNFC);
+        RelativeLayout rladd = findViewById(R.id.rladdtask);
+        RelativeLayout rlWipe = findViewById(R.id.rlWipeWithNFC);
+        RelativeLayout rlTest = findViewById(R.id.rlTestWithNFC);
+        rlRead.setOnClickListener(this);
+        rladd.setOnClickListener(this);
+        rlWrite.setOnClickListener(this);
+        rlWipe.setOnClickListener(this);
+        rlTest.setOnClickListener(this);
     }
 
 
-    public void fragmentLauncher() {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        assert fragment != null;
-        ft.replace(R.id.simpleFrameLayout, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        ft.commit();
-    }
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onClick(View view) {
+        Intent intent;
+        switch (view.getId()) {
+            case R.id.rlReadNFCTAG:
+                intent = new Intent(this, NFCRead.class);
+                startActivity(intent);
+                break;
+
+            case R.id.rlWriteWithNFC:
+
+                intent = new Intent(this, NFCWrite.class);
+                startActivity(intent);
+                break;
+            case R.id.rlWipeWithNFC:
+                intent = new Intent(this, NFCWipe.class);
+                startActivity(intent);
+                break;
+            case R.id.rlTestWithNFC:
+                intent = new Intent(this, NFCTest.class);
+                startActivity(intent);
+                break;
+            case R.id.rladdtask:
+                intent = new Intent(this, taskadder.class);
+                startActivity(intent);
+                break;
+
+
+        }
     }
+
+
+
 }

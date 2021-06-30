@@ -82,7 +82,7 @@ public class NFCWrite extends NFCBase {
             String messageToWrite = evTagMessage.getText().toString();
 
             if (!TextUtils.equals(messageToWrite, "null") && !TextUtils.isEmpty(messageToWrite)) {
-                NdefRecord record = NdefRecord.createMime(messageToWrite, messageToWrite.getBytes());
+                NdefRecord record = NdefRecord.createMime("ee", messageToWrite.getBytes());
                 NdefMessage message = new NdefMessage(new NdefRecord[]{record});
 
 

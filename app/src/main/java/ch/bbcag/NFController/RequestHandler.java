@@ -54,12 +54,11 @@ public class RequestHandler {
     public void SaveTagdata(Ndef ndef, Parcelable[] messages, NdefRecord records[]) {
 
         String e = ndef.toString();
-        e = e.replaceAll("\\:", "_");
         e = e.replaceAll("\\.", "_");
 
         e = e.split("_")[3];
 
-        String path = "Tag/Data/" + e + "_" + now() + "/";
+        String path = "Tag/Data/" + e + " " + now() + "/";
 
 
         database.getReference(path + "ndef").push().setValue(ndef.toString());
@@ -68,7 +67,7 @@ public class RequestHandler {
         }
 
         for (int j = 0; j < records.length; j++) {
-            database.getReference(path + "Type").push().setValue(records[j].getType().toString());
+            database.getReference(path + "Type").push().setValue(records[j].toMimeType());
             database.getReference(path + "TagData").push().setValue(new String(records[j].getPayload()));
         }
 
@@ -77,7 +76,9 @@ public class RequestHandler {
 
     public String now() {
         TimeZone tz = TimeZone.getTimeZone("UTC");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+
+        DateFormat df = new SimpleDateFormat(" dd-MM-yyyy HH:mm");
+
         df.setTimeZone(tz);
         return df.format(new Date());
     }

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.NumberPicker;
@@ -23,9 +24,11 @@ import com.hbb20.CountryCodePicker;
 import java.util.Arrays;
 import java.util.List;
 
+import ch.bbcag.NFController.MapActivities.MapsActivity;
+
 public class AttributeFragments {
     public static class IOAttribute extends Fragment implements View.OnClickListener {
-String state;
+        String state;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -64,9 +67,10 @@ String state;
                     break;
             }
         }
-public String getstate(){
+
+        public String getstate() {
             return state;
-}
+        }
 
     }
 
@@ -91,8 +95,8 @@ public String getstate(){
                 PackageManager packageManager = requireActivity().getApplicationContext().getPackageManager();
 
                 try {
-                    appIcons[i] = packageManager.getApplicationIcon(appNames[i]);
-                    appNames[i] = (String) packageManager.getApplicationLabel(packageManager.getApplicationInfo(appNames[i], PackageManager.GET_META_DATA));
+                    appIcons[i] = packageManager.getApplicationIcon(pkgNames[i]);
+                    appNames[i] = (String) packageManager.getApplicationLabel(packageManager.getApplicationInfo(pkgNames[i], PackageManager.GET_META_DATA));
                 } catch (PackageManager.NameNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -101,6 +105,7 @@ public String getstate(){
             }
         }
 
+        @SuppressLint("ResourceAsColor")
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -115,9 +120,18 @@ public String getstate(){
             listView.setAdapter(appList);
 
 
-            listView.setOnItemClickListener((parent, clickView, position, id) -> app = pkgNames[position]);
+            listView.setOnItemClickListener((parent, clickView, position, id) -> {
+
+                app = pkgNames[position];
+                for (int i = 0; i < parent.getChildCount(); i++) {
+                    parent.getChildAt(i).setBackgroundColor(android.R.color.transparent);
+                }
+                clickView.setBackgroundColor(Color.BLUE);
+
+            });
             return view;
         }
+
         public String getapp() {
             return app;
 

@@ -24,7 +24,6 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
     private String[] fulltask;
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +34,7 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
 
         whichFeatureHasBeenSelected();
 
-        fragmentlauncher();
+        Const.fragmentLauncher(fragment, R.id.coolFrameLayout, this);
 
 
     }
@@ -47,44 +46,34 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
 
         } else if (fragment instanceof AlarmAttribute) {
             for (int i = 0; i < ((AlarmAttribute) fragment).setAlarm().length; i++) {
-                fulltask[i+1]=((AlarmAttribute) fragment).setAlarm()[i];
+                fulltask[i + 1] = ((AlarmAttribute) fragment).setAlarm()[i];
             }
 
 
         } else if (fragment instanceof TimerAttribute) {
             for (int i = 0; i < ((TimerAttribute) fragment).getTimer().length; i++) {
-                fulltask[i+1]=((TimerAttribute) fragment).getTimer()[i];
+                fulltask[i + 1] = ((TimerAttribute) fragment).getTimer()[i];
             }
 
 
         } else if (fragment instanceof MessageParameter) {
             for (int i = 0; i < ((MessageParameter) fragment).getMessage().length; i++) {
-                fulltask[i+1]=((MessageParameter) fragment).getMessage()[i];
+                fulltask[i + 1] = ((MessageParameter) fragment).getMessage()[i];
             }
 
         } else if (fragment instanceof IOAttribute) {
-            fulltask[1]=((IOAttribute) fragment).getstate();
+            fulltask[1] = ((IOAttribute) fragment).getstate();
 
         } else if (fragment instanceof AppSelector) {
-            fulltask[1]=((AppSelector) fragment).getapp();
+            fulltask[1] = ((AppSelector) fragment).getapp();
 
         }
         Const.taskcontainer.add(fulltask);
 
-        if (view.getId() == R.id.rlWriteTask) {
+        if (view.getId() == R.id.rlAddTask) {
 
 
-            intent = new Intent(this, TaskWriter.class);
-            startActivity(intent);
-
-        } else if (view.getId() == R.id.rlAddTask) {
-
-
-
-
-
-
-            intent = new Intent(this, NfcHome.class);
+            intent = new Intent(this, taskadder.class);
             startActivity(intent);
 
         }
@@ -93,23 +82,12 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
 
 
     protected void initViews() {
-        LinearLayout rlWriteTask = findViewById(R.id.rlWriteTask);
         LinearLayout rladdtask = findViewById(R.id.rlAddTask);
-        rlWriteTask.setOnClickListener(this);
+
         rladdtask.setOnClickListener(this);
 
     }
 
-    public void fragmentlauncher() {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        assert fragment != null;
-        ft.replace(R.id.coolFrameLayout, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        ft.commit();
-
-
-    }
 
     public String whichFeatureHasBeenSelected() {
         fragment = null;

@@ -1,36 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    android:orientation="vertical">
-
-    <com.google.android.material.appbar.AppBarLayout
-
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:gravity="center|bottom">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/simpleTabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-
-    <FrameLayout
-        android:id="@+id/simpleFrameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/simpleViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    android:layout_height="match_parent">
 
     <LinearLayout
 
@@ -41,16 +12,108 @@
         android:padding="20dp">
 
 
-        <ImageView
-            android:id="@+id/DetailScan"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/rlReadNFCTAG"
+            android:layout_width="match_parent"
+            android:layout_height="117dp"
+            android:background="@drawable/bg_home"
+            android:gravity="center">
+
+
+            <TextView
+                android:id="@+id/tvReadWithNfc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/str_Read_with_nfc"
+                android:textColor="@android:color/white"
+                android:textSize="40sp" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlWriteWithNFC"
+            android:layout_width="match_parent"
+            android:layout_height="113dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_home"
+            android:gravity="center">
+
+
+            <TextView
+                android:id="@+id/tvWriteWithNfc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/str_Write_with_nfc"
+                android:textColor="@android:color/white"
+                android:textSize="40sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rladdtask"
+            android:layout_width="match_parent"
+            android:layout_height="113dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_home"
+            android:gravity="center">
+
+
+            <TextView
+                android:id="@+id/tvaddtask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="add task"
+                android:textColor="@android:color/white"
+                android:textSize="40sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlWipeWithNFC"
+            android:layout_width="match_parent"
             android:layout_height="88dp"
-            android:layout_marginTop="10dp"
-            android:contentDescription="@string/todo"
-            android:src="@drawable/ic_launcher" />
+
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_home"
+            android:gravity="center">
+
+
+            <TextView
+                android:id="@+id/tvWipeWithNfc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/str_Wipe_with_nfc"
+                android:textColor="@android:color/white"
+                android:textSize="40sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlTestWithNFC"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_home"
+            android:gravity="center"
+            android:onClick="onClick">
+
+
+            <TextView
+                android:id="@+id/tvTestWithNfc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/str_GPS_permissions"
+                android:textColor="@android:color/white"
+                android:textSize="40sp" />
+        </RelativeLayout>
 
 
     </LinearLayout>
-</LinearLayout>
 
-
+</RelativeLayout>

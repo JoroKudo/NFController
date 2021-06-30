@@ -92,14 +92,20 @@
 
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="ch.bbcag.nfcontroller" android:host="ext"
+                <data
+                    android:host="ext"
                     android:pathPrefix="/android.com:pkg"
-                     />
+                    android:scheme="ch.bbcag.nfcontroller" />
             </intent-filter>
         </activity>
         <activity
             android:name="ch.bbcag.NFController.AttributeSetter"
             android:screenOrientation="fullSensor" />
+        <activity
+            android:name="ch.bbcag.NFController.taskadder"
+            android:screenOrientation="fullSensor" />      <activity
+        android:name="ch.bbcag.NFController.TaskSelector"
+        android:screenOrientation="fullSensor" />
         <activity
             android:name="ch.bbcag.NFController.NFCWrite"
             android:screenOrientation="fullSensor">
