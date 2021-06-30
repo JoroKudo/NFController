@@ -68,7 +68,7 @@ public class NFCRead extends NFCBase {
 
             if (ndef != null) {
                 ndef.connect();
-                RequestHandler rh =new RequestHandler();
+                RequestHandler rh = new RequestHandler();
 
 
                 NdefMessage ndefMessage = ndef.getNdefMessage();
@@ -77,7 +77,7 @@ public class NFCRead extends NFCBase {
                     Parcelable[] messages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
 
                     if (messages != null) {
-                        rh.SaveTagdata(ndef,messages,ndef.getNdefMessage().getRecords());
+                        rh.SaveTagdata(ndef, messages, ndef.getNdefMessage().getRecords());
 
                         NdefMessage[] ndefMessages = new NdefMessage[messages.length];
                         for (int i = 0; i < messages.length; i++) {

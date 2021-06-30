@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 public class taskadder extends AppCompatActivity implements View.OnClickListener {
@@ -24,11 +25,11 @@ public class taskadder extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.addtask);
-        TextView tvaddtask = findViewById(R.id.TV_ListEntry);
-        TextView tvaddtaskk = findViewById(R.id.TV_ListEntryq);
+        FloatingActionButton tvaddtask = findViewById(R.id.TV_ListEntry);
+
         LinearLayout rlwritetask = findViewById(R.id.rlWriteTask);
         rlwritetask.setOnClickListener(this);
-        tvaddtaskk.setOnClickListener(this);
+
         tvaddtask.setOnClickListener(this);
 
         Const.fragmentLauncher(new TaskAdderList(), R.id.list_here, this);
@@ -50,11 +51,7 @@ public class taskadder extends AppCompatActivity implements View.OnClickListener
                 startActivity(intent);
                 break;
 
-            case R.id.TV_ListEntryq:
 
-                intent = new Intent(this, NFCWrite.class);
-                startActivity(intent);
-                break;
             case R.id.rlWriteTask:
                 intent = new Intent(this, TaskWriter.class);
                 startActivity(intent);

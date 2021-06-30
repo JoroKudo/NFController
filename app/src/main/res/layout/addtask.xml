@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="TASK procedure"
 
-        <TextView
-            android:id="@+id/TV_ListEntryq"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#1E90FF"
-            android:textSize="30dp" />
+        android:textColor="#1E90FF"
+        android:textSize="30dp" />
 
-        <TextView
-            android:id="@+id/TV_ListEntry"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="addTask"
-
-            android:textColor="#1E90FF"
-            android:textSize="30dp" />
-
-
-    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/list_here"
         android:layout_width="match_parent"
-        android:layout_height="541dp" />
+        android:layout_height="541dp">
+
+    </FrameLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/TV_ListEntry"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#673AB7"
+        android:backgroundTint="@color/colorpurple"
+        android:foregroundGravity="bottom"
+        android:src="@drawable/task_add"
+        app:fabCustomSize="@dimen/_223sdp"
+        app:maxImageSize="@dimen/_200sdp" />
+
     <LinearLayout
         android:id="@+id/rlWriteTask"
         android:layout_width="match_parent"
@@ -51,5 +58,8 @@
             android:text="Write Task"
             android:textColor="@android:color/white"
             android:textSize="40sp" />
+
     </LinearLayout>
+
+
 </LinearLayout>

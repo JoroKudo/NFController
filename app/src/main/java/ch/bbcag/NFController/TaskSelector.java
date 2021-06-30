@@ -28,7 +28,7 @@ public class TaskSelector extends AppCompatActivity {
         setContentView(R.layout.task_list);
         ListView listView = findViewById(R.id.mobile_list);
 
-        ArrayAdapter<?> adapter = new ArrayAdapter<>(this, R.layout.task_list_item, Const.tasknames);
+        ArrayAdapter<?> adapter = new ArrayAdapter<>(this, R.layout.added_task_list_item, Const.tasknames);
 
 
         listView.setAdapter(adapter);
@@ -42,9 +42,10 @@ public class TaskSelector extends AppCompatActivity {
                 intent.putExtra("FULL_TASK", fulltask);
             }else {
                 intent = new Intent(this, MapsActivity.class);
+
             }
             startActivity(intent);
-
+            finish();
 
         });
 
