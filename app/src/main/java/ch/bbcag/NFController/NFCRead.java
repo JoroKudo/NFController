@@ -16,6 +16,8 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
 import ch.bbcag.NFController.Features.ApplicationOpener;
 import ch.bbcag.NFController.Features.Bluetooth;
 import ch.bbcag.NFController.Features.Clock;
@@ -30,17 +32,27 @@ import ch.bbcag.NFController.MapActivities.GeofencingActivity;
 
 public class NFCRead extends NFCBase {
 
+    public String[] splitted;
+
+    @Inject
+    public NFCRead() {
+    }
+
+
     private TextView listTitle;
 
-    NotificationManager notificationManager = (NotificationManager) getApplication().getSystemService(Context.NOTIFICATION_SERVICE);
-    AudioManager audioManager = (AudioManager) getApplication().getSystemService(Context.AUDIO_SERVICE);
-    WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+    NotificationManager notificationManager;
+    AudioManager audioManager;
+    WifiManager wifiManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nfc_read);
+        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        audioManager = (AudioManager) getApplication().getSystemService(Context.AUDIO_SERVICE);
+        notificationManager = (NotificationManager) getApplication().getSystemService(Context.NOTIFICATION_SERVICE);
         initViews();
     }
 
@@ -115,7 +127,7 @@ public class NFCRead extends NFCBase {
         String mimetype = new String(type);
 
         int subFeaturePosition;
-        String[] splitted = text.split(Const.SPACER);
+        splitted = text.split(Const.SPACER);
 
         if (splitted[0].equals("geofencing")) {
             Intent intent = new Intent(getApplicationContext(), GeofencingActivity.class);

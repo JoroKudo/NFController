@@ -12,17 +12,23 @@ import com.google.android.gms.location.GeofencingEvent;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import ch.bbcag.NFController.NFCRead;
+
 import static android.content.ContentValues.TAG;
 
 public class GeofencingBroadcastReceiver extends BroadcastReceiver {
 
     private final int subFeaturePosition = 7;
 
-    private final GeofencingActivity geofencingActivity;
+    NFCRead nfcRead;
 
-public GeofencingBroadcastReceiver(GeofencingActivity geofencingActivity) {
-    this.geofencingActivity = geofencingActivity;
-}
+    @Inject
+    public GeofencingBroadcastReceiver(NFCRead nfcRead) {
+        this.nfcRead = nfcRead;
+    }
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -43,7 +49,7 @@ public GeofencingBroadcastReceiver(GeofencingActivity geofencingActivity) {
                 geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
 
             if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER){
-
+                nfcRead.featureActivator(7, nfcRead.splitted);
             }
             // Get the geofences that were triggered. A single event can trigger
             // multiple geofences.

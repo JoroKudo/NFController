@@ -23,6 +23,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import ch.bbcag.NFController.Const;
@@ -73,7 +75,10 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
 
         FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_NFC_writer);
         floatingActionButton.setOnClickListener(v -> {
+
             Const.fulltask[1] = "ID";
+
+            Collections.addAll(Const.taskcontainer, Const.fulltask);
 
             Intent intent = new Intent(getApplicationContext(), TaskWriter.class);
             startActivity(intent);
