@@ -1,6 +1,5 @@
 package ch.bbcag.NFController.Features;
 
-import android.app.Activity;
 import android.content.Context;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
@@ -8,15 +7,15 @@ import android.os.Build;
 
 public class Flashlight {
 
-    private final Activity activity;
+private final Context context;
 
-    public Flashlight(Activity activity) {
-        this.activity = activity;
+    public Flashlight(Context context) {
+        this.context = context;
     }
 
     public void flash(String switcher) {
 
-        CameraManager camManager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
+        CameraManager camManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
         String cameraId;
         try {
             cameraId = camManager.getCameraIdList()[0];

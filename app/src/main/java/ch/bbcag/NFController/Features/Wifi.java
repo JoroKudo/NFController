@@ -1,6 +1,6 @@
 package ch.bbcag.NFController.Features;
 
-import android.app.Activity;
+import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.widget.Toast;
@@ -8,12 +8,11 @@ import android.widget.Toast;
 public class Wifi {
 
     private final WifiManager wifi;
+    private final Context context;
 
-    private final Activity activity;
-
-    public Wifi(WifiManager wifi, Activity activity) {
+    public Wifi(Context context, WifiManager wifi) {
         this.wifi = wifi;
-        this.activity = activity;
+        this.context = context;
     }
 
     public void toggleWifi(String switcher) {
@@ -25,7 +24,7 @@ public class Wifi {
                     wifi.setWifiEnabled(false);
                 }
             } else {
-                Toast.makeText(activity, ("This function is not working on the newest version of android"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, ("This function is not working on the newest version of android"), Toast.LENGTH_SHORT).show();
 
             }
         }

@@ -1,21 +1,22 @@
 package ch.bbcag.NFController.Features;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
 public class ApplicationOpener {
 
-    private final Activity activity;
+    private final Context context;
 
-    public ApplicationOpener(Activity activity) {
-        this.activity = activity;
+    public ApplicationOpener(Context context) {
+        this.context = context;
     }
 
     public void openApp(String packageName) {
 
 
-        Intent launch = activity.getPackageManager().getLaunchIntentForPackage(packageName);
+        Intent launch = context.getPackageManager().getLaunchIntentForPackage(packageName);
 
         if (launch == null) {
             try {
@@ -25,6 +26,6 @@ public class ApplicationOpener {
                 launch = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + packageName));
             }
         }
-        activity.startActivity(launch);
+        context.startActivity(launch);
     }
 }

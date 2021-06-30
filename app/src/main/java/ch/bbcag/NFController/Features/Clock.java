@@ -1,16 +1,18 @@
 package ch.bbcag.NFController.Features;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.provider.AlarmClock;
 
 public class Clock {
 
-    private final Activity activity;
+    private final Context context;
 
-    public Clock(Activity activity) {
-        this.activity = activity;
 
+    public Clock(Context context) {
+
+        this.context = context;
     }
 
     public void setAlarm(int hour, int minute, String message) {
@@ -21,7 +23,7 @@ public class Clock {
         alarm.putExtra(AlarmClock.EXTRA_HOUR, hour);
         alarm.putExtra(AlarmClock.EXTRA_MINUTES, minute);
         alarm.putExtra(AlarmClock.EXTRA_MESSAGE, message);
-        activity.startActivity(alarm);
+        context.startActivity(alarm);
     }
 
     public void setTimer(int h, int m, int s, String message) {
@@ -30,6 +32,6 @@ public class Clock {
         timer.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
         timer.putExtra(AlarmClock.EXTRA_LENGTH, timerLength);
         timer.putExtra(AlarmClock.EXTRA_MESSAGE, message);
-        activity.startActivity(timer);
+        context.startActivity(timer);
     }
 }

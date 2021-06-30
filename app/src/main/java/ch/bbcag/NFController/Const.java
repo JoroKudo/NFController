@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 public class Const {

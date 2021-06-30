@@ -22,16 +22,16 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Collections;
 import java.util.List;
 
-import ch.bbcag.NFController.Const;
-import ch.bbcag.NFController.NFCRead;
+import javax.inject.Inject;
+
+import ch.bbcag.NFController.Dagger2.NFControllerApplication;
+import ch.bbcag.NFController.AppDataManager;
 
 public class GeofencingActivity extends AppCompatActivity {
 
-    private final String MYID = Const.fulltask[1];
-    private final double LATITUDE = Double.parseDouble(Const.fulltask[2]);
-    private final double LONGITUDE = Double.parseDouble(Const.fulltask[3]);
-    private final float RADIUS = Float.parseFloat(Const.fulltask[5]);
-    private final long EXPIRATION_TIME_IN_MILISECONDS = Long.parseLong(Const.fulltask[6]);
+    @Inject
+    AppDataManager appDataManager;
+
     private final String ACCESS_BACKGROUND_LOCATION = Manifest.permission.ACCESS_BACKGROUND_LOCATION;
     private final String ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private final String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -47,18 +47,17 @@ public class GeofencingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         geofencingClient = new GeofencingClient(this);
 
-        startGeoFenceMonitoring(MYID, LATITUDE, LONGITUDE, RADIUS);
+        ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
+
+        startGeoFenceMonitoring(appDataManager.getSplitted()[1], Double.parseDouble(appDataManager.getSplitted()[2]),Double.parseDouble(appDataManager.getSplitted()[3]), Float.parseFloat(appDataManager.getSplitted()[5]), Long.parseLong(appDataManager.getSplitted()[6]));
     }
 
 
     private PendingIntent getGeofencePendingIntent() {
-        // Reuse the PendingIntent if we already have it.
         if (geofencePendingIntent != null) {
             return geofencePendingIntent;
         }
         Intent intent = new Intent(this, GeofencingBroadcastReceiver.class);
-        // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when
-        // calling addGeofences() and removeGeofences().
         geofencePendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         return geofencePendingIntent;
     }
@@ -88,17 +87,15 @@ public class GeofencingActivity extends AppCompatActivity {
         return builder.build();
     }
 
-    private void createGeofence(String id, double latitude, double longitude, float radius) {
+    private void createGeofence(String id, double latitude, double longitude, float radius, long expirationTime) {
         geofenceList.add(new Geofence.Builder()
-                // Set the request ID of the geofence. This is a string to identify this
-                // geofence.
                 .setRequestId(id)
                 .setCircularRegion(
                         latitude,
                         longitude,
                         radius
                 )
-                .setExpirationDuration(EXPIRATION_TIME_IN_MILISECONDS)
+                .setExpirationDuration(expirationTime)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
                         Geofence.GEOFENCE_TRANSITION_EXIT)
                 .build());
@@ -129,10 +126,10 @@ public class GeofencingActivity extends AppCompatActivity {
                 == PackageManager.PERMISSION_GRANTED;
     }
 
-    private void startGeoFenceMonitoring(String myId, double latitude, double longitude, float radius) {
+    private void startGeoFenceMonitoring(String myId, double latitude, double longitude, float radius, long expirationTime) {
         try {
             requestMultiplePermissions();
-            createGeofence(myId, latitude, longitude, radius);
+            createGeofence(myId, latitude, longitude, radius, expirationTime);
             addGeofence();
         } catch (Exception e) {
             e.printStackTrace();

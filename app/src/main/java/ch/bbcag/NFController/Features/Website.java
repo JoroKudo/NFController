@@ -1,15 +1,16 @@
 package ch.bbcag.NFController.Features;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
 public class Website {
 
-    private final Activity activity;
+private final Context context;
 
-    public Website(Activity activity) {
-        this.activity = activity;
+    public Website(Context context) {
+        this.context = context;
     }
 
 
@@ -18,7 +19,7 @@ public class Website {
             url = "http://" + url;
         }
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        activity.startActivity(browserIntent);
+        context.startActivity(browserIntent);
 
     }
 
