@@ -16,12 +16,14 @@ import android.widget.TextView;
 public class CustomLists {
 
 
+    @SuppressWarnings("rawtypes")
     public static class MyCustomAdapter extends ArrayAdapter {
         private final String[] listEntries;
         private final Activity context;
         private final Drawable icon;
         private final int layout;
 
+        @SuppressWarnings("unchecked")
         public MyCustomAdapter(Activity context, String[] listEntries, Drawable icon, int layout) {
             super(context, layout, listEntries);
             this.context = context;

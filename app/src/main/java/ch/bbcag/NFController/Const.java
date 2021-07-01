@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Const {
 
-    public static String[] fulltask = {"", "", "", "", "", "", "", "", "", ""};
+    public static final String[] fulltask = {"", "", "", "", "", "", "", "", "", ""};
     public static final ArrayList<String[]> taskcontainer = new ArrayList<>();
     public static final String SPACER = "⠀";
 

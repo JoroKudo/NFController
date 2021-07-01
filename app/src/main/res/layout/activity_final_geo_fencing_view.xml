@@ -24,7 +24,7 @@
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sample Text"
+        android:text="@string/sample_text"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +47,7 @@
         android:id="@+id/radius"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sample Text"
+        android:text="@string/sample_text"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +58,7 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sample Text"
+        android:text="@string/sample_text"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
@@ -101,7 +101,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.928"
-        app:srcCompat="@drawable/ic_baseline_arrow_forward_24" />
+        app:srcCompat="@drawable/ic_baseline_arrow_forward_24"
+        android:contentDescription="@string/next"
+        android:focusable="true" />
 
     <TextView
         android:id="@+id/feature_title"
@@ -117,7 +119,7 @@
         android:id="@+id/feature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sample Text"
+        android:text="@string/sample_text"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

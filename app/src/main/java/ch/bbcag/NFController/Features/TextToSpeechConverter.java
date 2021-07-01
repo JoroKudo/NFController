@@ -17,9 +17,11 @@ public class TextToSpeechConverter {
         tts = new android.speech.tts.TextToSpeech(context, status -> {
             if (status == android.speech.tts.TextToSpeech.SUCCESS) {
 
+                //noinspection deprecation
                 tts.speak(speech, android.speech.tts.TextToSpeech.QUEUE_ADD, null);
             }
         });
+        //noinspection deprecation
         tts.speak(speech, android.speech.tts.TextToSpeech.QUEUE_ADD, null);
     }
 }

@@ -37,7 +37,7 @@ public class GeofencingActivity extends AppCompatActivity {
     private final int PERMISSIONS_MULTIPLE_REQUEST = 123;
     private final String[] permissions = new String[]{ACCESS_BACKGROUND_LOCATION, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION};
 
-    List<Geofence> geofenceList = Collections.emptyList();
+    final List<Geofence> geofenceList = Collections.emptyList();
     private PendingIntent geofencePendingIntent;
     GeofencingClient geofencingClient;
 

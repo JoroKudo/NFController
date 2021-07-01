@@ -39,6 +39,7 @@ import ch.bbcag.NFController.databinding.FragmentMapsBinding;
 
 import static android.graphics.Color.TRANSPARENT;
 
+@SuppressWarnings("deprecation")
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     EditText editText;

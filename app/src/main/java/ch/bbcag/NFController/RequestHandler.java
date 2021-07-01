@@ -15,7 +15,7 @@ import java.util.TimeZone;
 
 
 public class RequestHandler {
-    FirebaseDatabase database = FirebaseDatabase.getInstance("https://nfcontroller-default-rtdb.europe-west1.firebasedatabase.app/");
+    final FirebaseDatabase database = FirebaseDatabase.getInstance("https://nfcontroller-default-rtdb.europe-west1.firebasedatabase.app/");
 
 
     public void SaveTagdata(Ndef ndef, Parcelable[] messages, NdefRecord[] records) {

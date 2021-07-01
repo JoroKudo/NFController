@@ -16,7 +16,7 @@ public class TaskSelector extends AppCompatActivity {
     // Array of strings...
 
 
-    String[] fulltask = {"", "", "", "", "", "", "", "", "", ""};
+    final String[] fulltask = {"", "", "", "", "", "", "", "", "", ""};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

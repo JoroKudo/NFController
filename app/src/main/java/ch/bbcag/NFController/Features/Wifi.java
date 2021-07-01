@@ -5,6 +5,7 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.widget.Toast;
 
+@SuppressWarnings("ALL")
 public class Wifi {
 
     private final WifiManager wifi;

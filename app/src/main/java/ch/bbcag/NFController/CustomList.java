@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+@SuppressWarnings("rawtypes")
 public class CustomList extends ArrayAdapter {
     private final String[] listEntries;
 
@@ -18,6 +19,7 @@ public class CustomList extends ArrayAdapter {
     private final Activity context;
 
     public CustomList(Activity context, String[] countryNames, Drawable[] icons) {
+        //noinspection unchecked
         super(context, R.layout.custom_list_item, countryNames);
         this.context = context;
         this.listEntries = countryNames;

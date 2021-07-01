@@ -11,7 +11,7 @@ import android.os.Looper;
 public class SplashActivity extends Activity {
 
 
-    Context context = SplashActivity.this;
+    final Context context = SplashActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

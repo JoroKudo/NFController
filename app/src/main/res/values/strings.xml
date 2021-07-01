@@ -42,6 +42,11 @@
     <string name="task_procedure">TASK procedure</string>
     <string name="empty_tag">Empty Tag</string>
     <string name="app_icon">App Icon</string>
+    <string name="next">Next</string>
+    <string name="sample_text">Sample Text</string>
+    <string name="h">H</string>
+    <string name="m">M</string>
+    <string name="s">S</string>
 
 
 </resources>

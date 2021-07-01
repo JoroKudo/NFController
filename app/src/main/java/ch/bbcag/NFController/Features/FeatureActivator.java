@@ -9,7 +9,7 @@ import ch.bbcag.NFController.Util;
 
 public class FeatureActivator {
 
-    AppDataManager appDataManager;
+    final AppDataManager appDataManager;
 
     @Inject
     public FeatureActivator(AppDataManager appDataManager) {
