@@ -130,7 +130,8 @@
             android:name="ch.bbcag.NFController.MapActivities.MapsActivity"
             android:label="@string/title_activity_maps" />
 
-        <receiver android:name="ch.bbcag.NFController.MapActivities.GeofencingBroadcastReceiver"
+        <receiver
+            android:name="ch.bbcag.NFController.MapActivities.GeofencingBroadcastReceiver"
             tools:ignore="Instantiatable" />
 
         <activity android:name="ch.bbcag.NFController.MapActivities.GeofencingActivity" />
