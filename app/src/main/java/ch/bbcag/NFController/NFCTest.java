@@ -6,7 +6,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -21,7 +20,7 @@ public class NFCTest extends AppCompatActivity {
     private static final String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     public static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
 
-    private String[] permissions = new String[]{ACCESS_BACKGROUND_LOCATION, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION};
+    private final String[] permissions = new String[]{ACCESS_BACKGROUND_LOCATION, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION};
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

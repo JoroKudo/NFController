@@ -17,17 +17,17 @@ public class Wifi {
 
     public void toggleWifi(String switcher) {
 
-            if (Build.VERSION.SDK_INT <= 29) {
-                if (switcher.equals("1")) {
-                    wifi.setWifiEnabled(true);
-                } else if (switcher.equals("0")) {
-                    wifi.setWifiEnabled(false);
-                }
-            } else {
-                Toast.makeText(context, ("This function is not working on the newest version of android"), Toast.LENGTH_SHORT).show();
-
+        if (Build.VERSION.SDK_INT <= 29) {
+            if (switcher.equals("1")) {
+                wifi.setWifiEnabled(true);
+            } else if (switcher.equals("0")) {
+                wifi.setWifiEnabled(false);
             }
+        } else {
+            Toast.makeText(context, ("This function is not working on the newest version of android"), Toast.LENGTH_SHORT).show();
+
         }
     }
+}
 
 

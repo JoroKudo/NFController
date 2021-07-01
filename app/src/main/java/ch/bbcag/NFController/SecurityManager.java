@@ -16,7 +16,6 @@ public class SecurityManager {
     }
 
 
-
     public void checkIfNotificationPermissionIsGranted(Activity activity, NotificationManager notificationManager) {
         if (Build.VERSION.SDK_INT >= 23) {
             if (!notificationManager.isNotificationPolicyAccessGranted()) {

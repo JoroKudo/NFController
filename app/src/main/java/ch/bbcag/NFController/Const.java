@@ -17,7 +17,7 @@ public class Const {
 
     public static final String[] tasknames = {"BlueTooth", "WiFi", "TONE", "MUTE",
             "VIBRATE", "VOL", "TTS", "OpenApp", "set Alarm", "set Timer", "Location", "FLASHLIGHT", "SendWhatsapp", "OpenWebsite", "Geofencing"};
-    public static final List<String> TASKS = Arrays.asList(new String[]{"blue", "wifi", "tone", "mute", "vibrate", "vol", "tts", "open", "alarm", "timer", "location", "flash", "send", "web", "geofencing"});
+    public static final List<String> TASKS = Arrays.asList("blue", "wifi", "tone", "mute", "vibrate", "vol", "tts", "open", "alarm", "timer", "location", "flash", "send", "web", "geofencing");
     public static final String[] GEOTASKS = {"blue", "blue", "wifi", "wifi", "tone", "mute", "vibrate", "vol", "open", "flash", "web"};
 
     public static void fragmentLauncher(Fragment fragment, int layout, AppCompatActivity apac) {

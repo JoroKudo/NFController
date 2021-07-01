@@ -3,10 +3,8 @@ package ch.bbcag.NFController;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.View;
 import android.widget.RelativeLayout;
-
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,8 +26,6 @@ public class NfcHome extends AppCompatActivity implements View.OnClickListener {
         rlWipe.setOnClickListener(this);
         rlTest.setOnClickListener(this);
     }
-
-
 
 
     @SuppressLint("NonConstantResourceId")
@@ -63,7 +59,6 @@ public class NfcHome extends AppCompatActivity implements View.OnClickListener {
 
         }
     }
-
 
 
 }

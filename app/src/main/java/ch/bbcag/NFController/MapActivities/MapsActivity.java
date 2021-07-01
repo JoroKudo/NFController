@@ -1,6 +1,4 @@
 package ch.bbcag.NFController.MapActivities;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.location.Address;
@@ -9,6 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -47,7 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     double placeLongitude;
     String address;
 
-    public MapsActivity(){
+    public MapsActivity() {
     }
 
     public MapsActivity(double radius) {
@@ -93,12 +95,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Const.fulltask[3] = String.valueOf(placeLongitude);
             Const.fulltask[4] = address;
 
-            if (marker!= null){
+            if (marker != null) {
                 marker.remove();
             }
             marker = mMap.addMarker(new MarkerOptions().position(placeLatLng).title(place.getName() + " " + place.getAddress()));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(placeLatLng, 15));
-            if (radius != null){
+            if (radius != null) {
                 mMap.addCircle(new CircleOptions().center(placeLatLng).radius(radius).strokeColor(TRANSPARENT).fillColor(0x50021CDE));
             }
 
@@ -117,7 +119,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(zurich, 10));
 
         mMap.setOnMapLongClickListener(latLng -> {
-            if (marker!= null){
+            if (marker != null) {
                 marker.remove();
             }
             marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latLng.latitude, latLng.longitude)).title(latLng.latitude + ", " + latLng.longitude));
@@ -126,7 +128,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             try {
                 List<Address> addresses = new Geocoder(getApplicationContext()).getFromLocation(latLng.latitude, latLng.longitude, 1);
-                Const.fulltask[4] = addresses.get(0).getAddressLine(0) ;
+                Const.fulltask[4] = addresses.get(0).getAddressLine(0);
             } catch (IOException e) {
                 e.printStackTrace();
                 Const.fulltask[4] = "No_Address_available";
@@ -150,7 +152,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             Log.e("NullPointerException", "Map ist not loading");
             Toast.makeText(getApplicationContext(), "Map is not loading", Toast.LENGTH_SHORT).show();
         }

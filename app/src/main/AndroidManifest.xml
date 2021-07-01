@@ -104,9 +104,10 @@
             android:screenOrientation="fullSensor" />
         <activity
             android:name="ch.bbcag.NFController.taskadder"
-            android:screenOrientation="fullSensor" />      <activity
-        android:name="ch.bbcag.NFController.TaskSelector"
-        android:screenOrientation="fullSensor" />
+            android:screenOrientation="fullSensor" />
+        <activity
+            android:name="ch.bbcag.NFController.TaskSelector"
+            android:screenOrientation="fullSensor" />
         <activity
             android:name="ch.bbcag.NFController.NFCWrite"
             android:screenOrientation="fullSensor">
@@ -129,7 +130,8 @@
             android:name="ch.bbcag.NFController.MapActivities.MapsActivity"
             android:label="@string/title_activity_maps" />
 
-        <receiver android:name="ch.bbcag.NFController.MapActivities.GeofencingBroadcastReceiver" />
+        <receiver android:name="ch.bbcag.NFController.MapActivities.GeofencingBroadcastReceiver"
+            tools:ignore="Instantiatable" />
 
         <activity android:name="ch.bbcag.NFController.MapActivities.GeofencingActivity" />
     </application>

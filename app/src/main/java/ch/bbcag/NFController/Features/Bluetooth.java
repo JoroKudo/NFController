@@ -8,12 +8,23 @@ public class Bluetooth {
 
     public void toggleBluetooth(String switcher) {
 
-            if (switcher.equals("1")) {
+        switch (switcher) {
+            case "1":
                 bluetoothAdapter.enable();
-            } else if (switcher.equals("0")) {
+                break;
+            case "0":
                 bluetoothAdapter.disable();
-            }
+                break;
+            case "2":
+                if (bluetoothAdapter.isEnabled()) {
+                    bluetoothAdapter.disable();
+                } else {
+                    bluetoothAdapter.enable();
+                }
+                break;
         }
+
     }
+}
 
 

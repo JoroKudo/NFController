@@ -1,9 +1,5 @@
 package ch.bbcag.NFController.MapActivities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
@@ -11,8 +7,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
@@ -24,8 +23,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.AppDataManager;
+import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 
 public class GeofencingActivity extends AppCompatActivity {
 
@@ -49,7 +48,7 @@ public class GeofencingActivity extends AppCompatActivity {
 
         ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
 
-        startGeoFenceMonitoring(appDataManager.getSplitted()[1], Double.parseDouble(appDataManager.getSplitted()[2]),Double.parseDouble(appDataManager.getSplitted()[3]), Float.parseFloat(appDataManager.getSplitted()[5]), Long.parseLong(appDataManager.getSplitted()[6]));
+        startGeoFenceMonitoring(appDataManager.getSplitted()[1], Double.parseDouble(appDataManager.getSplitted()[2]), Double.parseDouble(appDataManager.getSplitted()[3]), Float.parseFloat(appDataManager.getSplitted()[5]), Long.parseLong(appDataManager.getSplitted()[6]));
     }
 
 

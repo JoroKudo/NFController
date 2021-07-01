@@ -1,14 +1,15 @@
 package ch.bbcag.NFController.MapActivities;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentActivity;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentActivity;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -20,10 +21,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +32,6 @@ import ch.bbcag.NFController.Const;
 import ch.bbcag.NFController.R;
 import ch.bbcag.NFController.TaskWriter;
 import ch.bbcag.NFController.databinding.ActivityFinalGeoFencingViewBinding;
-import ch.bbcag.NFController.databinding.FragmentMapsBinding;
 
 import static android.graphics.Color.TRANSPARENT;
 
@@ -98,7 +98,7 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             Log.e("NullPointerException", "Map ist not loading");
             Toast.makeText(getApplicationContext(), "Map is not loading", Toast.LENGTH_SHORT).show();
         }
@@ -114,7 +114,7 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         timeText.setText(h + "h " + m + "m " + s + "s");
         featureText.setText(Const.fulltask[9]);
 
-}
+    }
 
     private void calculateExpirationTime() {
         long expirationTime = new SelectGeofencingExpirationTimeActivity().getExpirationTimeInMilliseconds();

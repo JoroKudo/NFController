@@ -2,17 +2,13 @@ package ch.bbcag.NFController;
 
 
 import android.app.AlertDialog;
-
 import android.content.Intent;
-
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
-
 import android.os.Bundle;
-
 import android.widget.Toast;
 
 

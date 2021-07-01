@@ -2,20 +2,18 @@ package ch.bbcag.NFController;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
-import ch.bbcag.NFController.AttributeFragments.*;
+import ch.bbcag.NFController.AttributeFragments.AlarmAttribute;
+import ch.bbcag.NFController.AttributeFragments.AppSelector;
+import ch.bbcag.NFController.AttributeFragments.IOAttribute;
+import ch.bbcag.NFController.AttributeFragments.MessageParameter;
+import ch.bbcag.NFController.AttributeFragments.TextParameter;
+import ch.bbcag.NFController.AttributeFragments.TimerAttribute;
 
 
 public class AttributeSetter extends AppCompatActivity implements View.OnClickListener {

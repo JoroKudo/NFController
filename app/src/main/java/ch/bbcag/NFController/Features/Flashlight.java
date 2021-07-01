@@ -7,7 +7,7 @@ import android.os.Build;
 
 public class Flashlight {
 
-private final Context context;
+    private final Context context;
 
     public Flashlight(Context context) {
         this.context = context;

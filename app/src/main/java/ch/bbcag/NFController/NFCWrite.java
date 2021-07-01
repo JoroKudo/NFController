@@ -13,7 +13,6 @@ import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import java.io.IOException;
 
 public class NFCWrite extends NFCBase {

@@ -9,9 +9,7 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.Toast;
-
 
 import java.io.IOException;
 
@@ -80,7 +78,7 @@ public class TaskWriter extends NFCBase {
             NdefRecord[] rec = new NdefRecord[Const.taskcontainer.size()];
             for (int i = 0; i < Const.taskcontainer.size(); i++) {
 
-                String messageToWrite =  Const.taskcontainer.get(i)[0]
+                String messageToWrite = Const.taskcontainer.get(i)[0]
                         + Const.SPACER + Const.taskcontainer.get(i)[1]
                         + Const.SPACER + Const.taskcontainer.get(i)[2]
                         + Const.SPACER + Const.taskcontainer.get(i)[3]

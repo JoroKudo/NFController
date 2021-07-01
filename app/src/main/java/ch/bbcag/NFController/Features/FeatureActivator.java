@@ -70,7 +70,7 @@ public class FeatureActivator {
         }
     }
 
-    private Volume getVolume( Context context) {
+    private Volume getVolume(Context context) {
         return new Volume(Util.getAudioManager(context));
     }
 }

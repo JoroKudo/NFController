@@ -14,7 +14,7 @@ import ch.bbcag.NFController.Const;
 import ch.bbcag.NFController.R;
 
 public class geofencingFeatureSelector extends Fragment {
-    private String[] entries= {"Bluetooth off","Bluetooth on", "WiFi off ", "WiFi on ", "TONE", "MUTE",
+    private final String[] entries = {"Bluetooth off", "Bluetooth on", "WiFi off ", "WiFi on ", "TONE", "MUTE",
             "VIBRATE", "VOL", "OpenApp", "FLASHLIGHT", "OpenWebsite"};
     private int option;
 
@@ -23,6 +23,7 @@ public class geofencingFeatureSelector extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class geofencingFeatureSelector extends Fragment {
     }
 
     private void areOptionsAvailable(int position) {
-        if (Const.fulltask[7] == "blue" || Const.fulltask[5] == "wifi"){
+        if (Const.fulltask[7] == "blue" || Const.fulltask[5] == "wifi") {
             setOption(position);
         }
     }
@@ -53,7 +54,7 @@ public class geofencingFeatureSelector extends Fragment {
     private void setOption(int position) {
         if (position == 0 || position == 2) {
             option = 0;
-        }else if (position == 1 || position == 3) {
+        } else if (position == 1 || position == 3) {
             option = 1;
         }
         Const.fulltask[8] = Integer.toString(option);

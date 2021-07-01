@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.NumberPicker;
@@ -24,7 +23,6 @@ import com.hbb20.CountryCodePicker;
 import java.util.Arrays;
 import java.util.List;
 
-import ch.bbcag.NFController.MapActivities.MapsActivity;
 
 public class AttributeFragments {
     public static class IOAttribute extends Fragment implements View.OnClickListener {
@@ -136,6 +134,7 @@ public class AttributeFragments {
             return app;
 
         }
+
 
     }
 

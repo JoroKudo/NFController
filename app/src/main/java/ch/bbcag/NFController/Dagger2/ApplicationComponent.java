@@ -9,8 +9,11 @@ import dagger.Component;
 @Component
 public interface ApplicationComponent {
     void inject(GeofencingBroadcastReceiver geofencingBroadcastReceiver);
+
     void inject(GeofencingActivity geofencingActivity);
+
     void inject(NFCRead nfcRead);
+
     void inject(FeatureActivator featureActivator);
 
 }

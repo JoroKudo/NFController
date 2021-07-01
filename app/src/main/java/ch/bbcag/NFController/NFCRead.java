@@ -1,7 +1,6 @@
 package ch.bbcag.NFController;
 
 import android.annotation.SuppressLint;
-
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -33,6 +32,8 @@ public class NFCRead extends NFCBase {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
 
         super.onCreate(savedInstanceState);
@@ -110,7 +111,7 @@ public class NFCRead extends NFCBase {
     private void whichActionIsOnTag(byte[] payload, NdefRecord record) throws UnsupportedEncodingException {
         //Encode Message mannually because otherwhise the bytes could be interpreted as chinese characters
         String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-8";
-        String text = new String(payload,  textEncoding);
+        String text = new String(payload, textEncoding);
 
         byte[] type = record.getType();
         String mimetype = new String(type);
@@ -120,7 +121,7 @@ public class NFCRead extends NFCBase {
 
         int subFeaturePosition = 0;
 
-        featureActivator.activateFeature(this,  subFeaturePosition, appDataManager.getSplitted());
+        featureActivator.activateFeature(this, subFeaturePosition, appDataManager.getSplitted());
 
         if (text.isEmpty()) {
             listTitle.setText("Empty Tag3");

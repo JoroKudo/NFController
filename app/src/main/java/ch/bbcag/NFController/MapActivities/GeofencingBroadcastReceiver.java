@@ -55,7 +55,7 @@ public class GeofencingBroadcastReceiver extends BroadcastReceiver {
         if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
                 geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
 
-            if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER){
+            if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER) {
                 featureActivator.activateFeature(context, subFeaturePosition, appDataManager.getSplitted());
             }
             // Get the geofences that were triggered. A single event can trigger
@@ -63,7 +63,7 @@ public class GeofencingBroadcastReceiver extends BroadcastReceiver {
             List<Geofence> triggeringGeofences = geofencingEvent.getTriggeringGeofences();
 
             // Get the transition details as a String.
-            String geofenceTransitionDetails = getGeofenceTransitionDetails(this,geofenceTransition,
+            String geofenceTransitionDetails = getGeofenceTransitionDetails(this, geofenceTransition,
                     triggeringGeofences);
 
             // Send notification and log the transition details.
