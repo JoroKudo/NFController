@@ -14,9 +14,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="TASK procedure"
+            android:text="@string/task_procedure"
             android:textColor="@color/quantum_white_100"
-            android:textSize="35dp" />
+            android:textSize="35sp" />
 
         <View
             android:layout_width="match_parent"
@@ -54,7 +54,8 @@
         android:foregroundGravity="bottom"
         android:src="@drawable/task_add"
         app:fabCustomSize="@dimen/_50sdp"
-        app:maxImageSize="@dimen/_40sdp" />
+        app:maxImageSize="@dimen/_40sdp"
+        android:contentDescription="@string/add_task" />
 
     <LinearLayout
         android:id="@+id/rlWriteTask"
@@ -72,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Write Task"
+            android:text="@string/str_Write_with_nfc"
             android:textColor="@android:color/white"
             android:textSize="40sp" />
 

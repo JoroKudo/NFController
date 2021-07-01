@@ -12,13 +12,14 @@
         android:layout_row="0"
         android:layout_rowSpan="2"
         android:layout_column="1"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:contentDescription="@string/delete" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_columnWeight="1"
-        android:textSize="30dp"
+        android:textSize="@dimen/_30sdp"
         android:textColor="#1E90FF"
         android:id="@+id/TV_ListEntry"
         android:layout_row="0"

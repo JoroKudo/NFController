@@ -1,5 +1,6 @@
 package ch.bbcag.NFController.MapActivities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -86,7 +89,7 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NotNull GoogleMap googleMap) {
         mMap = googleMap;
         marker = mMap.addMarker(new MarkerOptions().position(placeLatLng).title(address));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(placeLatLng, 17));
@@ -97,6 +100,7 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         try {
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.map);
+            assert mapFragment != null;
             mapFragment.getMapAsync(this);
         } catch (NullPointerException e) {
             Log.e("NullPointerException", "Map ist not loading");
@@ -104,6 +108,7 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void setText() {
 
 

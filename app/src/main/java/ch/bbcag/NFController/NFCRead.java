@@ -124,7 +124,7 @@ public class NFCRead extends NFCBase {
         featureActivator.activateFeature(this, subFeaturePosition, appDataManager.getSplitted());
 
         if (text.isEmpty()) {
-            listTitle.setText("Empty Tag3");
+            listTitle.setText(R.string.empty_tag);
         } else {
 
             listTitle.setText(text);
@@ -134,7 +134,7 @@ public class NFCRead extends NFCBase {
 
 
     public void isTheGeoFencingFeatureSelected() {
-        if (appDataManager.getSplitted().equals("geofencing")) {
+        if (appDataManager.getSplitted()[0].equals("geofencing")) {
             Intent intent = new Intent(getApplicationContext(), GeofencingActivity.class);
             startActivity(intent);
         }

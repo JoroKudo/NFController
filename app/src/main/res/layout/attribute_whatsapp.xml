@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="attribute"
+        android:text="@string/attr"
         android:textColor="@android:color/white"
         android:textSize="@dimen/_20sdp" />
 
@@ -37,7 +37,8 @@
                 android:layout_height="wrap_content"
                 android:imeOptions="actionDone"
                 android:inputType="phone"
-                tools:ignore="LabelFor" />
+                tools:ignore="LabelFor"
+                android:importantForAutofill="no" />
         </LinearLayout>
 
         <EditText
@@ -47,7 +48,8 @@
             android:layout_marginTop="@dimen/_100sdp"
             android:imeOptions="actionDone"
             android:inputType="text"
-            tools:ignore="LabelFor" />
+            tools:ignore="LabelFor"
+            android:importantForAutofill="no" />
 
 
     </LinearLayout>

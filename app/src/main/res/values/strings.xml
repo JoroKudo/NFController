@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">NFControl</string>
     <string name="message_write_error">Error Writing Message !</string>
     <string name="message_write_success">Successfully written to Tag !</string>
@@ -17,8 +17,8 @@
     <string name="positive">Enable NFC</string>
     <string name="title_activity_maps">Map</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="search">Search...</string>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDmjg1GfxqjVmhrp-2QtTTOt7gznCQXGQE</string>
+    <string name="search">Search…</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false" tools:ignore="Typos">AIzaSyDmjg1GfxqjVmhrp-2QtTTOt7gznCQXGQE</string>
     <string name="radius_input_information">Please enter a Radius of the geofence</string>
     <string name="radius_input_field_hint">Radius in meters</string>
     <string name="expiration_time_input_information">For how long should your geofence be existing?</string>
@@ -32,6 +32,16 @@
     <string name="address_title">Address:</string>
     <string name="feature_title">Feature:</string>
     <string name="application_name">NFController</string>
+    <string name="put_tag_behind_phone">put tag behind phön</string>
+    <string name="add_task">add task</string>
+    <string name="delete">Delete</string>
+    <string name="turn_off">Turn Off</string>
+    <string name="turn_on">Turn On</string>
+    <string name="switcheroo">Switch</string>
+    <string name="attr">attribute</string>
+    <string name="task_procedure">TASK procedure</string>
+    <string name="empty_tag">Empty Tag</string>
+    <string name="app_icon">App Icon</string>
 
 
 </resources>

@@ -8,7 +8,7 @@ import android.net.wifi.WifiManager;
 public class Util {
 
     public static WifiManager getWifiManager(Context context) {
-        return (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        return (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
     }
 
 

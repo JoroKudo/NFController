@@ -27,6 +27,8 @@ import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -82,11 +84,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == RESULT_OK) {
+            assert data != null;
             place = Autocomplete.getPlaceFromIntent(data);
 
             editText.setText(place.getAddress());
 
             LatLng placeLatLng = place.getLatLng();
+            assert placeLatLng != null;
             placeLatitude = placeLatLng.latitude;
             placeLongitude = placeLatLng.longitude;
             address = place.getAddress();
@@ -105,13 +109,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
 
         } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+            assert data != null;
             Status status = Autocomplete.getStatusFromIntent(data);
             Toast.makeText(getApplicationContext(), status.getStatusMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NotNull GoogleMap googleMap) {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
@@ -151,6 +156,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.map);
+            assert mapFragment != null;
             mapFragment.getMapAsync(this);
         } catch (NullPointerException e) {
             Log.e("NullPointerException", "Map ist not loading");

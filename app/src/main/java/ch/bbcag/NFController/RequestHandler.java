@@ -1,6 +1,7 @@
 package ch.bbcag.NFController;
 
 
+import android.annotation.SuppressLint;
 import android.nfc.NdefRecord;
 import android.nfc.tech.Ndef;
 import android.os.Parcelable;
@@ -43,7 +44,7 @@ public class RequestHandler {
     public String now() {
         TimeZone tz = TimeZone.getTimeZone("UTC");
 
-        DateFormat df = new SimpleDateFormat(" dd-MM-yyyy HH:mm");
+        @SuppressLint("SimpleDateFormat") DateFormat df = new SimpleDateFormat(" dd-MM-yyyy HH:mm");
 
         df.setTimeZone(tz);
         return df.format(new Date());

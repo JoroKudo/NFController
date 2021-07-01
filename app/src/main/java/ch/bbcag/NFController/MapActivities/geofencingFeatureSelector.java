@@ -32,7 +32,7 @@ public class geofencingFeatureSelector extends Fragment {
         ListView listView = (ListView) view.findViewById(R.id.mobile_list);
 
         // For populating list data
-        ArrayAdapter adapter = new ArrayAdapter<>(getContext(), R.layout.task_list_item, entries);
+        ArrayAdapter<?> adapter = new ArrayAdapter<>(getContext(), R.layout.task_list_item, entries);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener((parent, clickView, position, id) -> {
@@ -46,7 +46,7 @@ public class geofencingFeatureSelector extends Fragment {
     }
 
     private void areOptionsAvailable(int position) {
-        if (Const.fulltask[7] == "blue" || Const.fulltask[5] == "wifi") {
+        if (Const.fulltask[7].equals("blue") || Const.fulltask[5].equals("wifi")) {
             setOption(position);
         }
     }

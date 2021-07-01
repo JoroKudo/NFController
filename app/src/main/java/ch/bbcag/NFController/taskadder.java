@@ -1,5 +1,6 @@
 package ch.bbcag.NFController;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +36,7 @@ public class taskadder extends AppCompatActivity implements View.OnClickListener
         super.onPause();
     }
 
+    @SuppressLint("NonConstantResourceId")
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {

@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="put tag behind phön"
+        android:text="@string/put_tag_behind_phone"
         android:textColor="@android:color/white"
         android:textSize="@dimen/_20sdp" />
 

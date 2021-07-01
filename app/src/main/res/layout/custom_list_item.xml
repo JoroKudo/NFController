@@ -12,14 +12,15 @@
         android:scaleType="fitXY"
         android:id="@+id/ImgV_icon"
         android:layout_row="0"
-        android:layout_column="0" />
+        android:layout_column="0"
+        android:contentDescription="@string/app_icon" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_columnWeight="1"
-        android:layout_marginLeft="10dp"
-        android:textSize="30dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:textSize="@dimen/_30sdp"
         android:textColor="#1E90FF"
         android:id="@+id/TV_ListEntry"
         android:layout_row="0"

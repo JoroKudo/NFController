@@ -65,12 +65,7 @@ public class CustomLists {
 
             imageFlag.setImageDrawable(icon);
 
-            imageFlag.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    deletedialog(position);
-                }
-            });
+            imageFlag.setOnClickListener(v -> deletedialog(position));
 
 
             return view;
