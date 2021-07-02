@@ -2,9 +2,15 @@ package ch.bbcag.NFController.Features;
 
 import android.media.AudioManager;
 
+import java.nio.file.SecureDirectoryStream;
+
+import javax.inject.Inject;
+
 public class Volume {
 
     private final AudioManager audioManager;
+
+
 
     public Volume(AudioManager audioManager) {
         this.audioManager = audioManager;

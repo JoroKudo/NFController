@@ -3,6 +3,7 @@ package ch.bbcag.NFController.Dagger2;
 import javax.inject.Singleton;
 
 import ch.bbcag.NFController.Features.FeatureActivator;
+import ch.bbcag.NFController.MapActivities.FinalGeoFencingViewActivity;
 import ch.bbcag.NFController.MapActivities.GeofencingActivity;
 import ch.bbcag.NFController.MapActivities.GeofencingBroadcastReceiver;
 import ch.bbcag.NFController.NFCRead;
@@ -18,5 +19,7 @@ public interface ApplicationComponent {
     void inject(NFCRead nfcRead);
 
     void inject(FeatureActivator featureActivator);
+
+    void inject(FinalGeoFencingViewActivity finalGeoFencingViewActivity);
 
 }

@@ -25,6 +25,7 @@ public class NFCRead extends NFCBase {
 
     @Inject
     public AppDataManager appDataManager;
+    @Inject
     public FeatureActivator featureActivator;
 
     private TextView listTitle;

@@ -23,6 +23,7 @@ public class TaskWriter extends NFCBase {
         initViews();
 
 
+
     }
 
     @Override
@@ -99,6 +100,8 @@ public class TaskWriter extends NFCBase {
             if (writeTag(tag, message)) {
                 Toast.makeText(this, (getString(R.string.message_write_success)), Toast.LENGTH_SHORT).show();
                 Const.taskcontainer.clear();
+                Intent homeIntent = new Intent(this, NfcHome.class);
+                startActivity(homeIntent);
                 finish();
             } else {
                 Toast.makeText(this, (getString(R.string.message_write_error)), Toast.LENGTH_SHORT).show();

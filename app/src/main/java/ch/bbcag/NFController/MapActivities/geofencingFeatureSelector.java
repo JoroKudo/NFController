@@ -11,6 +11,7 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import ch.bbcag.NFController.Const;
+import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.R;
 
 public class geofencingFeatureSelector extends Fragment {
@@ -20,6 +21,7 @@ public class geofencingFeatureSelector extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
     }
@@ -38,6 +40,7 @@ public class geofencingFeatureSelector extends Fragment {
         listView.setOnItemClickListener((parent, clickView, position, id) -> {
             Const.fulltask[7] = Const.GEOTASKS[position];
             Const.fulltask[9] = entries[position];
+
             areOptionsAvailable(position);
             Intent intent = new Intent(getContext(), FinalGeoFencingViewActivity.class);
             startActivity(intent);

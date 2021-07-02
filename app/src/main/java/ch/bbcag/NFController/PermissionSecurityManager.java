@@ -9,10 +9,11 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
-public class SecurityManager {
+public class PermissionSecurityManager {
+
 
     @Inject
-    SecurityManager() {
+    public PermissionSecurityManager() {
     }
 
 
@@ -26,4 +27,5 @@ public class SecurityManager {
             }
         }
     }
+
 }

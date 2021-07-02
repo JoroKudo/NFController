@@ -62,6 +62,9 @@ public class GeofencingBroadcastReceiver extends BroadcastReceiver {
             // Send notification and log the transition details.
             Log.i(TAG, geofenceTransitionDetails);
             Toast.makeText(context.getApplicationContext(), "Youre in", Toast.LENGTH_SHORT).show();
+            Intent homeIntent = new Intent(context.getApplicationContext(), NfcHome.class);
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(homeIntent);
         } else {
             // Log the error.
             Toast.makeText(context.getApplicationContext(), TAG + (geofenceTransition), Toast.LENGTH_SHORT).show();

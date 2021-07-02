@@ -31,14 +31,22 @@ import java.time.LocalTime;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
 import ch.bbcag.NFController.Const;
+import ch.bbcag.NFController.Dagger2.NFControllerApplication;
+import ch.bbcag.NFController.PermissionSecurityManager;
 import ch.bbcag.NFController.R;
 import ch.bbcag.NFController.TaskWriter;
+import ch.bbcag.NFController.Util;
 import ch.bbcag.NFController.databinding.ActivityFinalGeoFencingViewBinding;
 
 import static android.graphics.Color.TRANSPARENT;
 
 public class FinalGeoFencingViewActivity extends FragmentActivity implements OnMapReadyCallback {
+
+    @Inject
+    PermissionSecurityManager permissionSecurityManager;
 
     TextView addressText;
     TextView radiusText;
@@ -60,8 +68,12 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
 
     private GoogleMap mMap;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
+
         super.onCreate(savedInstanceState);
         binding = ActivityFinalGeoFencingViewBinding.inflate(getLayoutInflater());
         ConstraintLayout root = binding.getRoot();
@@ -75,6 +87,11 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         featureText = findViewById(R.id.feature);
 
         setText();
+
+        if (Const.fulltask[7].equals(Const.GEOTASKS[4]) | Const.fulltask[7].equals(Const.GEOTASKS[5]) | Const.fulltask[7].equals(Const.GEOTASKS[6]) | Const.fulltask[7].equals(Const.GEOTASKS[7])){
+            permissionSecurityManager.checkIfNotificationPermissionIsGranted(this, Util.getNotificationManager(getApplicationContext()));
+        }
+
 
         FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_NFC_writer);
         floatingActionButton.setOnClickListener(v -> {

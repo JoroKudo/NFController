@@ -1,10 +1,5 @@
 package ch.bbcag.NFController;
 
-
-import android.app.NotificationManager;
-import android.media.AudioManager;
-import android.net.wifi.WifiManager;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 @Singleton
