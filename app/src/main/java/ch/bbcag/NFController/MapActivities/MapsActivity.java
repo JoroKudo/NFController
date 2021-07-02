@@ -96,6 +96,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             placeLongitude = placeLatLng.longitude;
             address = place.getAddress();
 
+            Const.fulltask[0] = "geofencing";
             Const.fulltask[2] = String.valueOf(placeLatitude);
             Const.fulltask[3] = String.valueOf(placeLongitude);
             Const.fulltask[4] = address;

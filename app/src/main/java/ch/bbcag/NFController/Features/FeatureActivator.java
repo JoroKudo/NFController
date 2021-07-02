@@ -3,13 +3,15 @@ package ch.bbcag.NFController.Features;
 import android.content.Context;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import ch.bbcag.NFController.AppDataManager;
 import ch.bbcag.NFController.Util;
 
+@Singleton
 public class FeatureActivator {
 
-    final AppDataManager appDataManager;
+    AppDataManager appDataManager;
 
     @Inject
     public FeatureActivator(AppDataManager appDataManager) {
@@ -68,6 +70,10 @@ public class FeatureActivator {
                 website.opensite(splitted[subFeaturePosition + 1]);
                 break;
         }
+    }
+
+    public AppDataManager getAppDataManager() {
+        return appDataManager;
     }
 
     private Volume getVolume(Context context) {

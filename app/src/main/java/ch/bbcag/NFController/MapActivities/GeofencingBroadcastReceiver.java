@@ -18,27 +18,21 @@ import ch.bbcag.NFController.AppDataManager;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.Features.FeatureActivator;
 import ch.bbcag.NFController.NFCRead;
+import ch.bbcag.NFController.NfcHome;
 
 import static android.content.ContentValues.TAG;
 
 public class GeofencingBroadcastReceiver extends BroadcastReceiver {
 
     private final int subFeaturePosition = 7;
-    private final NFCRead nfcRead;
 
     @Inject
     FeatureActivator featureActivator;
-    AppDataManager appDataManager;
-
-    public GeofencingBroadcastReceiver(NFCRead nfcRead) {
-        this.nfcRead = nfcRead;
-    }
-
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        ((NFControllerApplication) context).appComponent.inject(this);
+        ((NFControllerApplication) context.getApplicationContext()).appComponent.inject(this);
 
         GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
         if (geofencingEvent.hasError()) {
@@ -55,16 +49,15 @@ public class GeofencingBroadcastReceiver extends BroadcastReceiver {
         if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
                 geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
 
-            if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER) {
-                featureActivator.activateFeature(context, subFeaturePosition, appDataManager.getSplitted());
+            if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER){
+                featureActivator.activateFeature(context, subFeaturePosition, featureActivator.getAppDataManager().getSplitted());
             }
             // Get the geofences that were triggered. A single event can trigger
             // multiple geofences.
             List<Geofence> triggeringGeofences = geofencingEvent.getTriggeringGeofences();
 
             // Get the transition details as a String.
-            String geofenceTransitionDetails = getGeofenceTransitionDetails(this, geofenceTransition,
-                    triggeringGeofences);
+            String geofenceTransitionDetails = this.toString() + geofenceTransition + triggeringGeofences;
 
             // Send notification and log the transition details.
             Log.i(TAG, geofenceTransitionDetails);

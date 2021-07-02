@@ -1,5 +1,9 @@
 package ch.bbcag.NFController.MapActivities;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
@@ -7,24 +11,22 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import android.widget.Toast;
 
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import ch.bbcag.NFController.AppDataManager;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
+import ch.bbcag.NFController.AppDataManager;
 
 public class GeofencingActivity extends AppCompatActivity {
 
@@ -37,18 +39,19 @@ public class GeofencingActivity extends AppCompatActivity {
     private final int PERMISSIONS_MULTIPLE_REQUEST = 123;
     private final String[] permissions = new String[]{ACCESS_BACKGROUND_LOCATION, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION};
 
-    final List<Geofence> geofenceList = Collections.emptyList();
+    List<Geofence> geofenceList = new ArrayList<>();
     private PendingIntent geofencePendingIntent;
     GeofencingClient geofencingClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         geofencingClient = new GeofencingClient(this);
 
         ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
 
-        startGeoFenceMonitoring(appDataManager.getSplitted()[1], Double.parseDouble(appDataManager.getSplitted()[2]), Double.parseDouble(appDataManager.getSplitted()[3]), Float.parseFloat(appDataManager.getSplitted()[5]), Long.parseLong(appDataManager.getSplitted()[6]));
+        startGeoFenceMonitoring(appDataManager.getSplitted()[1], Double.parseDouble(appDataManager.getSplitted()[2]),Double.parseDouble(appDataManager.getSplitted()[3]), Float.parseFloat(appDataManager.getSplitted()[5]), Long.parseLong(appDataManager.getSplitted()[6]));
+
+        super.onCreate(savedInstanceState);
     }
 
 
@@ -87,7 +90,7 @@ public class GeofencingActivity extends AppCompatActivity {
     }
 
     private void createGeofence(String id, double latitude, double longitude, float radius, long expirationTime) {
-        geofenceList.add(new Geofence.Builder()
+        Geofence build = new Geofence.Builder()
                 .setRequestId(id)
                 .setCircularRegion(
                         latitude,
@@ -97,7 +100,8 @@ public class GeofencingActivity extends AppCompatActivity {
                 .setExpirationDuration(expirationTime)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
                         Geofence.GEOFENCE_TRANSITION_EXIT)
-                .build());
+                .build();
+        geofenceList.add(build);
     }
 
     public void requestMultiplePermissions() {
@@ -126,13 +130,9 @@ public class GeofencingActivity extends AppCompatActivity {
     }
 
     private void startGeoFenceMonitoring(String myId, double latitude, double longitude, float radius, long expirationTime) {
-        try {
-            requestMultiplePermissions();
-            createGeofence(myId, latitude, longitude, radius, expirationTime);
-            addGeofence();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        requestMultiplePermissions();
+        createGeofence(myId, latitude, longitude, radius, expirationTime);
+        addGeofence();
     }
 
     private void stopGeoFencingMonitoring() {

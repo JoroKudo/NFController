@@ -6,13 +6,11 @@ import android.media.AudioManager;
 import android.net.wifi.WifiManager;
 
 import javax.inject.Inject;
-
+import javax.inject.Singleton;
+@Singleton
 public class AppDataManager {
 
     private String[] splitted;
-    private WifiManager wifiManager;
-    private AudioManager audioManager;
-    private NotificationManager notificationManager;
 
     @Inject
     public AppDataManager() {
