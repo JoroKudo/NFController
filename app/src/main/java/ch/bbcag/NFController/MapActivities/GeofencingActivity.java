@@ -27,17 +27,18 @@ import javax.inject.Inject;
 
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.AppDataManager;
+import ch.bbcag.NFController.PermissionSecurityManager;
 
 public class GeofencingActivity extends AppCompatActivity {
 
     @Inject
     AppDataManager appDataManager;
+    @Inject
+    PermissionSecurityManager permissionSecurityManager;
 
     private final String ACCESS_BACKGROUND_LOCATION = Manifest.permission.ACCESS_BACKGROUND_LOCATION;
     private final String ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private final String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private final int PERMISSIONS_MULTIPLE_REQUEST = 123;
-    private final String[] permissions = new String[]{ACCESS_BACKGROUND_LOCATION, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION};
 
     List<Geofence> geofenceList = new ArrayList<>();
     private PendingIntent geofencePendingIntent;
@@ -104,23 +105,6 @@ public class GeofencingActivity extends AppCompatActivity {
         geofenceList.add(build);
     }
 
-    public void requestMultiplePermissions() {
-        if (!checkForMyRequiredLocationPermissions()) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, ACCESS_BACKGROUND_LOCATION) ||
-                    ActivityCompat.shouldShowRequestPermissionRationale(this, ACCESS_FINE_LOCATION) ||
-                    ActivityCompat.shouldShowRequestPermissionRationale(this, ACCESS_COARSE_LOCATION)) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    Snackbar.make(this.findViewById(android.R.id.content),
-                            "Please change your Location settings for the geofencing feature",
-                            Snackbar.LENGTH_INDEFINITE).setAction("Continue",
-                            v -> requestPermissions(
-                                    permissions, PERMISSIONS_MULTIPLE_REQUEST)).show();
-                }
-
-            }
-
-        }
-    }
 
     public boolean checkForMyRequiredLocationPermissions() {
         return (ContextCompat.checkSelfPermission(this, ACCESS_BACKGROUND_LOCATION) +
@@ -130,7 +114,7 @@ public class GeofencingActivity extends AppCompatActivity {
     }
 
     private void startGeoFenceMonitoring(String myId, double latitude, double longitude, float radius, long expirationTime) {
-        requestMultiplePermissions();
+        permissionSecurityManager.requestBackgroundLocation(this);
         createGeofence(myId, latitude, longitude, radius, expirationTime);
         addGeofence();
     }
@@ -142,6 +126,8 @@ public class GeofencingActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
 
 
 }

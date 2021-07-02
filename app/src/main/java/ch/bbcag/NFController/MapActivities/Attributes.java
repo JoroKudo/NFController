@@ -3,6 +3,7 @@ package ch.bbcag.NFController.MapActivities;
 import java.io.Serializable;
 
 public class Attributes implements Serializable {
+
     private int radius = 5;
     private double longitude = 3.2541;
 

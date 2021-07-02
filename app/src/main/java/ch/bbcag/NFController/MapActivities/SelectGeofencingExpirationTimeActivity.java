@@ -18,14 +18,14 @@ import ch.bbcag.NFController.R;
 
 public class SelectGeofencingExpirationTimeActivity extends AppCompatActivity {
 
-    Intent intent;
-    NumberPicker numberPickerHours;
-    NumberPicker numberPickerMinutes;
-    NumberPicker numberPickerSeconds;
+    private Intent intent;
+    private NumberPicker numberPickerHours;
+    private NumberPicker numberPickerMinutes;
+    private NumberPicker numberPickerSeconds;
     private int h;
     private int m;
     private int s;
-    long expirationTimeInMilliseconds;
+    private long expirationTimeInMilliseconds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

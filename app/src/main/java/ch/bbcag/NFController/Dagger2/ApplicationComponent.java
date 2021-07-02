@@ -6,7 +6,10 @@ import ch.bbcag.NFController.Features.FeatureActivator;
 import ch.bbcag.NFController.MapActivities.FinalGeoFencingViewActivity;
 import ch.bbcag.NFController.MapActivities.GeofencingActivity;
 import ch.bbcag.NFController.MapActivities.GeofencingBroadcastReceiver;
+import ch.bbcag.NFController.MapActivities.MapsActivity;
+import ch.bbcag.NFController.MapActivities.SecurityFragmentActivity;
 import ch.bbcag.NFController.NFCRead;
+import ch.bbcag.NFController.NfcHome;
 import dagger.Component;
 
 @Singleton
@@ -21,5 +24,12 @@ public interface ApplicationComponent {
     void inject(FeatureActivator featureActivator);
 
     void inject(FinalGeoFencingViewActivity finalGeoFencingViewActivity);
+
+    void inject(MapsActivity mapsActivity);
+
+    void inject(SecurityFragmentActivity securityFragmentActivity);
+
+    void inject(NfcHome nfcHome);
+
 
 }

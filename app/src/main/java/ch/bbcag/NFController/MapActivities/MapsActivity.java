@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -33,51 +32,58 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import ch.bbcag.NFController.Alerts;
 import ch.bbcag.NFController.Const;
+import ch.bbcag.NFController.Dagger2.NFControllerApplication;
+import ch.bbcag.NFController.PermissionSecurityManager;
 import ch.bbcag.NFController.R;
 import ch.bbcag.NFController.databinding.FragmentMapsBinding;
 
 import static android.graphics.Color.TRANSPARENT;
 
 @SuppressWarnings("deprecation")
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends SecurityFragmentActivity implements OnMapReadyCallback {
 
-    EditText editText;
-    Marker marker;
-    Place place;
+    private EditText editText;
+    private Marker marker;
+    private Place place;
     private Double radius;
-    FragmentMapsBinding binding;
+    private FragmentMapsBinding binding;
     private GoogleMap mMap;
-    double placeLatitude;
-    double placeLongitude;
-    String address;
+    private double placeLatitude;
+    private double placeLongitude;
+    private String address;
+    private FloatingActionButton floatingActionButton;
 
-    public MapsActivity() {
-    }
+    @Inject
+    PermissionSecurityManager permissionSecurityManager;
 
-    public MapsActivity(double radius) {
-        this.radius = radius;
-    }
+    @Inject
+    Alerts alerts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
+
         super.onCreate(savedInstanceState);
 
         binding = FragmentMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
-
         loadMap();
 
         editText = findViewById(R.id.sv_location);
+        floatingActionButton = findViewById(R.id.continue_to_radius);
+        permissionSecurityManager.requestMultiplePermissions(this);
+
+        showAlertIfNeeded();
+        hideFloatingActionButtonIfNeeded();
+
         editText.setOnClickListener(v -> createNewMarkerThroughAutocomplete());
-
-        FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_radius);
         floatingActionButton.setOnClickListener(v -> {
-
-            Intent intent = new Intent(getApplicationContext(), SelectGeofencingRadiusActivity.class);
-            startActivity(intent);
+            startActivityIfPlaceSelected();
         });
     }
 
@@ -121,7 +127,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(@NotNull GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
         LatLng zurich = new LatLng(47.3769, 8.5417);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(zurich, 10));
 
@@ -130,6 +135,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 marker.remove();
             }
             marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latLng.latitude, latLng.longitude)).title(latLng.latitude + ", " + latLng.longitude));
+            Const.fulltask[0] = "geofencing";
             Const.fulltask[2] = String.valueOf(latLng.latitude);
             Const.fulltask[3] = String.valueOf(latLng.longitude);
 
@@ -166,19 +172,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public Marker getMarker() {
-        return marker;
+    private void hideFloatingActionButtonIfNeeded() {
+        if (!permissionSecurityManager.areMultiplePermissionsGranted(this)) {
+            floatingActionButton.hide();
+        }
     }
 
-    public double getPlaceLatitude() {
-        return placeLatitude;
+    private void showAlertIfNeeded() {
+        if (permissionSecurityManager.hasThePermissionAlreadyBeenDenied()) {
+            alerts.DisplayPermissionAlert(this);
+        }
     }
 
-    public double getPlaceLongitude() {
-        return placeLongitude;
-    }
-
-    public Place getPlace() {
-        return place;
+    private void startActivityIfPlaceSelected() {
+        if (Const.fulltask[0].isEmpty() || Const.fulltask[2].isEmpty() || Const.fulltask[3].isEmpty() || Const.fulltask[4].isEmpty()) {
+            Toast.makeText(this, "please Select a Place on the map to continue", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(getApplicationContext(), SelectGeofencingRadiusActivity.class);
+            startActivity(intent);
+        }
     }
 }

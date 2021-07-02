@@ -42,7 +42,9 @@ public class geofencingFeatureSelector extends Fragment {
             Const.fulltask[9] = entries[position];
 
             areOptionsAvailable(position);
-            Intent intent = new Intent(getContext(), FinalGeoFencingViewActivity.class);
+            Intent intent = new Intent();
+            intent.setClass(getContext(), FinalGeoFencingViewActivity.class);
+            intent.putExtra("FinalView", "FromFeatureSelector");
             startActivity(intent);
         });
         return view;

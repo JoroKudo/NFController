@@ -35,6 +35,7 @@ import javax.inject.Inject;
 
 import ch.bbcag.NFController.Const;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
+import ch.bbcag.NFController.NfcHome;
 import ch.bbcag.NFController.PermissionSecurityManager;
 import ch.bbcag.NFController.R;
 import ch.bbcag.NFController.TaskWriter;
@@ -48,16 +49,21 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     @Inject
     PermissionSecurityManager permissionSecurityManager;
 
-    TextView addressText;
-    TextView radiusText;
-    TextView timeText;
-    TextView featureText;
+    private TextView addressText;
+    private TextView radiusText;
+    private TextView timeText;
+    private TextView featureText;
 
-    Marker marker;
-    Circle circle;
+    private Marker marker;
+    private Circle circle;
     private int h;
     private int m;
     private int s;
+
+    //TODO
+    //Differentiate between latitude when FinalView is launched from NFCRead or from FeatureSelector
+    //Problem will be solved when refactoring code and using AppDataManager as main data source.
+
     private final double latitude = Double.parseDouble(Const.fulltask[2]);
     private final double longitude = Double.parseDouble(Const.fulltask[3]);
     private final String address = Const.fulltask[4];
@@ -92,17 +98,28 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
             permissionSecurityManager.checkIfNotificationPermissionIsGranted(this, Util.getNotificationManager(getApplicationContext()));
         }
 
+        Intent intentBefore = this.getIntent();
+        String extraInformation = intentBefore.getExtras().getString("FinalView");
+        if (extraInformation.equals("FromFeatureSelector")){
+            FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_NFC_writer);
+            floatingActionButton.setOnClickListener(v -> {
 
-        FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_NFC_writer);
-        floatingActionButton.setOnClickListener(v -> {
+                Const.fulltask[1] = "ID";
 
-            Const.fulltask[1] = "ID";
+                Collections.addAll(Const.taskcontainer, Const.fulltask);
 
-            Collections.addAll(Const.taskcontainer, Const.fulltask);
+                Intent intent = new Intent(getApplicationContext(), TaskWriter.class);
+                startActivity(intent);
+            });
+        }else if (extraInformation.equals("From_NFCRead")){
+            FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_NFC_Home);
+            floatingActionButton.setOnClickListener(v -> {
+                Intent homeIntent = new Intent(this, NfcHome.class);
+                startActivity(homeIntent);
+            });
+        }
 
-            Intent intent = new Intent(getApplicationContext(), TaskWriter.class);
-            startActivity(intent);
-        });
+
     }
 
     @Override

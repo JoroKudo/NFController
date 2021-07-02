@@ -82,7 +82,7 @@ public class CustomLists {
 
 
                         Const.taskcontainer.remove(position);
-                        Intent intent = new Intent(getContext(), taskadder.class);
+                        Intent intent = new Intent(getContext(), TaskAdder.class);
 
                         context.startActivity(intent);
                         context.finish();

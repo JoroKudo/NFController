@@ -14,9 +14,9 @@ import ch.bbcag.NFController.R;
 
 public class SelectGeofencingRadiusActivity extends AppCompatActivity {
 
-    Intent intent;
-    EditText editText;
-    int radius;
+    private Intent intent;
+    private EditText editText;
+    private int radius;
 
     public SelectGeofencingRadiusActivity() {
     }

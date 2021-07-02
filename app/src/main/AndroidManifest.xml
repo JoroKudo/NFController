@@ -74,7 +74,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="ch.bbcag.NFController.NFCTest"
+            android:name="ch.bbcag.NFController.MapActivities.GeofencingInfo"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
@@ -103,7 +103,7 @@
             android:name="ch.bbcag.NFController.AttributeSetter"
             android:screenOrientation="fullSensor" />
         <activity
-            android:name="ch.bbcag.NFController.taskadder"
+            android:name="ch.bbcag.NFController.TaskAdder"
             android:screenOrientation="fullSensor" />
         <activity
             android:name="ch.bbcag.NFController.TaskSelector"
