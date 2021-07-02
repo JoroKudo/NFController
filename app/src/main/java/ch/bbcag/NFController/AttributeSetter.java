@@ -8,12 +8,7 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import ch.bbcag.NFController.AttributeFragments.AlarmAttribute;
-import ch.bbcag.NFController.AttributeFragments.AppSelector;
-import ch.bbcag.NFController.AttributeFragments.IOAttribute;
-import ch.bbcag.NFController.AttributeFragments.MessageParameter;
-import ch.bbcag.NFController.AttributeFragments.TextParameter;
-import ch.bbcag.NFController.AttributeFragments.TimerAttribute;
+import ch.bbcag.NFController.AttributeFragments.*;
 
 
 public class AttributeSetter extends AppCompatActivity implements View.OnClickListener {
@@ -66,6 +61,10 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
             fulltask[1] = ((AppSelector) fragment).getapp();
 
         }
+        else if (fragment instanceof VolumeModeParam) {
+            fulltask[0] = ((VolumeModeParam) fragment).getVolMode();
+
+        }
         Const.taskcontainer.add(fulltask);
 
         if (view.getId() == R.id.rlAddTask) {
@@ -110,8 +109,7 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
             case "mute":
             case "vibrate":
 
-                Intent intent = new Intent(this, TaskWriter.class);
-                startActivity(intent);
+             fragment = new VolumeModeParam();
                 break;
             case "timer":
                 fragment = new TimerAttribute();

@@ -7,11 +7,10 @@
     tools:context=".MapActivities.SelectGeofencingExpirationTimeActivity">
 
     <View
-        android:id="@+id/NP_Expiration_Time_Border_Top"
         android:layout_width="match_parent"
 
         android:layout_height="2dp"
-        android:background="@color/colorpurple"
+        android:background="@color/colorPurple"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2" />
 
     <LinearLayout
@@ -58,7 +57,6 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/setTimeTitle"
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:gravity="center"
@@ -115,7 +113,7 @@
             android:gravity="center"
             android:text="@string/h"
 
-            android:textColor="@color/colorpurple"
+            android:textColor="@color/colorPurple"
             android:textSize="30sp" />
 
         <TextView
@@ -126,7 +124,7 @@
 
             android:text="@string/m"
 
-            android:textColor="@color/colorpurple"
+            android:textColor="@color/colorPurple"
             android:textSize="30sp" />
 
         <TextView
@@ -136,16 +134,15 @@
             android:gravity="center"
             android:text="@string/s"
 
-            android:textColor="@color/colorpurple"
+            android:textColor="@color/colorPurple"
             android:textSize="30sp" />
     </LinearLayout>
 
     <View
-        android:id="@+id/NP_Expiration_Time_Border_Bottom"
         android:layout_width="match_parent"
 
         android:layout_height="2dp"
-        android:background="@color/colorpurple"
+        android:background="@color/colorPurple"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

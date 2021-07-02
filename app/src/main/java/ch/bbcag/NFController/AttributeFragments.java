@@ -10,10 +10,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import androidx.fragment.app.Fragment;
@@ -40,10 +43,10 @@ public class AttributeFragments {
             View view = inflater.inflate(R.layout.attribute_io, container,
                     false);
 
-            RadioButton radioOn = view.findViewById(R.id.radioon);
+            RadioButton radioOn = view.findViewById(R.id.RadioOn);
             radioOn.setOnClickListener(this);
 
-            RadioButton radioOff = view.findViewById(R.id.radiooff);
+            RadioButton radioOff = view.findViewById(R.id.RadioOff);
             radioOff.setOnClickListener(this);
             return view;
         }
@@ -53,12 +56,12 @@ public class AttributeFragments {
         public void onClick(View view) {
             boolean checked = ((RadioButton) view).isChecked();
             switch (view.getId()) {
-                case R.id.radioon:
+                case R.id.RadioOn:
                     if (checked)
                         state = "1";
 
                     break;
-                case R.id.radiooff:
+                case R.id.RadioOff:
                     if (checked)
                         state = "0";
 
@@ -67,6 +70,49 @@ public class AttributeFragments {
         }
 
         public String getstate() {
+            return state;
+        }
+
+    }
+
+    public static class VolumeModeParam extends Fragment {
+        String state;
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.attribute_volmode, container,
+                    false);
+
+            Spinner dropdown = view.findViewById(R.id.spinner1);
+            String[] items = new String[]{"mute", "vibrate", "tone"};
+            ArrayAdapter<?> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, items);
+//set the spinners adapter to the previously created one.
+            dropdown.setAdapter(adapter);
+
+            dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                    state = items[pos];
+
+                }
+
+                public void onNothingSelected(AdapterView<?> parent) {
+                    state = items[0];
+                }
+            });
+
+
+            return view;
+        }
+
+
+        public String getVolMode() {
             return state;
         }
 
@@ -218,7 +264,7 @@ public class AttributeFragments {
                     false);
 
             timePicker = view.findViewById(R.id.timePicker1);
-            alertMessage = view.findViewById(R.id.Alarmmessage);
+            alertMessage = view.findViewById(R.id.AlertMessage);
 
 
             return view;

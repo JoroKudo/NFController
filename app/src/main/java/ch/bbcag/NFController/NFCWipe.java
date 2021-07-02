@@ -32,7 +32,7 @@ public class NFCWipe extends NFCBase {
 
         if (tag != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.Wipetag_alert)
+            builder.setMessage(R.string.Wipe_Tag_Alert)
                     .setPositiveButton(R.string.Wipe_Tag, (dialog, id) -> {
                         try {
                             Ndef ndef = Ndef.get(tag);

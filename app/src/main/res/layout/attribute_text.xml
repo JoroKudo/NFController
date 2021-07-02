@@ -12,13 +12,14 @@
         android:layout_marginTop="@dimen/_100sdp"
         android:imeOptions="actionDone"
         android:inputType="text"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor"
+        android:importantForAutofill="no" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="attribute"
+        android:text="@string/attr"
         android:textColor="@android:color/white"
         android:textSize="@dimen/_20sdp" />
 

@@ -23,7 +23,7 @@ public class FeatureActivator {
         switch (splitted[subFeaturePosition]) {
             case "blue":
                 Bluetooth bluetooth = new Bluetooth();
-                bluetooth.toggleBluetooth(splitted[subFeaturePosition + 1]);
+                bluetooth.toggleBluetooth(splitted[1]);
                 break;
             case "wifi":
                 Wifi wifiClass = new Wifi(context, Util.getWifiManager(context));
