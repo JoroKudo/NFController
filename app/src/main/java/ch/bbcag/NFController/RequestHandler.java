@@ -5,18 +5,37 @@ import android.annotation.SuppressLint;
 import android.nfc.NdefRecord;
 import android.nfc.tech.Ndef;
 import android.os.Parcelable;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 import java.util.TimeZone;
+
+import static android.content.ContentValues.TAG;
 
 
 public class RequestHandler {
     final FirebaseDatabase database = FirebaseDatabase.getInstance("https://nfcontroller-default-rtdb.europe-west1.firebasedatabase.app/");
+    private int entries;
 
+    public static ArrayList<String[]> ayy = new ArrayList<>();
+    public static List<String> insanee=new ArrayList<>();
+    private int pew = 0;
 
     public void SaveTagdata(Ndef ndef, Parcelable[] messages, NdefRecord[] records) {
 
@@ -38,6 +57,89 @@ public class RequestHandler {
             database.getReference(path + "TagData").push().setValue(new String(record.getPayload()));
         }
 
+
+    }
+
+    public ArrayList<String[]> readProcedures(String procName) {
+
+
+        String path = "Procedures/" + procName;
+
+        DatabaseReference mDbRef = database.getReference(path).getRef();
+
+        mDbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                entries = (int) dataSnapshot.getChildrenCount();
+
+                for (int i = 0; i < entries; i++) {
+                    RequestHandler.ayy.add(i, Objects.requireNonNull(dataSnapshot.child(String.valueOf(i)).getValue(String.class)).split(Const.SPACER));
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+
+
+        });
+
+
+        return ayy;
+    }
+
+    public void addProcedure(String ProcedureName) {
+        String task;
+
+        for (int i = 0; i < Const.taskcontainer.size(); i++) {
+
+            if (!Const.taskcontainer.get(i)[0].isEmpty()) {
+
+
+                task = Arrays.toString(Const.taskcontainer.get(i)).replaceAll(", ", Const.SPACER).replaceAll("\\[|\\]", "");
+
+
+                database.getReference("Procedures/" + ProcedureName + "/" + i)
+                        .setValue(task);
+            }
+
+        }
+
+
+    }
+
+    public List<String> insane() {
+insanee.clear();
+database.getReference("www")
+                .setValue("1");
+        DatabaseReference chilcountdref = database.getReference("Procedures");
+
+        chilcountdref.addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                                    for (DataSnapshot booksSnapshot : dataSnapshot.getChildren()) {
+                                                        //loop 2 to go through all the child nodes of books node
+                                                        RequestHandler.insanee.add(booksSnapshot.getKey());
+
+
+
+
+                                                    }
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+                                                    // Getting Post failed, log a message
+                                                    Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                                                }
+                                            }
+        );
+return RequestHandler.insanee;
 
     }
 

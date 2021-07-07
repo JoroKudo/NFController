@@ -7,22 +7,11 @@
     </style>
 
 
-    <style name="custom_tv" parent="@android:style/TextAppearance.DeviceDefault.Large">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">left</item>
-        <item name="android:layout_marginRight">@dimen/activity_vertical_margin</item>
-    </style>
-
     <style name="DefaultNumberPickerTheme" parent="AppTheme">
         <item name="colorControlNormal">@android:color/transparent</item>
         <item name="android:textSize">30sp</item>
     </style>
 
-    <style name="ShapeAppearanceOverlay.MyApp.Button.Rounded" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-    </style>
+    <style name="AppTheme.NoActionBar"></style>
 
 </resources>

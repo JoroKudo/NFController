@@ -2,7 +2,6 @@ package ch.bbcag.NFController;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
-
-import java.util.List;
 
 
 public class TaskAdderList extends Fragment {
@@ -26,7 +23,6 @@ public class TaskAdderList extends Fragment {
 
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        List<ResolveInfo> pkgAppsList = requireContext().getPackageManager().queryIntentActivities(mainIntent, 0);
 
 
     }

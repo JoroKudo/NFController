@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,13 +14,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class TaskAdder extends AppCompatActivity implements View.OnClickListener {
 
+    EditText etProcName;
+    private final RequestHandler r = new RequestHandler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.addtask);
         FloatingActionButton tvaddtask = findViewById(R.id.TV_ListEntry);
-
+        etProcName = findViewById(R.id.procedure_name);
         LinearLayout rlwritetask = findViewById(R.id.rlWriteTask);
         rlwritetask.setOnClickListener(this);
 
@@ -47,6 +50,10 @@ public class TaskAdder extends AppCompatActivity implements View.OnClickListener
 
 
             case R.id.rlWriteTask:
+
+
+                r.addProcedure(etProcName.getText().toString());
+
                 intent = new Intent(this, TaskWriter.class);
                 startActivity(intent);
 

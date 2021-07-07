@@ -7,20 +7,18 @@
     <string name="str_Write_with_nfc">Write NFC Tag</string>
     <string name="GeofencingInfoButton">my Geofences</string>
     <string name="str_Wipe_with_nfc">Wipe NFC Tag</string>
-    <string name="Wipetag_alert">Are you sure you want to erase all data from this nfc tag?</string>
+    <string name="Wipe_Tag_Alert">Are you sure you want to erase all data from this nfc tag?</string>
     <string name="Wipe_Tag">Wipe the tag</string>
-    <string name="cancel">Dont wipe it</string>
+    <string name="cancel">Don\'t wipe it</string>
     <string name="todo">todo</string>
     <string name="str_reading">Reading</string>
-    <string name="str_scan">Scan a Tag</string>
-    <string name="negative">Dont Enable NFC</string>
+    <string name="negative">Don\'t Enable NFC</string>
     <string name="positive">Enable NFC</string>
     <string name="close">close</string>
     <string name="change_location_permissions">enable access</string>
     <string name="permission_alert_title">use Geofencing?</string>
     <string name="permission_alert_message">To use our geofencing feature we need to access your location. To use the geofencing feature of our app please change your location access permissions in your settings</string>
     <string name="title_activity_maps">Map</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Search…</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false" tools:ignore="Typos">AIzaSyDmjg1GfxqjVmhrp-2QtTTOt7gznCQXGQE</string>
     <string name="radius_input_information">Please enter a Radius of the geofence</string>
@@ -30,13 +28,11 @@
     <string name="geofencing_wrong_data_type_toast">Please Enter a number</string>
     <string name="geofencing_value_too_small_toast">Value must be at least 100</string>
     <string name="geofencing_expiration_time_0_value_toast">Please enter a time greater than 0s</string>
-    <string name="title_activity_final_geo_fencing_view">Map</string>
     <string name="time_title">Duration:</string>
     <string name="radius_title">Radius</string>
     <string name="address_title">Address:</string>
     <string name="feature_title">Feature:</string>
-    <string name="application_name">NFController</string>
-    <string name="put_tag_behind_phone">put tag behind phön</string>
+    <string name="put_tag_behind_phone">put tag behind phone</string>
     <string name="add_task">add task</string>
     <string name="delete">Delete</string>
     <string name="turn_off">Turn Off</string>
@@ -51,6 +47,9 @@
     <string name="h">H</string>
     <string name="m">M</string>
     <string name="s">S</string>
+    <string name="select_feature">Select a feature</string>
+    <string name="message">Message</string>
+    <string name="set_timer">Set Timer</string>
 
 
 </resources>

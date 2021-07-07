@@ -56,7 +56,7 @@
 
         <activity
             android:name="ch.bbcag.NFController.MapActivities.FinalGeoFencingViewActivity"
-            android:label="@string/title_activity_final_geo_fencing_view" />
+            android:label="@string/title_activity_maps" />
         <activity android:name="ch.bbcag.NFController.MapActivities.SelectGeoFencingFeatureActivity" />
         <activity android:name="ch.bbcag.NFController.MapActivities.SelectGeofencingExpirationTimeActivity" />
         <activity android:name="ch.bbcag.NFController.MapActivities.SelectGeofencingRadiusActivity" />
@@ -107,6 +107,9 @@
             android:screenOrientation="fullSensor" />
         <activity
             android:name="ch.bbcag.NFController.TaskSelector"
+            android:screenOrientation="fullSensor" />
+        <activity
+            android:name="ch.bbcag.NFController.ProcedureSelector"
             android:screenOrientation="fullSensor" />
         <activity
             android:name="ch.bbcag.NFController.NFCWrite"

@@ -5,19 +5,18 @@
     android:orientation="vertical">
 
     <RadioButton
-        android:id="@+id/radiooff"
+        android:id="@+id/RadioOff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/turn_off" />
 
     <RadioButton
-        android:id="@+id/radioon"
+        android:id="@+id/RadioOn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/turn_on" />
 
     <RadioButton
-        android:id="@+id/radioswitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/switcheroo" />

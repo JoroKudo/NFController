@@ -10,13 +10,15 @@
         android:layout_height="640dp"
         android:orientation="vertical">
 
-        <TextView
+        <EditText
+            android:id="@+id/procedure_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/task_procedure"
             android:textColor="@color/quantum_white_100"
-            android:textSize="35sp" />
+            android:textSize="35sp"
+            android:importantForAutofill="no" />
 
         <View
             android:layout_width="match_parent"
@@ -24,7 +26,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
 
-            android:background="@color/colorpurple" />
+            android:background="@color/colorPurple" />
 
 
         <FrameLayout
@@ -48,7 +50,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="106dp"
         android:background="#673AB7"
-        android:backgroundTint="@color/colorpurple"
+        android:backgroundTint="@color/colorPurple"
 
 
         android:foregroundGravity="bottom"
@@ -69,7 +71,6 @@
 
 
         <TextView
-            android:id="@+id/tvWriteTask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
