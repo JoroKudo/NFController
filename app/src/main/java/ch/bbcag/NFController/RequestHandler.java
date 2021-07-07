@@ -22,8 +22,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
+
+import static android.content.ContentValues.TAG;
 
 
 public class RequestHandler {
@@ -31,7 +34,8 @@ public class RequestHandler {
     private int entries;
 
     public static ArrayList<String[]> ayy = new ArrayList<>();
-
+    public static List<String> insanee=new ArrayList<>();
+    private int pew = 0;
 
     public void SaveTagdata(Ndef ndef, Parcelable[] messages, NdefRecord[] records) {
 
@@ -56,52 +60,86 @@ public class RequestHandler {
 
     }
 
-    public ArrayList<String[]> insane(String procName) {
+    public ArrayList<String[]> readProcedures(String procName) {
 
 
-            String path = "Procedures/" + procName ;
+        String path = "Procedures/" + procName;
 
-            DatabaseReference mDbRef = database.getReference(path).getRef();
+        DatabaseReference mDbRef = database.getReference(path).getRef();
 
+        mDbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                entries = (int) dataSnapshot.getChildrenCount();
 
-            mDbRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    entries = (int) dataSnapshot.getChildrenCount();
+                for (int i = 0; i < entries; i++) {
+                    RequestHandler.ayy.add(i, Objects.requireNonNull(dataSnapshot.child(String.valueOf(i)).getValue(String.class)).split(Const.SPACER));
 
-                    for (int i = 0; i < entries; i++) {
-                        RequestHandler.ayy.add(i,Objects.requireNonNull(dataSnapshot.child(String.valueOf(i)).getValue(String.class)).split(","));
-
-
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
 
 
-            });
-
+        });
 
 
         return ayy;
     }
 
-    public void tksop(String ProcedureName) {
-
+    public void addProcedure(String ProcedureName) {
+        String task;
 
         for (int i = 0; i < Const.taskcontainer.size(); i++) {
 
-                if (!Const.taskcontainer.get(i)[0].isEmpty()) {
-                    database.getReference("Procedures/" + ProcedureName + "/" + i )
-                            .setValue(Const.taskcontainer.get(i).toString());
-                }
+            if (!Const.taskcontainer.get(i)[0].isEmpty()) {
+
+
+                task = Arrays.toString(Const.taskcontainer.get(i)).replaceAll(", ", Const.SPACER).replaceAll("\\[|\\]", "");
+
+
+                database.getReference("Procedures/" + ProcedureName + "/" + i)
+                        .setValue(task);
+            }
 
         }
 
+
+    }
+
+    public List<String> insane() {
+insanee.clear();
+database.getReference("www")
+                .setValue("1");
+        DatabaseReference chilcountdref = database.getReference("Procedures");
+
+        chilcountdref.addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                                    for (DataSnapshot booksSnapshot : dataSnapshot.getChildren()) {
+                                                        //loop 2 to go through all the child nodes of books node
+                                                        RequestHandler.insanee.add(booksSnapshot.getKey());
+
+
+
+
+                                                    }
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+                                                    // Getting Post failed, log a message
+                                                    Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                                                }
+                                            }
+        );
+return RequestHandler.insanee;
 
     }
 

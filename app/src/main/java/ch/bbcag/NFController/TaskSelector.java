@@ -29,9 +29,15 @@ public class TaskSelector extends AppCompatActivity {
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, viewv, position, id) -> {
-            fulltask[0] = Const.TASKS.get(position);
-
             Intent intent;
+            if (Const.tasknames[position].equals("Custom procedure")) {
+                fulltask[0] ="blue";
+                intent = new Intent(this, ProcedureSelector.class);
+
+            } else {
+                fulltask[0] = Const.TASKS.get(position);
+
+
             if (!fulltask[0].equals("geofencing")) {
 
                 intent = new Intent(this, AttributeSetter.class);
@@ -39,7 +45,7 @@ public class TaskSelector extends AppCompatActivity {
             } else {
                 intent = new Intent(this, MapsActivity.class);
 
-            }
+            }}
             startActivity(intent);
             finish();
 

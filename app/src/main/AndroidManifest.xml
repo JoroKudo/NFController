@@ -109,6 +109,9 @@
             android:name="ch.bbcag.NFController.TaskSelector"
             android:screenOrientation="fullSensor" />
         <activity
+            android:name="ch.bbcag.NFController.ProcedureSelector"
+            android:screenOrientation="fullSensor" />
+        <activity
             android:name="ch.bbcag.NFController.NFCWrite"
             android:screenOrientation="fullSensor">
             <intent-filter>

@@ -51,11 +51,10 @@ public class taskadder extends AppCompatActivity implements View.OnClickListener
             case R.id.rlWriteTask:
 
 
-                r.tksop(etProcName.getText().toString());
-                r.tksop("efg");
-                r.insane("efg");
-                //intent = new Intent(this, TaskWriter.class);
-                //startActivity(intent);
+                r.addProcedure(etProcName.getText().toString());
+
+                intent = new Intent(this, TaskWriter.class);
+                startActivity(intent);
 
 
         }
