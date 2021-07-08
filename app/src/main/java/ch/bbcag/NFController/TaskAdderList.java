@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 
 import java.util.Arrays;
 
+import ch.bbcag.NFController.CustomLists.MyCustomAdapter;
+
 
 public class TaskAdderList extends Fragment {
 
@@ -43,10 +45,7 @@ public class TaskAdderList extends Fragment {
         @SuppressLint("UseCompatLoadingForDrawables")
         MyCustomAdapter appList = new MyCustomAdapter(getActivity(), taskListNames, getResources().getDrawable(R.drawable.trash), R.layout.added_task_list_item);
         listView.setAdapter(appList);
-        //ArrayAdapter<?> adapter = new ArrayAdapter<>(getContext(), R.layout.task_list_item, taskListNames);
 
-
-        //listView.setAdapter(adapter);
 
         listView.setOnItemClickListener((parent, itemView, position, id) -> {
 

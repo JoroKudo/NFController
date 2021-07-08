@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.List;
 
-import ch.bbcag.NFController.CustomList;
+import ch.bbcag.NFController.CustomLists.CustomList;
 import ch.bbcag.NFController.R;
 
 public  class AppSelector extends Fragment {

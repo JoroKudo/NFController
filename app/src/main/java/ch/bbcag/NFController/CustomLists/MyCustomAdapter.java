@@ -1,4 +1,4 @@
-package ch.bbcag.NFController;
+package ch.bbcag.NFController.CustomLists;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,8 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import ch.bbcag.NFController.Const;
+import ch.bbcag.NFController.R;
+import ch.bbcag.NFController.TaskAdder;
+
 @SuppressWarnings("rawtypes")
- class MyCustomAdapter extends ArrayAdapter {
+ public class MyCustomAdapter extends ArrayAdapter {
         private final String[] listEntries;
         private final Activity context;
         private final Drawable icon;

@@ -1,4 +1,4 @@
-package ch.bbcag.NFController;
+package ch.bbcag.NFController.CustomLists;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import ch.bbcag.NFController.R;
 
 
 @SuppressWarnings("rawtypes")

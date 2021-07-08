@@ -22,7 +22,6 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
     private Fragment fragment;
     private String[] fulltask;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,12 +29,8 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
         Intent intent = getIntent();
         fulltask = intent.getStringArrayExtra("FULL_TASK");
         initViews();
-
         whichFeatureHasBeenSelected();
-
         Util.fragmentLauncher(fragment, R.id.coolFrameLayout, this);
-
-
     }
 
     public void onClick(View view) {
@@ -48,12 +43,10 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
                 fulltask[i + 1] = ((AlarmAttribute) fragment).setAlarm()[i];
             }
 
-
         } else if (fragment instanceof TimerAttribute) {
             for (int i = 0; i < ((TimerAttribute) fragment).getTimer().length; i++) {
                 fulltask[i + 1] = ((TimerAttribute) fragment).getTimer()[i];
             }
-
 
         } else if (fragment instanceof MessageParam) {
             for (int i = 0; i < ((MessageParam) fragment).getMessage().length; i++) {
@@ -73,23 +66,15 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
         Const.taskcontainer.add(fulltask);
 
         if (view.getId() == R.id.rlAddTask) {
-
-
             intent = new Intent(this, TaskAdder.class);
             startActivity(intent);
-
         }
-
     }
-
 
     protected void initViews() {
         LinearLayout rladdtask = findViewById(R.id.rlAddTask);
-
         rladdtask.setOnClickListener(this);
-
     }
-
 
     private void whichFeatureHasBeenSelected() {
         fragment = null;
@@ -100,28 +85,22 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
             case "wifi":
                 fragment = new IOAttribute();
                 break;
-
             case "alarm":
                 fragment = new AlarmAttribute();
                 break;
-
             case "tts":
             case "web":
-
                 fragment = new TextParam();
                 break;
             case "tone":
             case "mute":
             case "vibrate":
-
                 fragment = new VolumeModeParam();
                 break;
             case "timer":
                 fragment = new TimerAttribute();
             case "geofencing":
-
                 break;
-
             case "send":
                 fragment = new MessageParam();
                 break;
@@ -129,10 +108,7 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
                 fragment = new AppSelector();
                 break;
         }
-
     }
-
-
 }
 
 
