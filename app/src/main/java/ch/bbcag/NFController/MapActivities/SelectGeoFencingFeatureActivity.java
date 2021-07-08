@@ -16,7 +16,7 @@ public class SelectGeoFencingFeatureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_geo_fencing_feature);
 
-        Fragment fragment = new geofencingFeatureSelector();
+        Fragment fragment = new GeofencingFeatureSelector();
 
         fragmentlauncher(fragment);
     }

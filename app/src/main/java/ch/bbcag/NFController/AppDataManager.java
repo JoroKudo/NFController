@@ -6,7 +6,7 @@ import javax.inject.Singleton;
 @Singleton
 public class AppDataManager {
 
-    private String[] splitted;
+    private String[] splitted = new String[10];
 
     @Inject
     public AppDataManager() {

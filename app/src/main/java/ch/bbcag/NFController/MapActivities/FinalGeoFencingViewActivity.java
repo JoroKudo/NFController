@@ -33,6 +33,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import ch.bbcag.NFController.AppDataManager;
 import ch.bbcag.NFController.Const;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.NfcHome;
@@ -48,6 +49,8 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
 
     @Inject
     PermissionSecurityManager permissionSecurityManager;
+    @Inject
+    AppDataManager appDataManager;
 
     private TextView addressText;
     private TextView radiusText;
@@ -64,12 +67,8 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     //Differentiate between latitude when FinalView is launched from NFCRead or from FeatureSelector
     //Problem will be solved when refactoring code and using AppDataManager as main data source.
 
-    private final double latitude = Double.parseDouble(Const.fulltask[2]);
-    private final double longitude = Double.parseDouble(Const.fulltask[3]);
-    private final String address = Const.fulltask[4];
-    private final LatLng placeLatLng = new LatLng(latitude, longitude);
-    private final int radius = Integer.parseInt(Const.fulltask[5]);
-    private final long expirationTimeInMilliseconds = Long.parseLong(Const.fulltask[6]);
+
+
     private ActivityFinalGeoFencingViewBinding binding;
 
     private GoogleMap mMap;
@@ -79,6 +78,8 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     protected void onCreate(Bundle savedInstanceState) {
         ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
 
+
+
         super.onCreate(savedInstanceState);
         binding = ActivityFinalGeoFencingViewBinding.inflate(getLayoutInflater());
         ConstraintLayout root = binding.getRoot();
@@ -86,31 +87,29 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
         loadMap();
 
-        addressText = findViewById(R.id.address);
-        radiusText = findViewById(R.id.radius);
-        timeText = findViewById(R.id.time);
-        featureText = findViewById(R.id.feature);
-
-        setText();
-
-        if (Const.fulltask[7].equals(Const.GEOTASKS[4]) | Const.fulltask[7].equals(Const.GEOTASKS[5]) | Const.fulltask[7].equals(Const.GEOTASKS[6]) | Const.fulltask[7].equals(Const.GEOTASKS[7])) {
+        if (appDataManager.getSplitted()[7].equals(Const.GEOTASKS[4]) | appDataManager.getSplitted()[7].equals(Const.GEOTASKS[5]) | appDataManager.getSplitted()[7].equals(Const.GEOTASKS[6]) | appDataManager.getSplitted()[7].equals(Const.GEOTASKS[7])) {
             permissionSecurityManager.checkIfNotificationPermissionIsGranted(this, Util.getNotificationManager(getApplicationContext()));
         }
 
         Intent intentBefore = this.getIntent();
         String extraInformation = intentBefore.getExtras().getString("FinalView");
+        initializeViewContent();
+        setText();
+
         if (extraInformation.equals("FromFeatureSelector")) {
+            initializeViewContent();
             FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_NFC_writer);
             floatingActionButton.setOnClickListener(v -> {
 
-                Const.fulltask[1] = "ID";
+                appDataManager.getSplitted()[1] = "ID";
 
-                Collections.addAll(Const.taskcontainer, Const.fulltask);
+                Collections.addAll(Const.taskcontainer, appDataManager.getSplitted());
 
                 Intent intent = new Intent(getApplicationContext(), TaskWriter.class);
                 startActivity(intent);
             });
         } else if (extraInformation.equals("From_NFCRead")) {
+            initializeViewContent();
             FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_NFC_Home);
             floatingActionButton.setOnClickListener(v -> {
                 Intent homeIntent = new Intent(this, NfcHome.class);
@@ -150,7 +149,7 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         addressText.setText(address);
         radiusText.setText(String.valueOf(radius));
         timeText.setText(h + "h " + m + "m " + s + "s");
-        featureText.setText(Const.fulltask[9]);
+        featureText.setText(appDataManager.getSplitted()[9]);
 
     }
 
@@ -172,6 +171,14 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
             s = Math.toIntExact(TimeUnit.MILLISECONDS.toSeconds(expirationTimeInMilliseconds) - TimeUnit.MINUTES.toSeconds(m) - TimeUnit.HOURS.toSeconds(h));
         }
 
+    }
+
+
+    private void initializeViewContent() {
+        addressText = findViewById(R.id.address);
+        radiusText = findViewById(R.id.radius);
+        timeText = findViewById(R.id.time);
+        featureText = findViewById(R.id.feature);
     }
 
 }

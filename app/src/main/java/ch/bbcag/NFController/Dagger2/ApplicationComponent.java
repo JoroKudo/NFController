@@ -6,8 +6,11 @@ import ch.bbcag.NFController.Features.FeatureActivator;
 import ch.bbcag.NFController.MapActivities.FinalGeoFencingViewActivity;
 import ch.bbcag.NFController.MapActivities.GeofencingActivity;
 import ch.bbcag.NFController.MapActivities.GeofencingBroadcastReceiver;
+import ch.bbcag.NFController.MapActivities.GeofencingFeatureSelector;
 import ch.bbcag.NFController.MapActivities.MapsActivity;
 import ch.bbcag.NFController.MapActivities.SecurityFragmentActivity;
+import ch.bbcag.NFController.MapActivities.SelectGeofencingExpirationTimeActivity;
+import ch.bbcag.NFController.MapActivities.SelectGeofencingRadiusActivity;
 import ch.bbcag.NFController.NFCRead;
 import ch.bbcag.NFController.NfcHome;
 import dagger.Component;
@@ -31,5 +34,10 @@ public interface ApplicationComponent {
 
     void inject(NfcHome nfcHome);
 
+    void inject(SelectGeofencingRadiusActivity selectGeofencingRadiusActivity);
+
+    void inject(SelectGeofencingExpirationTimeActivity selectGeofencingExpirationTimeActivity);
+
+    void inject(GeofencingFeatureSelector geofencingFeatureSelector);
 
 }

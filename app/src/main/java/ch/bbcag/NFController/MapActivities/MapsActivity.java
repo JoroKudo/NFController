@@ -35,6 +35,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ch.bbcag.NFController.Alerts;
+import ch.bbcag.NFController.AppDataManager;
 import ch.bbcag.NFController.Const;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.PermissionSecurityManager;
@@ -59,9 +60,10 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
 
     @Inject
     PermissionSecurityManager permissionSecurityManager;
-
     @Inject
     Alerts alerts;
+    @Inject
+    AppDataManager appDataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,10 +102,10 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
             placeLongitude = placeLatLng.longitude;
             address = place.getAddress();
 
-            Const.fulltask[0] = "geofencing";
-            Const.fulltask[2] = String.valueOf(placeLatitude);
-            Const.fulltask[3] = String.valueOf(placeLongitude);
-            Const.fulltask[4] = address;
+            appDataManager.getSplitted()[0] = "geofencing";
+            appDataManager.getSplitted()[2] = String.valueOf(placeLatitude);
+            appDataManager.getSplitted()[3] = String.valueOf(placeLongitude);
+            appDataManager.getSplitted()[4] = address;
 
             if (marker != null) {
                 marker.remove();
@@ -133,16 +135,16 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
                 marker.remove();
             }
             marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latLng.latitude, latLng.longitude)).title(latLng.latitude + ", " + latLng.longitude));
-            Const.fulltask[0] = "geofencing";
-            Const.fulltask[2] = String.valueOf(latLng.latitude);
-            Const.fulltask[3] = String.valueOf(latLng.longitude);
+            appDataManager.getSplitted()[0] = "geofencing";
+            appDataManager.getSplitted()[2] = String.valueOf(placeLatitude);
+            appDataManager.getSplitted()[3] = String.valueOf(placeLongitude);
 
             try {
                 List<Address> addresses = new Geocoder(getApplicationContext()).getFromLocation(latLng.latitude, latLng.longitude, 1);
-                Const.fulltask[4] = addresses.get(0).getAddressLine(0);
+                appDataManager.getSplitted()[4] = addresses.get(0).getAddressLine(0);
             } catch (IOException e) {
                 e.printStackTrace();
-                Const.fulltask[4] = "No_Address_available";
+                appDataManager.getSplitted()[4] = "No_Address_available";
             }
 
         });
@@ -183,7 +185,7 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
     }
 
     private void startActivityIfPlaceSelected() {
-        if (Const.fulltask[0].isEmpty() || Const.fulltask[2].isEmpty() || Const.fulltask[3].isEmpty() || Const.fulltask[4].isEmpty()) {
+        if (appDataManager.getSplitted()[0].isEmpty() || appDataManager.getSplitted()[2].isEmpty() || appDataManager.getSplitted()[3].isEmpty() || appDataManager.getSplitted()[4].isEmpty()) {
             Toast.makeText(this, "please Select a Place on the map to continue", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(getApplicationContext(), SelectGeofencingRadiusActivity.class);
