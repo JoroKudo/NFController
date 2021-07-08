@@ -16,13 +16,11 @@ import java.io.UnsupportedEncodingException;
 
 import javax.inject.Inject;
 
-
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.Database.RequestHandler;
 import ch.bbcag.NFController.Features.FeatureActivator;
 import ch.bbcag.NFController.MapActivities.FinalGeoFencingViewActivity;
 import ch.bbcag.NFController.MapActivities.GeofencingActivity;
-
 
 
 public class NFCRead extends NFCBase {
@@ -37,8 +35,6 @@ public class NFCRead extends NFCBase {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
 
         super.onCreate(savedInstanceState);
@@ -68,20 +64,13 @@ public class NFCRead extends NFCBase {
     private void readFromNFC(Tag tag, Intent intent) {
 
         try {
-
             Ndef ndef = Ndef.get(tag);
-
-
             if (ndef != null) {
                 ndef.connect();
                 RequestHandler rh = new RequestHandler();
-
-
                 NdefMessage ndefMessage = ndef.getNdefMessage();
-
                 if (ndefMessage != null) {
                     Parcelable[] messages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
-
                     if (messages != null) {
                         rh.SaveTagdata(ndef, messages, ndef.getNdefMessage().getRecords());
 
@@ -109,8 +98,6 @@ public class NFCRead extends NFCBase {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
     private void whichActionIsOnTag(byte[] payload, NdefRecord record) throws UnsupportedEncodingException {
@@ -123,7 +110,7 @@ public class NFCRead extends NFCBase {
         appDataManager.setSplitted(text.split(Const.SPACER));
 
         isTheGeoFencingFeatureSelected();
-        isGeofencingInformationRequested();
+        //isGeofencingInformationRequested();
         int subFeaturePosition = 0;
 
         featureActivator.activateFeature(this, subFeaturePosition, appDataManager.getSplitted());
@@ -136,7 +123,6 @@ public class NFCRead extends NFCBase {
             Log.e("MIMETYPE", mimetype);
         }
     }
-
 
     public void isTheGeoFencingFeatureSelected() {
         if (appDataManager.getSplitted()[0].equals("geofencing")) {
@@ -155,5 +141,4 @@ public class NFCRead extends NFCBase {
             startActivity(geofencingInfoIntent);
         }
     }
-
 }

@@ -14,21 +14,15 @@ import java.util.Arrays;
 
 import ch.bbcag.NFController.CustomLists.MyCustomAdapter;
 
-
 public class TaskAdderList extends Fragment {
 
-
     private final String[] taskListNames = new String[Const.taskcontainer.size()];
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-
-
     }
 
     @SuppressLint("ResourceAsColor")
@@ -37,25 +31,13 @@ public class TaskAdderList extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.task_list, container,
                 false);
-
         ListView listView = view.findViewById(R.id.mobile_list);
-
-
         updatelist();
         @SuppressLint("UseCompatLoadingForDrawables")
         MyCustomAdapter appList = new MyCustomAdapter(getActivity(), taskListNames, getResources().getDrawable(R.drawable.trash), R.layout.added_task_list_item);
         listView.setAdapter(appList);
-
-
-        listView.setOnItemClickListener((parent, itemView, position, id) -> {
-
-
-        });
-
         return view;
-
     }
-
 
     private void updatelist() {
         for (int i = 0; i < Const.taskcontainer.size(); i++) {

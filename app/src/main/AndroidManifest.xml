@@ -18,9 +18,13 @@
     <permission android:name="android.permission.FLASHLIGHT" />
     <permission android:name="android.permission.CAMERA" />
 
-    <uses-permission
-        android:name="android.permission.QUERY_ALL_PACKAGES"
-        tools:ignore="QueryAllPackagesPermission" />
+    <permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+        </intent>
+    </queries>
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -87,17 +91,11 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name="ch.bbcag.NFController.NfcActions.NFCRead"
+            android:name="ch.bbcag.NFController.NFCRead"
             android:screenOrientation="fullSensor">
-            <intent-filter>
 
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data
-                    android:host="ext"
-                    android:pathPrefix="/android.com:pkg"
-                    android:scheme="ch.bbcag.nfcontroller" />
-            </intent-filter>
+
+
         </activity>
         <activity
             android:name="ch.bbcag.NFController.AttributeSetter"
@@ -114,20 +112,10 @@
         <activity
             android:name="ch.bbcag.NFController.NFCWrite"
             android:screenOrientation="fullSensor">
-            <intent-filter>
-                <action android:name="android.nfc.action.TECH_DISCOVERED" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="my/tag" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/nfc_tech_filter" />
         </activity>
         <activity
-            android:name="ch.bbcag.NFController.NfcActions.NFCWipe"
+            android:name="ch.bbcag.NFController.NFCWipe"
             android:screenOrientation="fullSensor" />
         <activity
             android:name="ch.bbcag.NFController.MapActivities.MapsActivity"
