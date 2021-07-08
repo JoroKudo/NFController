@@ -52,7 +52,7 @@ public class NFCRead extends NFCBase {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        intent.setType("tag/nc");
+
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         if (tag != null) {
 

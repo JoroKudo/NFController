@@ -75,7 +75,9 @@ public class TaskWriter extends NFCBase {
         if (tag != null) {
 
 
-            NdefRecord[] rec = new NdefRecord[Const.taskcontainer.size()];
+            NdefRecord[] rec = new NdefRecord[Const.taskcontainer.size() + 1];
+            NdefRecord[] rec2 = new NdefRecord[Const.taskcontainer.size() + 1];
+
             for (int i = 0; i < Const.taskcontainer.size(); i++) {
 
                 String messageToWrite = Const.taskcontainer.get(i)[0]
@@ -88,9 +90,15 @@ public class TaskWriter extends NFCBase {
                         + Const.SPACER + Const.taskcontainer.get(i)[7]
                         + Const.SPACER + Const.taskcontainer.get(i)[8]
                         + Const.SPACER + Const.taskcontainer.get(i)[9];
+                rec2[i] = NdefRecord.createMime("ee/11", messageToWrite.getBytes());
+                rec2[i + 1] = NdefRecord.createMime("android.com:pkg", "ch.bbcag.NFController".getBytes());
 
+                NdefRecord nder = new NdefRecord((short) 2, "ee/11".getBytes(), rec2[i].getId(), messageToWrite.getBytes());
+                NdefRecord nder2 = new NdefRecord((short) 4, "android.com:pkg".getBytes(), rec2[i + 1].getId(), "ch.bbcag.NFController".getBytes());
 
-                rec[i] = NdefRecord.createMime(messageToWrite, messageToWrite.getBytes());
+                rec[i] = nder;
+                rec[i + 1] = nder2;
+
 
             }
             NdefMessage message = new NdefMessage(rec);
