@@ -31,21 +31,22 @@ public class TaskSelector extends AppCompatActivity {
         listView.setOnItemClickListener((parent, viewv, position, id) -> {
             Intent intent;
             if (Const.tasknames[position].equals("Custom procedure")) {
-                fulltask[0] ="blue";
+                fulltask[0] = "blue";
                 intent = new Intent(this, ProcedureSelector.class);
 
             } else {
-                fulltask[0] = Const.TASKS.get(position);
+                fulltask[0] = Const.TASKS[position];
 
 
-            if (!fulltask[0].equals("geofencing")) {
+                if (!fulltask[0].equals("geofencing")) {
 
-                intent = new Intent(this, AttributeSetter.class);
-                intent.putExtra("FULL_TASK", fulltask);
-            } else {
-                intent = new Intent(this, MapsActivity.class);
+                    intent = new Intent(this, AttributeSetter.class);
+                    intent.putExtra("FULL_TASK", fulltask);
+                } else {
+                    intent = new Intent(this, MapsActivity.class);
 
-            }}
+                }
+            }
             startActivity(intent);
             finish();
 

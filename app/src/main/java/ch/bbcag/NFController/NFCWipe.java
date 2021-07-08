@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 
+
+
+
 public class NFCWipe extends NFCBase {
 
 

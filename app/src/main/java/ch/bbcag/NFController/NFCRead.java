@@ -16,11 +16,13 @@ import java.io.UnsupportedEncodingException;
 
 import javax.inject.Inject;
 
+
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
+import ch.bbcag.NFController.Database.RequestHandler;
 import ch.bbcag.NFController.Features.FeatureActivator;
 import ch.bbcag.NFController.MapActivities.FinalGeoFencingViewActivity;
 import ch.bbcag.NFController.MapActivities.GeofencingActivity;
-import ch.bbcag.NFController.MapActivities.GeofencingInfo;
+
 
 
 public class NFCRead extends NFCBase {
@@ -146,7 +148,7 @@ public class NFCRead extends NFCBase {
     public void isGeofencingInformationRequested() {
         Intent intent = this.getIntent();
         String extraInformation = intent.getExtras().getString("NFCRead");
-        if (extraInformation.equals("From_NFCHome")){
+        if (extraInformation.equals("From_NFCHome")) {
             Intent geofencingInfoIntent = new Intent();
             geofencingInfoIntent.setClass(this, FinalGeoFencingViewActivity.class);
             geofencingInfoIntent.putExtra("FinalView", "From_NFCRead");

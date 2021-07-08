@@ -11,7 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import javax.inject.Inject;
 
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
-import ch.bbcag.NFController.MapActivities.GeofencingInfo;
+import ch.bbcag.NFController.NfcActions.NFCRead;
+import ch.bbcag.NFController.NfcActions.NFCWipe;
 
 
 public class NfcHome extends AppCompatActivity implements View.OnClickListener {
@@ -21,7 +22,7 @@ public class NfcHome extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        ((NFControllerApplication)getApplicationContext()).appComponent.inject(this);
+        ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nfc_home);
         RelativeLayout rlRead = findViewById(R.id.rlReadNFCTAG);

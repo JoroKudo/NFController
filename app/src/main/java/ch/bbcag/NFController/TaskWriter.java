@@ -23,7 +23,6 @@ public class TaskWriter extends NFCBase {
         initViews();
 
 
-
     }
 
     @Override

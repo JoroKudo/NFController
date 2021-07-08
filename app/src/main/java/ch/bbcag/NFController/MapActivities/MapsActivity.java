@@ -82,9 +82,7 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
         hideFloatingActionButtonIfNeeded();
 
         editText.setOnClickListener(v -> createNewMarkerThroughAutocomplete());
-        floatingActionButton.setOnClickListener(v -> {
-            startActivityIfPlaceSelected();
-        });
+        floatingActionButton.setOnClickListener(v -> startActivityIfPlaceSelected());
     }
 
     @Override

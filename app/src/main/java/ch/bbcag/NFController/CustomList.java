@@ -35,9 +35,9 @@ public class CustomList extends ArrayAdapter {
         LayoutInflater inflater = context.getLayoutInflater();
         if (convertView == null)
             row = inflater.inflate(R.layout.custom_list_item, null, true);
-        TextView textViewCountry = (TextView) row.findViewById(R.id.TV_ListEntry);
+        TextView textViewCountry = row.findViewById(R.id.TV_ListEntry);
 
-        ImageView imageFlag = (ImageView) row.findViewById(R.id.ImgV_icon);
+        ImageView imageFlag = row.findViewById(R.id.ImgV_icon);
 
         textViewCountry.setText(listEntries[position]);
 

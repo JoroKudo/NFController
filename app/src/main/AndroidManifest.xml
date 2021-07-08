@@ -87,7 +87,7 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name="ch.bbcag.NFController.NFCRead"
+            android:name="ch.bbcag.NFController.NfcActions.NFCRead"
             android:screenOrientation="fullSensor">
             <intent-filter>
 
@@ -127,7 +127,7 @@
                 android:resource="@xml/nfc_tech_filter" />
         </activity>
         <activity
-            android:name="ch.bbcag.NFController.NFCWipe"
+            android:name="ch.bbcag.NFController.NfcActions.NFCWipe"
             android:screenOrientation="fullSensor" />
         <activity
             android:name="ch.bbcag.NFController.MapActivities.MapsActivity"

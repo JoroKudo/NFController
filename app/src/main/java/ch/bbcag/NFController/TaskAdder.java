@@ -11,11 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import ch.bbcag.NFController.Database.RequestHandler;
+
 
 public class TaskAdder extends AppCompatActivity implements View.OnClickListener {
 
     EditText etProcName;
     private final RequestHandler r = new RequestHandler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +31,7 @@ public class TaskAdder extends AppCompatActivity implements View.OnClickListener
 
         tvaddtask.setOnClickListener(this);
 
-        Const.fragmentLauncher(new TaskAdderList(), R.id.list_here, this);
+        Util.fragmentLauncher(new TaskAdderList(), R.id.list_here, this);
 
 
     }

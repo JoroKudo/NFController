@@ -3,7 +3,6 @@ package ch.bbcag.NFController;
 import android.Manifest;
 import android.app.Activity;
 import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -16,7 +15,6 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.snackbar.Snackbar;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 public class PermissionSecurityManager {
 
@@ -83,19 +81,13 @@ public class PermissionSecurityManager {
     }
 
     public boolean areMultiplePermissionsGranted(Activity activity) {
-        if ((ContextCompat.checkSelfPermission(activity.getApplicationContext(), ACCESS_FINE_LOCATION) +
+        return (ContextCompat.checkSelfPermission(activity.getApplicationContext(), ACCESS_FINE_LOCATION) +
                 ContextCompat.checkSelfPermission(activity.getApplicationContext(), ACCESS_COARSE_LOCATION))
-                == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else
-            return false;
+                == PackageManager.PERMISSION_GRANTED;
     }
 
     public boolean isBackgroundPermissionGranted(Activity activity) {
-        if (ContextCompat.checkSelfPermission(activity.getApplicationContext(), ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else
-            return false;
+        return ContextCompat.checkSelfPermission(activity.getApplicationContext(), ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED;
     }
 
     public boolean hasThePermissionAlreadyBeenDenied() {

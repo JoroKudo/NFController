@@ -8,7 +8,13 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import ch.bbcag.NFController.AttributeFragments.*;
+import ch.bbcag.NFController.AttributeFragments.AlarmAttribute;
+import ch.bbcag.NFController.AttributeFragments.AppSelector;
+import ch.bbcag.NFController.AttributeFragments.IOAttribute;
+import ch.bbcag.NFController.AttributeFragments.MessageParam;
+import ch.bbcag.NFController.AttributeFragments.TextParam;
+import ch.bbcag.NFController.AttributeFragments.TimerAttribute;
+import ch.bbcag.NFController.AttributeFragments.VolumeModeParam;
 
 
 public class AttributeSetter extends AppCompatActivity implements View.OnClickListener {
@@ -27,15 +33,15 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
 
         whichFeatureHasBeenSelected();
 
-        Const.fragmentLauncher(fragment, R.id.coolFrameLayout, this);
+        Util.fragmentLauncher(fragment, R.id.coolFrameLayout, this);
 
 
     }
 
     public void onClick(View view) {
         Intent intent;
-        if (fragment instanceof TextParameter) {
-            ((TextParameter) fragment).getTextinput();
+        if (fragment instanceof TextParam) {
+            ((TextParam) fragment).getTextinput();
 
         } else if (fragment instanceof AlarmAttribute) {
             for (int i = 0; i < ((AlarmAttribute) fragment).setAlarm().length; i++) {
@@ -49,9 +55,9 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
             }
 
 
-        } else if (fragment instanceof MessageParameter) {
-            for (int i = 0; i < ((MessageParameter) fragment).getMessage().length; i++) {
-                fulltask[i + 1] = ((MessageParameter) fragment).getMessage()[i];
+        } else if (fragment instanceof MessageParam) {
+            for (int i = 0; i < ((MessageParam) fragment).getMessage().length; i++) {
+                fulltask[i + 1] = ((MessageParam) fragment).getMessage()[i];
             }
 
         } else if (fragment instanceof IOAttribute) {
@@ -60,8 +66,7 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
         } else if (fragment instanceof AppSelector) {
             fulltask[1] = ((AppSelector) fragment).getapp();
 
-        }
-        else if (fragment instanceof VolumeModeParam) {
+        } else if (fragment instanceof VolumeModeParam) {
             fulltask[0] = ((VolumeModeParam) fragment).getVolMode();
 
         }
@@ -86,7 +91,7 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    public String whichFeatureHasBeenSelected() {
+    private void whichFeatureHasBeenSelected() {
         fragment = null;
         switch (fulltask[0]) {
             case "blue":
@@ -103,13 +108,13 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
             case "tts":
             case "web":
 
-                fragment = new TextParameter();
+                fragment = new TextParam();
                 break;
             case "tone":
             case "mute":
             case "vibrate":
 
-             fragment = new VolumeModeParam();
+                fragment = new VolumeModeParam();
                 break;
             case "timer":
                 fragment = new TimerAttribute();
@@ -118,13 +123,13 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case "send":
-                fragment = new MessageParameter();
+                fragment = new MessageParam();
                 break;
             case "open":
                 fragment = new AppSelector();
                 break;
         }
-        return fulltask[0];
+
     }
 
 

@@ -12,12 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-public class CustomLists {
-
-
-    @SuppressWarnings("rawtypes")
-    public static class MyCustomAdapter extends ArrayAdapter {
+@SuppressWarnings("rawtypes")
+ class MyCustomAdapter extends ArrayAdapter {
         private final String[] listEntries;
         private final Activity context;
         private final Drawable icon;
@@ -62,7 +58,7 @@ public class CustomLists {
 
 
             //Handle buttons and add onClickListeners
-            ImageView imageFlag = (ImageView) view.findViewById(R.id.ImgV_icon);
+            ImageView imageFlag = view.findViewById(R.id.ImgV_icon);
             tvContact.setText(listEntries[position]);
 
             imageFlag.setImageDrawable(icon);
@@ -93,4 +89,4 @@ public class CustomLists {
                     .show();
         }
     }
-}
+

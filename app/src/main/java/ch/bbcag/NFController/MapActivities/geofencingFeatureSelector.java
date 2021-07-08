@@ -11,7 +11,6 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import ch.bbcag.NFController.Const;
-import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.R;
 
 public class geofencingFeatureSelector extends Fragment {
@@ -31,7 +30,7 @@ public class geofencingFeatureSelector extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.task_list, container,
                 false);
-        ListView listView = (ListView) view.findViewById(R.id.mobile_list);
+        ListView listView = view.findViewById(R.id.mobile_list);
 
         // For populating list data
         ArrayAdapter<?> adapter = new ArrayAdapter<>(getContext(), R.layout.task_list_item, entries);

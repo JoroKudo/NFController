@@ -10,6 +10,8 @@ import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
+import java.util.Arrays;
+
 
 public class TaskAdderList extends Fragment {
 
@@ -39,7 +41,7 @@ public class TaskAdderList extends Fragment {
 
         updatelist();
         @SuppressLint("UseCompatLoadingForDrawables")
-        CustomLists.MyCustomAdapter appList = new CustomLists.MyCustomAdapter(getActivity(), taskListNames, getResources().getDrawable(R.drawable.trash), R.layout.added_task_list_item);
+        MyCustomAdapter appList = new MyCustomAdapter(getActivity(), taskListNames, getResources().getDrawable(R.drawable.trash), R.layout.added_task_list_item);
         listView.setAdapter(appList);
         //ArrayAdapter<?> adapter = new ArrayAdapter<>(getContext(), R.layout.task_list_item, taskListNames);
 
@@ -58,7 +60,7 @@ public class TaskAdderList extends Fragment {
 
     private void updatelist() {
         for (int i = 0; i < Const.taskcontainer.size(); i++) {
-            taskListNames[i] = Const.tasknames[Const.TASKS.indexOf(Const.taskcontainer.get(i)[0])] + " " + Const.taskcontainer.get(i)[1];
+            taskListNames[i] = Const.tasknames[Arrays.asList(Const.TASKS).indexOf(Const.taskcontainer.get(i)[0])] + " " + Const.taskcontainer.get(i)[1];
         }
     }
 }

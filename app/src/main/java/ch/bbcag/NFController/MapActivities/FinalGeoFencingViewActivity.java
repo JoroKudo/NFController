@@ -75,7 +75,6 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     private GoogleMap mMap;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
@@ -94,13 +93,13 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
 
         setText();
 
-        if (Const.fulltask[7].equals(Const.GEOTASKS[4]) | Const.fulltask[7].equals(Const.GEOTASKS[5]) | Const.fulltask[7].equals(Const.GEOTASKS[6]) | Const.fulltask[7].equals(Const.GEOTASKS[7])){
+        if (Const.fulltask[7].equals(Const.GEOTASKS[4]) | Const.fulltask[7].equals(Const.GEOTASKS[5]) | Const.fulltask[7].equals(Const.GEOTASKS[6]) | Const.fulltask[7].equals(Const.GEOTASKS[7])) {
             permissionSecurityManager.checkIfNotificationPermissionIsGranted(this, Util.getNotificationManager(getApplicationContext()));
         }
 
         Intent intentBefore = this.getIntent();
         String extraInformation = intentBefore.getExtras().getString("FinalView");
-        if (extraInformation.equals("FromFeatureSelector")){
+        if (extraInformation.equals("FromFeatureSelector")) {
             FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_NFC_writer);
             floatingActionButton.setOnClickListener(v -> {
 
@@ -111,7 +110,7 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
                 Intent intent = new Intent(getApplicationContext(), TaskWriter.class);
                 startActivity(intent);
             });
-        }else if (extraInformation.equals("From_NFCRead")){
+        } else if (extraInformation.equals("From_NFCRead")) {
             FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_NFC_Home);
             floatingActionButton.setOnClickListener(v -> {
                 Intent homeIntent = new Intent(this, NfcHome.class);

@@ -7,7 +7,7 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import ch.bbcag.NFController.MapActivities.MapsActivity;
+import ch.bbcag.NFController.Database.RequestHandler;
 
 
 public class ProcedureSelector extends AppCompatActivity {
@@ -15,7 +15,6 @@ public class ProcedureSelector extends AppCompatActivity {
 
     // Array of strings...
     private final RequestHandler r = new RequestHandler();
-
 
 
     @Override
@@ -31,12 +30,10 @@ public class ProcedureSelector extends AppCompatActivity {
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, viewv, position, id) -> {
-            Const.taskcontainer=r.readProcedures(Const.procedures.get(position));
-            Intent intent = new Intent(this, taskadder.class);
+            Const.taskcontainer = r.readProcedures(Const.procedures.get(position));
+            Intent intent = new Intent(this, TaskAdder.class);
             startActivity(intent);
             finish();
-
-
 
 
         });

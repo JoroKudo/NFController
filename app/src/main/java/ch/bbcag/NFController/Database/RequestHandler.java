@@ -1,4 +1,4 @@
-package ch.bbcag.NFController;
+package ch.bbcag.NFController.Database;
 
 
 import android.annotation.SuppressLint;
@@ -7,7 +7,6 @@ import android.nfc.tech.Ndef;
 import android.os.Parcelable;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +25,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
 
+import ch.bbcag.NFController.Const;
+
 import static android.content.ContentValues.TAG;
 
 
@@ -34,8 +35,7 @@ public class RequestHandler {
     private int entries;
 
     public static ArrayList<String[]> ayy = new ArrayList<>();
-    public static List<String> insanee=new ArrayList<>();
-    private int pew = 0;
+    public static List<String> insanee = new ArrayList<>();
 
     public void SaveTagdata(Ndef ndef, Parcelable[] messages, NdefRecord[] records) {
 
@@ -69,7 +69,7 @@ public class RequestHandler {
 
         mDbRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                 entries = (int) dataSnapshot.getChildrenCount();
 
                 for (int i = 0; i < entries; i++) {
@@ -80,7 +80,7 @@ public class RequestHandler {
             }
 
             @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+            public void onCancelled(@NotNull DatabaseError error) {
 
             }
 
@@ -99,7 +99,7 @@ public class RequestHandler {
             if (!Const.taskcontainer.get(i)[0].isEmpty()) {
 
 
-                task = Arrays.toString(Const.taskcontainer.get(i)).replaceAll(", ", Const.SPACER).replaceAll("\\[|\\]", "");
+                task = Arrays.toString(Const.taskcontainer.get(i)).replaceAll(", ", Const.SPACER).replaceAll("[\\[\\]]", "");
 
 
                 database.getReference("Procedures/" + ProcedureName + "/" + i)
@@ -112,20 +112,18 @@ public class RequestHandler {
     }
 
     public List<String> insane() {
-insanee.clear();
-database.getReference("www")
+        insanee.clear();
+        database.getReference("www")
                 .setValue("1");
         DatabaseReference chilcountdref = database.getReference("Procedures");
 
         chilcountdref.addValueEventListener(new ValueEventListener() {
                                                 @Override
-                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
 
                                                     for (DataSnapshot booksSnapshot : dataSnapshot.getChildren()) {
                                                         //loop 2 to go through all the child nodes of books node
                                                         RequestHandler.insanee.add(booksSnapshot.getKey());
-
-
 
 
                                                     }
@@ -133,13 +131,13 @@ database.getReference("www")
                                                 }
 
                                                 @Override
-                                                public void onCancelled(DatabaseError databaseError) {
+                                                public void onCancelled(@NotNull DatabaseError databaseError) {
                                                     // Getting Post failed, log a message
                                                     Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                                                 }
                                             }
         );
-return RequestHandler.insanee;
+        return RequestHandler.insanee;
 
     }
 

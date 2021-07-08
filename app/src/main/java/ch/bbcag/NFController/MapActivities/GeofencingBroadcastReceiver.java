@@ -14,10 +14,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import ch.bbcag.NFController.AppDataManager;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.Features.FeatureActivator;
-import ch.bbcag.NFController.NFCRead;
 import ch.bbcag.NFController.NfcHome;
 
 import static android.content.ContentValues.TAG;
@@ -49,7 +47,7 @@ public class GeofencingBroadcastReceiver extends BroadcastReceiver {
         if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
                 geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
 
-            if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER){
+            if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER) {
                 featureActivator.activateFeature(context, subFeaturePosition, featureActivator.getAppDataManager().getSplitted());
             }
             // Get the geofences that were triggered. A single event can trigger
