@@ -24,12 +24,12 @@ public class TaskAdder extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.addtask);
-        FloatingActionButton tvaddtask = findViewById(R.id.TV_ListEntry);
+        FloatingActionButton taskaddcircle = findViewById(R.id.task_add_circle);
         etProcName = findViewById(R.id.procedure_name);
         LinearLayout rlwritetask = findViewById(R.id.rlWriteTask);
         rlwritetask.setOnClickListener(this);
 
-        tvaddtask.setOnClickListener(this);
+        taskaddcircle.setOnClickListener(this);
 
         Util.fragmentLauncher(new TaskAdderList(), R.id.list_here, this);
 
@@ -46,9 +46,10 @@ public class TaskAdder extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
-            case R.id.TV_ListEntry:
+            case R.id.task_add_circle:
                 intent = new Intent(this, TaskSelector.class);
                 startActivity(intent);
+                this.finish();
                 break;
 
 

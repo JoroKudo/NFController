@@ -70,6 +70,7 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
         if (view.getId() == R.id.rlAddTask) {
             intent = new Intent(this, TaskAdder.class);
             startActivity(intent);
+            this.finish();
         }
 
     }

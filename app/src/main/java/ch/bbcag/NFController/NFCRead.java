@@ -99,7 +99,7 @@ public class NFCRead extends NFCBase {
             } else {
                 listTitle.setText("Empty Tag2");
             }
-        } catch (IOException| FormatException e) {
+        } catch (IOException | FormatException e) {
             e.printStackTrace();
         }
     }

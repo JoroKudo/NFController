@@ -1,5 +1,6 @@
 package ch.bbcag.NFController;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -24,17 +25,17 @@ public class Alerts {
         permissionAlert.setCanceledOnTouchOutside(false);
     }
 
-    private void deletedialog(int position,Context context) {
-        new AlertDialog.Builder(context)
+    public void deletedialog(int position, Activity act) {
+        new AlertDialog.Builder(act)
                 .setTitle("NFC is disabled")
                 .setMessage("You must enable NFC to use this app.")
                 .setPositiveButton("delete", (dialog, which) -> {
                     Const.taskcontainer.remove(position);
-                    context.startActivity( new Intent(context, TaskAdder.class));
-
+                    act.startActivity(new Intent(act, TaskAdder.class));
+                    act.finish();
                 })
 
-                .setNegativeButton("edit", (dialog, which) -> context.startActivity(new Intent(android.provider.Settings.ACTION_NFC_SETTINGS)))
+                .setNegativeButton("dont delete", (dialog, which) ->dialog.cancel())
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
