@@ -50,7 +50,7 @@ public class GeofencingFeatureSelector extends Fragment {
             areOptionsAvailable(position);
             Intent intent = new Intent();
             intent.setClass(getContext(), FinalGeoFencingViewActivity.class);
-            intent.putExtra("FinalView", "FromFeatureSelector");
+            intent.putExtra("FinalView", "FromFeatureSelector"); // TODO key -> Const file
             startActivity(intent);
         });
         return view;

@@ -53,7 +53,7 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
     private FloatingActionButton floatingActionButton;
 
     @Inject
-    PermissionSecurityManager permissionSecurityManager;
+    PermissionSecurityManager permissionSecurityManager; // TODO make private if possible
     @Inject
     Alerts alerts;
     @Inject

@@ -19,7 +19,6 @@ public class SelectGeofencingRadiusActivity extends AppCompatActivity {
     @Inject
     AppDataManager appDataManager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);

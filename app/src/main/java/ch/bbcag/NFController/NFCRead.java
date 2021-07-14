@@ -59,7 +59,6 @@ public class NFCRead extends NFCBase {
 
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         if (tag != null) {
-
             readFromNFC(tag, intent);
         }
     }

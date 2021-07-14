@@ -53,11 +53,7 @@ public class Volume {
         }
         for (int i = 0; i < abs; i++) {
             audioManager.adjustVolume(adjust, AudioManager.FLAG_PLAY_SOUND);
-
-
         }
-
     }
-
 
 }

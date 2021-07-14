@@ -8,15 +8,11 @@ public class Clock {
 
     private final Context context;
 
-
     public Clock(Context context) {
-
         this.context = context;
     }
 
     public void setAlarm(int hour, int minute, String message) {
-
-
         Intent alarm = new Intent(AlarmClock.ACTION_SET_ALARM);
         alarm.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
         alarm.putExtra(AlarmClock.EXTRA_HOUR, hour);

@@ -22,10 +22,6 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
@@ -60,7 +56,6 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     private int h;
     private int m;
     private int s;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

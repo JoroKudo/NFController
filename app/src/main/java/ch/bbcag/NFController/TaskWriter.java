@@ -15,55 +15,17 @@ import java.io.IOException;
 
 public class TaskWriter extends NFCBase {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_writer);
         initViews();
-
-
     }
 
     @Override
     protected void initViews() {
-
         this.mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
-
-    private boolean writeTag(Tag tag, NdefMessage message) {
-        int size = message.toByteArray().length;
-        try {
-            Ndef ndef = Ndef.get(tag);
-
-            if (ndef != null) {
-                ndef.connect();
-                if (!ndef.isWritable() || ndef.getMaxSize() < size) {
-                    return false;
-                }
-                ndef.writeNdefMessage(message);
-
-                return true;
-            } else {
-                NdefFormatable format = NdefFormatable.get(tag);
-                if (format != null) {
-                    try {
-                        format.connect();
-                        format.format(message);
-                        return true;
-                    } catch (IOException e) {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -115,4 +77,36 @@ public class TaskWriter extends NFCBase {
         }
     }
 
+    private boolean writeTag(Tag tag, NdefMessage message) {
+        int size = message.toByteArray().length;
+        try {
+            Ndef ndef = Ndef.get(tag);
+
+            if (ndef != null) {
+                ndef.connect();
+                if (!ndef.isWritable() || ndef.getMaxSize() < size) {
+                    return false;
+                }
+                ndef.writeNdefMessage(message);
+
+                return true;
+            } else {
+                NdefFormatable format = NdefFormatable.get(tag);
+                if (format != null) {
+                    try {
+                        format.connect();
+                        format.format(message);
+                        return true;
+                    } catch (IOException e) {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
