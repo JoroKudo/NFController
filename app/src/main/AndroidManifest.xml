@@ -97,7 +97,7 @@
 
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
-                <data android:mimeType="my/tag" />
+
             </intent-filter>
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"

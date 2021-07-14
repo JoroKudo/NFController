@@ -86,10 +86,10 @@ public class NFCWrite extends NFCBase {
 
 
                 if (writeTag(tag, message)) {
-                    Toast.makeText(this, (getString(R.string.message_write_success)), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, (getString(R.string.Tag_write_success)), Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(this, (getString(R.string.message_write_error)), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, (getString(R.string.Tag_write_error)), Toast.LENGTH_SHORT).show();
                 }
             } else {
                 evTagMessage.setError("Please enter the text to write");

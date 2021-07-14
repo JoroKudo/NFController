@@ -115,7 +115,7 @@
         android:paddingStart="@dimen/_5sdp"
         android:paddingEnd="@dimen/_5sdp"
 
-        android:text="@string/message"
+        android:text="@string/attr_Message"
         android:textColor="@android:color/white"
         android:textSize="23sp" />
 

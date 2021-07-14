@@ -25,7 +25,7 @@
         android:layout_marginTop="@dimen/_30sdp"
         android:gravity="bottom|start"
         android:paddingStart="@dimen/_5sdp"
-        android:text="@string/message"
+        android:text="@string/attr_Message"
         android:textColor="@android:color/white"
         android:textSize="23sp"
         tools:ignore="RtlSymmetry" />

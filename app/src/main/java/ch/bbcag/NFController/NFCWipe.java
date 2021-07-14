@@ -33,19 +33,19 @@ public class NFCWipe extends NFCBase {
         if (tag != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(R.string.Wipe_Tag_Alert)
-                    .setPositiveButton(R.string.Wipe_Tag, (dialog, id) -> {
+                    .setPositiveButton(R.string.str_Wipe_with_nfc, (dialog, id) -> {
                         try {
                             Ndef ndef = Ndef.get(tag);
                             if (ndef != null) {
                                 ndef.connect();
 
                                 ndef.writeNdefMessage(new NdefMessage(new NdefRecord(NdefRecord.TNF_EMPTY, null, null, null)));
-                                Toast.makeText(this, (getString(R.string.message_wipe_success)), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, (getString(R.string.Tag_wipe_success)), Toast.LENGTH_SHORT).show();
                                 finish();
 
                             }
                         } catch (Exception e) {
-                            Toast.makeText(this, (getString(R.string.message_write_error)), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, (getString(R.string.Tag_write_error)), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .setNegativeButton(R.string.cancel, (dialog, id) -> finish());
