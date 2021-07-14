@@ -13,8 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import java.util.Arrays;
 
-import ch.bbcag.NFController.CustomLists.CustomList;
-
 public class TaskAdderList extends Fragment {
 
     private final String[] taskListNames = new String[Const.taskcontainer.size()];
@@ -35,7 +33,7 @@ public class TaskAdderList extends Fragment {
         ListView listView = view.findViewById(R.id.mobile_list);
         updatelist();
         @SuppressLint("UseCompatLoadingForDrawables")
-        CustomList appList = new CustomList(getActivity(), taskListNames, new Drawable[]{getResources().getDrawable(R.drawable.trash)}, R.layout.added_task_list_item);
+        CustomListAdapter appList = new CustomListAdapter(getActivity(), taskListNames, new Drawable[]{getResources().getDrawable(R.drawable.trash)}, R.layout.added_task_list_item);
         listView.setAdapter(appList);
         return view;
     }

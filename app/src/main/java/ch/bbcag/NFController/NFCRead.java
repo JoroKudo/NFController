@@ -2,6 +2,7 @@ package ch.bbcag.NFController;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.nfc.FormatException;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import javax.inject.Inject;
@@ -97,7 +99,7 @@ public class NFCRead extends NFCBase {
             } else {
                 listTitle.setText("Empty Tag2");
             }
-        } catch (Exception e) {
+        } catch (IOException| FormatException e) {
             e.printStackTrace();
         }
     }
@@ -117,6 +119,7 @@ public class NFCRead extends NFCBase {
         featureActivator.activateFeature(this, subFeaturePosition, appDataManager.getSplitted());
 
         if (text.isEmpty()) {
+
             listTitle.setText(R.string.empty_tag);
         } else {
 

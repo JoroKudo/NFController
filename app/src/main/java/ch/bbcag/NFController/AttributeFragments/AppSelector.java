@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.List;
 
-import ch.bbcag.NFController.CustomLists.CustomList;
+import ch.bbcag.NFController.CustomListAdapter;
 import ch.bbcag.NFController.R;
 
 public class AppSelector extends Fragment {
@@ -61,7 +61,7 @@ public class AppSelector extends Fragment {
 
 
         // For populating list data
-        CustomList appList = new CustomList(getActivity(), appNames, appIcons, R.layout.custom_list_item);
+        CustomListAdapter appList = new CustomListAdapter(getActivity(), appNames, appIcons, R.layout.custom_list_item);
         listView.setAdapter(appList);
 
 

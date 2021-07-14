@@ -15,7 +15,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -41,7 +40,6 @@ import ch.bbcag.NFController.PermissionSecurityManager;
 import ch.bbcag.NFController.R;
 import ch.bbcag.NFController.databinding.FragmentMapsBinding;
 
-import static android.graphics.Color.TRANSPARENT;
 
 @SuppressWarnings("deprecation")
 public class MapsActivity extends SecurityFragmentActivity implements OnMapReadyCallback {
@@ -54,7 +52,7 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
     AppDataManager appDataManager;
     private EditText editText;
     private Marker marker;
-    private Double radius;
+
     private GoogleMap mMap;
     private FloatingActionButton floatingActionButton;
 
@@ -105,9 +103,7 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
             }
             marker = mMap.addMarker(new MarkerOptions().position(placeLatLng).title(place.getName() + " " + place.getAddress()));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(placeLatLng, 15));
-            if (radius != null) {
-                mMap.addCircle(new CircleOptions().center(placeLatLng).radius(radius).strokeColor(TRANSPARENT).fillColor(0x50021CDE));
-            }
+
 
         } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
             assert data != null;

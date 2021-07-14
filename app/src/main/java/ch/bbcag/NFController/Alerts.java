@@ -24,6 +24,21 @@ public class Alerts {
         permissionAlert.setCanceledOnTouchOutside(false);
     }
 
+    private void deletedialog(int position,Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("NFC is disabled")
+                .setMessage("You must enable NFC to use this app.")
+                .setPositiveButton("delete", (dialog, which) -> {
+                    Const.taskcontainer.remove(position);
+                    context.startActivity( new Intent(context, TaskAdder.class));
+
+                })
+
+                .setNegativeButton("edit", (dialog, which) -> context.startActivity(new Intent(android.provider.Settings.ACTION_NFC_SETTINGS)))
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
     public void diplayNoGeofenceActiveAlert(Context context) {
         AlertDialog noGeofenceActiveAlert = new AlertDialog.Builder(context).setTitle("No Geofences active")
                 .setMessage("There are currently no geofences active. " +

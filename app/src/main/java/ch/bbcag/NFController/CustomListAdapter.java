@@ -1,4 +1,4 @@
-package ch.bbcag.NFController.CustomLists;
+package ch.bbcag.NFController;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -18,7 +18,7 @@ import ch.bbcag.NFController.TaskAdder;
 
 
 @SuppressWarnings("rawtypes")
-public class CustomList extends ArrayAdapter {
+public class CustomListAdapter extends ArrayAdapter {
     private final String[] listEntries;
 
     private final Drawable[] icons;
@@ -26,7 +26,7 @@ public class CustomList extends ArrayAdapter {
     private final int layout;
 
 
-    public CustomList(Activity context, String[] countryNames, Drawable[] icons, int layout) {
+    public CustomListAdapter(Activity context, String[] countryNames, Drawable[] icons, int layout) {
         //noinspection unchecked
         super(context, R.layout.custom_list_item, countryNames);
         this.context = context;
@@ -71,7 +71,7 @@ public class CustomList extends ArrayAdapter {
                     Intent intent = new Intent(getContext(), TaskAdder.class);
 
                     context.startActivity(intent);
-                    context.finish();
+
                 })
 
                 .setNegativeButton("edit", (dialog, which) -> context.startActivity(new Intent(android.provider.Settings.ACTION_NFC_SETTINGS)))
