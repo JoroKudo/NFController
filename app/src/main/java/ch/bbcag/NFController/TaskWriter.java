@@ -30,17 +30,14 @@ public class TaskWriter extends NFCBase {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 
         if (tag != null) {
-
 
             NdefRecord[] rec = new NdefRecord[Const.taskcontainer.size() + 1];
             NdefRecord[] rec2 = new NdefRecord[Const.taskcontainer.size() + 1];
 
             for (int i = 0; i < Const.taskcontainer.size(); i++) {
-
                 String messageToWrite = Const.taskcontainer.get(i)[0]
                         + Const.SPACER + Const.taskcontainer.get(i)[1]
                         + Const.SPACER + Const.taskcontainer.get(i)[2]
@@ -52,16 +49,13 @@ public class TaskWriter extends NFCBase {
                         + Const.SPACER + Const.taskcontainer.get(i)[8]
                         + Const.SPACER + Const.taskcontainer.get(i)[9];
                 rec2[i] = NdefRecord.createMime("my/tag", messageToWrite.getBytes());
-                rec2[i + 1] = NdefRecord.createMime("my/tag", "wow".getBytes());
-                NdefRecord nder = new NdefRecord((short) 2, "my/tag".getBytes(), rec2[i].getId(), messageToWrite.getBytes());
-                NdefRecord nder2 = new NdefRecord((short) 4, "my/tag".getBytes(), rec2[i + 1].getId(), "wow".getBytes());
+                rec2[i + 1] = NdefRecord.createMime("my/tag", "wow" .getBytes());
+                NdefRecord nder = new NdefRecord((short) 2, "my/tag" .getBytes(), rec2[i].getId(), messageToWrite.getBytes());
+                NdefRecord nder2 = new NdefRecord((short) 4, "my/tag" .getBytes(), rec2[i + 1].getId(), "wow" .getBytes());
                 rec[i] = nder;
                 rec[i + 1] = nder2;
-
-
             }
             NdefMessage message = new NdefMessage(rec);
-
 
             if (writeTag(tag, message)) {
                 Toast.makeText(this, (getString(R.string.Tag_write_success)), Toast.LENGTH_SHORT).show();
@@ -72,8 +66,6 @@ public class TaskWriter extends NFCBase {
             } else {
                 Toast.makeText(this, (getString(R.string.Tag_write_error)), Toast.LENGTH_SHORT).show();
             }
-
-
         }
     }
 

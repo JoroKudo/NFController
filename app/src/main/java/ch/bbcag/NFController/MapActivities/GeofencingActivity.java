@@ -24,6 +24,7 @@ import ch.bbcag.NFController.AppDataManager;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.NfcHome;
 import ch.bbcag.NFController.PermissionSecurityManager;
+import ch.bbcag.NFController.R;
 
 public class GeofencingActivity extends AppCompatActivity {
 
@@ -59,14 +60,13 @@ public class GeofencingActivity extends AppCompatActivity {
     private void addGeofence() {
         if (checkForMyRequiredLocationPermissions()) {
             geofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
-                    .addOnSuccessListener(this, aVoid -> Toast.makeText(getApplicationContext(), ("Geofence added"), Toast.LENGTH_SHORT).show())
-                    .addOnFailureListener(this, e -> Toast.makeText(getApplicationContext(), ("failed to add Geofence"), Toast.LENGTH_SHORT).show());
+                    .addOnSuccessListener(this, aVoid -> Toast.makeText(getApplicationContext(), (getApplicationContext().getResources().getString(R.string.geofence_added_toast)), Toast.LENGTH_SHORT).show())
+                    .addOnFailureListener(this, e -> Toast.makeText(getApplicationContext(), (getApplicationContext().getResources().getString(R.string.failed_add_geofence_toast)), Toast.LENGTH_SHORT).show());
         }
         Intent NFCHomeIntent = new Intent(this, NfcHome.class);
         startActivity(NFCHomeIntent);
 
     }
-
 
     private GeofencingRequest getGeofencingRequest() {
         GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
@@ -109,6 +109,4 @@ public class GeofencingActivity extends AppCompatActivity {
         createGeofence(myId, latitude, longitude, radius, expirationTime);
         addGeofence();
     }
-
-
 }

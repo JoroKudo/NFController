@@ -19,7 +19,7 @@ public class ProcedureSelector extends AppCompatActivity {
         ListView listView = findViewById(R.id.mobile_list);
         ArrayAdapter<?> adapter = new ArrayAdapter<>(this, R.layout.task_list_item, Const.procedures);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener((parent, viewv, position, id) -> {
+        listView.setOnItemClickListener((parent, view, position, id) -> {
             Const.taskcontainer = r.readProcedures(Const.procedures.get(position));
             Intent intent = new Intent(this, TaskAdder.class);
             startActivity(intent);

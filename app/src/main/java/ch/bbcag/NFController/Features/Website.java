@@ -12,14 +12,12 @@ public class Website {
         this.context = context;
     }
 
-
-    public void opensite(String url) {
+    public void openSite(String url) {
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
             url = "http://" + url;
         }
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         context.startActivity(browserIntent);
-
     }
 
 }

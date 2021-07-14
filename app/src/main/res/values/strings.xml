@@ -19,6 +19,8 @@
     <string name="str_Read_with_nfc">Read NFC Tag</string>
     <string name="str_Wipe_with_nfc">Wipe NFC Tag</string>
     <string name="str_Write_with_nfc">Write NFC Tag</string>
+    <string name="NFC_disabled_Info">NFC is disabled</string>
+    <string name="NFC_must_be_enabled_message">NFC must be enabled to use the key function of your application</string>
     <string name="Tag_wipe_success">Successfully wiped Tag !</string>
     <string name="Tag_write_error">Error Writing Message !</string>
     <string name="Tag_write_success">Successfully written to Tag !</string>
@@ -28,7 +30,9 @@
     <string name="attr">attribute</string>
     <string name="cancel">Don\'t wipe it</string>
     <string name="close">close</string>
-    <string name="delete">Delete</string>
+    <string name="delete">delete</string>
+    <string name="delete_dialog_positive_button">delete</string>
+    <string name="delete_dialog_negative_button">edit</string>
     <string name="empty_tag">Empty Tag</string>
     <string name="h">H</string>
     <string name="m">M</string>
@@ -49,4 +53,24 @@
     <string name="turn_off">Turn Off</string>
     <string name="turn_on">Turn On</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false" tools:ignore="Typos">AIzaSyDmjg1GfxqjVmhrp-2QtTTOt7gznCQXGQE</string>
+    <string name="on">1</string>
+    <string name="off">0</string>
+    <string name="app_store_web_application_redirect_URL">https://play.google.com/store/apps/details?id=</string>
+    <string name="app_store_redirect_URL">market://details?id=</string>
+    <string name="version_too_high_info">This function is not working on the newest version of android</string>
+    <string name="geofence_added_toast">Geofence added</string>
+    <string name="failed_add_geofence_toast">failed to add geofence</string>
+    <string name="geofencing_transition_occurred">you\'\re in</string>
+    <string name="map_not_loading_toast">map is not loading. Please try again later</string>
+    <string name="no_place_selected_toast">please select a place on the map to continue</string>
+    <string name="permission_denied_toast_info">Without the needed permissions, the geofencing feature will not be available</string>
+    <string name="no_geofence_active_alert_message">Without the needed permissions, the geofencing feature will not be available</string>
+    <string name="no_geofence_active_alert_title">No Geofences active</string>
+    <string name="no_geofence_active_alert_positive_button">got it</string>
+    <string name="no_geofence_active_alert_negative_button">cancel</string>
+    <string name="please_enter_text_error">Please enter the text to write</string>
+    <string name="version_not_compatible_info">This function is not working on this version of android</string>
+    <string name="please_grant_location_persmissions_message">Please grant the required permissions to use the geofencing feature</string>
+    <string name="request_multiple_permissions_button">continue</string>
+    <string name="please_change_location_settings_message">Please change your Location settings to ALLOW ALL THE TIME to use the geofencing feature.</string>
 </resources>

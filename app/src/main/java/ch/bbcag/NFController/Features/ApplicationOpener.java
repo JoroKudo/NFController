@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import ch.bbcag.NFController.R;
+
 public class ApplicationOpener {
 
     private final Context context;
@@ -19,9 +21,9 @@ public class ApplicationOpener {
         if (launch == null) {
             try {
                 // if play store installed, open play store, else open browser
-                launch = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName));
+                launch = new Intent(Intent.ACTION_VIEW, Uri.parse(context.getResources().getString(R.string.app_store_redirect_URL) + packageName));
             } catch (Exception e) {
-                launch = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + packageName));
+                launch = new Intent(Intent.ACTION_VIEW, Uri.parse(context.getResources().getString(R.string.app_store_web_application_redirect_URL) + packageName));
             }
         }
         context.startActivity(launch);

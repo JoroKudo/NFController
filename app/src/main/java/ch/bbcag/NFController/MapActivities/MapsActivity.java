@@ -155,7 +155,7 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
             mapFragment.getMapAsync(this);
         } catch (NullPointerException e) {
             Log.e("NullPointerException", "Map ist not loading");
-            Toast.makeText(getApplicationContext(), "Map is not loading", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.map_not_loading_toast), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -173,7 +173,7 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
 
     private void startActivityIfPlaceSelected() {
         if (appDataManager.getSplitted()[0].isEmpty() || appDataManager.getSplitted()[2].isEmpty() || appDataManager.getSplitted()[3].isEmpty() || appDataManager.getSplitted()[4].isEmpty()) {
-            Toast.makeText(this, "please Select a Place on the map to continue", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getApplicationContext().getResources().getString(R.string.no_place_selected_toast), Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(getApplicationContext(), SelectGeofencingRadiusActivity.class);
             startActivity(intent);

@@ -31,7 +31,7 @@ public class FeatureActivator {
                 getVolume(context).setToTone();
                 break;
             case "mute":
-                getVolume(context).setTomute();
+                getVolume(context).setToMute();
                 break;
             case "vibrate":
                 getVolume(context).setToVibrate();
@@ -65,9 +65,8 @@ public class FeatureActivator {
                 break;
             case "web":
                 Website website = new Website(context);
-                website.opensite(splitted[subFeaturePosition + 1]);
+                website.openSite(splitted[subFeaturePosition + 1]);
                 break;
-
         }
     }
 

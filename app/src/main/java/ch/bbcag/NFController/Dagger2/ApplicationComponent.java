@@ -39,6 +39,4 @@ public interface ApplicationComponent {
     void inject(SelectGeofencingExpirationTimeActivity selectGeofencingExpirationTimeActivity);
 
     void inject(GeofencingFeatureSelector geofencingFeatureSelector);
-
-
 }

@@ -45,8 +45,6 @@ public class AppSelector extends Fragment {
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 
@@ -59,11 +57,9 @@ public class AppSelector extends Fragment {
 
         ListView listView = view.findViewById(R.id.mobile_list);
 
-
         // For populating list data
         CustomListAdapter appList = new CustomListAdapter(getActivity(), appNames, appIcons, R.layout.custom_list_item);
         listView.setAdapter(appList);
-
 
         listView.setOnItemClickListener((parent, clickView, position, id) -> {
 
@@ -72,15 +68,11 @@ public class AppSelector extends Fragment {
                 parent.getChildAt(i).setBackgroundColor(android.R.color.transparent);
             }
             clickView.setBackgroundColor(Color.BLUE);
-
         });
         return view;
     }
 
-    public String getapp() {
+    public String getApp() {
         return app;
-
     }
-
-
 }

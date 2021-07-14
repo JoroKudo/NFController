@@ -16,11 +16,9 @@ public class MessageParam extends Fragment {
     EditText msgInput;
     CountryCodePicker ccp;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -33,14 +31,9 @@ public class MessageParam extends Fragment {
         ccp = view.findViewById(R.id.ccp);
         ccp.registerCarrierNumberEditText(view.findViewById(R.id.wew));
         return view;
-
     }
-
 
     public String[] getMessage() {
         return new String[]{ccp.getFullNumberWithPlus(), msgInput.getText().toString()};
-
-
     }
-
 }

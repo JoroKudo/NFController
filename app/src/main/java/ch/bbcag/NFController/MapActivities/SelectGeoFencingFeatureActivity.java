@@ -17,10 +17,10 @@ public class SelectGeoFencingFeatureActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_geo_fencing_feature);
 
         Fragment fragment = new GeofencingFeatureSelector();
-        fragmentlauncher(fragment);
+        fragmentLauncher(fragment);
     }
 
-    public void fragmentlauncher(Fragment fragment) {
+    public void fragmentLauncher(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         assert fragment != null;

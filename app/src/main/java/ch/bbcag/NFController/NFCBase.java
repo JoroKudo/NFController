@@ -49,8 +49,8 @@ public class NFCBase extends AppCompatActivity {
 
     public void showNfcSettingsDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("NFC is disabled")
-                .setMessage("You must enable NFC to use this app.")
+                .setTitle(getApplicationContext().getResources().getString(R.string.NFC_disabled_Info))
+                .setMessage(getApplicationContext().getResources().getString(R.string.NFC_must_be_enabled_message))
 
                 .setPositiveButton(R.string.positive, (dialog, which) -> this.startActivity(new Intent(android.provider.Settings.ACTION_NFC_SETTINGS)))
                 .setNegativeButton(R.string.negative, (dialog, which) -> this.finish())

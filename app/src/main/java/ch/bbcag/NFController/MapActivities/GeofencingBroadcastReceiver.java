@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.Features.FeatureActivator;
 import ch.bbcag.NFController.NfcHome;
+import ch.bbcag.NFController.R;
 
 import static android.content.ContentValues.TAG;
 
@@ -42,7 +43,6 @@ public class GeofencingBroadcastReceiver extends BroadcastReceiver {
 
         if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
                 geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
-
             if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER) {
                 int subFeaturePosition = 7;
                 featureActivator.activateFeature(context, subFeaturePosition, featureActivator.getAppDataManager().getSplitted());
@@ -52,13 +52,12 @@ public class GeofencingBroadcastReceiver extends BroadcastReceiver {
             String geofenceTransitionDetails = this.toString() + geofenceTransition + triggeringGeofences;
 
             Log.i(TAG, geofenceTransitionDetails);
-            Toast.makeText(context.getApplicationContext(), "Youre in", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context.getApplicationContext(), context.getResources().getString(R.string.geofencing_transition_occurred), Toast.LENGTH_SHORT).show();
             Intent homeIntent = new Intent(context.getApplicationContext(), NfcHome.class);
             homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(homeIntent);
         } else {
             Toast.makeText(context.getApplicationContext(), TAG + (geofenceTransition), Toast.LENGTH_SHORT).show();
-
         }
     }
 }

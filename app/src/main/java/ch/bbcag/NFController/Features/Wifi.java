@@ -5,6 +5,8 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.widget.Toast;
 
+import ch.bbcag.NFController.R;
+
 @SuppressWarnings("ALL")
 public class Wifi {
 
@@ -17,7 +19,6 @@ public class Wifi {
     }
 
     public void toggleWifi(String switcher) {
-
         if (Build.VERSION.SDK_INT <= 29) {
             if (switcher.equals("1")) {
                 wifi.setWifiEnabled(true);
@@ -25,7 +26,7 @@ public class Wifi {
                 wifi.setWifiEnabled(false);
             }
         } else {
-            Toast.makeText(context, ("This function is not working on the newest version of android"), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, (context.getResources().getString(R.string.version_too_high_info)), Toast.LENGTH_SHORT).show();
 
         }
     }

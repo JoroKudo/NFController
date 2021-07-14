@@ -6,12 +6,11 @@ public class Volume {
 
     private final AudioManager audioManager;
 
-
     public Volume(AudioManager audioManager) {
         this.audioManager = audioManager;
     }
 
-    public void setTomute() {
+    public void setToMute() {
         audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
     }
 
@@ -23,9 +22,7 @@ public class Volume {
         audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
     }
 
-
     public void changeVolume(String adjuster) {
-
         int attribute = Integer.parseInt(adjuster.substring(1));
         switch (adjuster.substring(0, 1)) {
             case "+":
@@ -46,14 +43,11 @@ public class Volume {
         int adjust;
         if (isNeg) {
             adjust = AudioManager.ADJUST_LOWER;
-
         } else {
             adjust = AudioManager.ADJUST_RAISE;
-
         }
         for (int i = 0; i < abs; i++) {
             audioManager.adjustVolume(adjust, AudioManager.FLAG_PLAY_SOUND);
         }
     }
-
 }

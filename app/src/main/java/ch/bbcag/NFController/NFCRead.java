@@ -26,15 +26,14 @@ import ch.bbcag.NFController.MapActivities.GeofencingActivity;
 
 public class NFCRead extends NFCBase {
 
+    private TextView listTitle;
+
     @Inject
     public AppDataManager appDataManager;
     @Inject
     public FeatureActivator featureActivator;
     @Inject
     Alerts alerts;
-
-    private TextView listTitle;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +75,7 @@ public class NFCRead extends NFCBase {
                 if (ndefMessage != null) {
                     Parcelable[] messages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
                     if (messages != null) {
-                        rh.SaveTagdata(ndef, messages, ndef.getNdefMessage().getRecords());
+                        rh.SaveTagData(ndef, messages, ndef.getNdefMessage().getRecords());
 
                         NdefMessage[] ndefMessages = new NdefMessage[messages.length];
                         for (int i = 0; i < messages.length; i++) {
@@ -109,7 +108,6 @@ public class NFCRead extends NFCBase {
         String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-8";
         String text = new String(payload, textEncoding);
 
-
         appDataManager.setSplitted(text.split(Const.SPACER));
 
         startFinalGeofencingViewIfNeeded();
@@ -124,7 +122,6 @@ public class NFCRead extends NFCBase {
         } else {
 
             listTitle.setText(text);
-
         }
     }
 
@@ -141,7 +138,6 @@ public class NFCRead extends NFCBase {
     private boolean isAnyInformationInSplittedAvailable() {
         return appDataManager.getSplitted()[0].equals("geofencing");
     }
-
 
     private void startFinalGeofencingView() {
         Intent geofencingInfoIntent = new Intent();
@@ -168,10 +164,8 @@ public class NFCRead extends NFCBase {
                     startFinalGeofencingView();
                 }
             } catch (NullPointerException e) {
-                alerts.diplayNoGeofenceActiveAlert(this);
+                alerts.displayNoGeofenceActiveAlert(this);
             }
-
         }
-
     }
 }

@@ -16,7 +16,6 @@ public class Util {
         return (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
     }
 
-
     public static AudioManager getAudioManager(Context context) {
         return (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
@@ -33,5 +32,4 @@ public class Util {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
     }
-
 }

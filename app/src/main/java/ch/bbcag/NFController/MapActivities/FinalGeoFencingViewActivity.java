@@ -53,7 +53,6 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     private TextView featureText;
     private FloatingActionButton floatingActionButtonForNFCWrite;
     private FloatingActionButton floatingActionButtonForNFCHome;
-
     private int h;
     private int m;
     private int s;
@@ -153,7 +152,6 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
             m = Math.toIntExact(TimeUnit.MILLISECONDS.toMinutes(expirationTimeInMilliseconds) - TimeUnit.HOURS.toMinutes(h));
             s = Math.toIntExact(TimeUnit.MILLISECONDS.toSeconds(expirationTimeInMilliseconds) - TimeUnit.MINUTES.toSeconds(m) - TimeUnit.HOURS.toSeconds(h));
         }
-
     }
 
     private void initializeViewContent() {
@@ -169,5 +167,4 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         floatingActionButtonForNFCWrite.hide();
         floatingActionButtonForNFCHome.hide();
     }
-
 }

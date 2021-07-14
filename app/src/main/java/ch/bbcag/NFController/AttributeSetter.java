@@ -36,33 +36,26 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         Intent intent;
         if (fragment instanceof TextParam) {
-            fulltask[1] = ((TextParam) fragment).getTextparam();
-
+            fulltask[1] = ((TextParam) fragment).getTextParam();
 
         } else if (fragment instanceof AlarmAttribute) {
             for (int i = 0; i < ((AlarmAttribute) fragment).setAlarm().length; i++) {
                 fulltask[i + 1] = ((AlarmAttribute) fragment).setAlarm()[i];
             }
-
         } else if (fragment instanceof TimerAttribute) {
             for (int i = 0; i < ((TimerAttribute) fragment).getTimer().length; i++) {
                 fulltask[i + 1] = ((TimerAttribute) fragment).getTimer()[i];
             }
-
         } else if (fragment instanceof MessageParam) {
             for (int i = 0; i < ((MessageParam) fragment).getMessage().length; i++) {
                 fulltask[i + 1] = ((MessageParam) fragment).getMessage()[i];
             }
-
         } else if (fragment instanceof IOAttribute) {
-            fulltask[1] = ((IOAttribute) fragment).getstate();
-
+            fulltask[1] = ((IOAttribute) fragment).getState();
         } else if (fragment instanceof AppSelector) {
-            fulltask[1] = ((AppSelector) fragment).getapp();
-
+            fulltask[1] = ((AppSelector) fragment).getApp();
         } else if (fragment instanceof VolumeModeParam) {
             fulltask[0] = ((VolumeModeParam) fragment).getVolMode();
-
         }
 
         Const.taskcontainer.add(fulltask);
@@ -72,12 +65,11 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
             startActivity(intent);
             this.finish();
         }
-
     }
 
     protected void initViews() {
-        LinearLayout rladdtask = findViewById(R.id.rlAddTask);
-        rladdtask.setOnClickListener(this);
+        LinearLayout llLayoutAddTask = findViewById(R.id.rlAddTask);
+        llLayoutAddTask.setOnClickListener(this);
     }
 
     private void whichFeatureHasBeenSelected() {

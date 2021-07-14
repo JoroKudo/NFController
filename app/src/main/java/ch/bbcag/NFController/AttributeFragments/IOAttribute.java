@@ -17,7 +17,6 @@ public class IOAttribute extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -41,18 +40,16 @@ public class IOAttribute extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.RadioOn:
                 if (checked)
-                    state = "1";
-
+                    state = getContext().getResources().getString(R.string.on);
                 break;
             case R.id.RadioOff:
                 if (checked)
-                    state = "0";
-
+                    state = getContext().getResources().getString(R.string.off);
                 break;
         }
     }
 
-    public String getstate() {
+    public String getState() {
         return state;
     }
 

@@ -18,7 +18,6 @@ public class VolumeModeParam extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -30,24 +29,20 @@ public class VolumeModeParam extends Fragment {
         Spinner dropdown = view.findViewById(R.id.spinner1);
         String[] items = new String[]{"mute", "vibrate", "tone"};
         ArrayAdapter<?> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, items);
-//set the spinners adapter to the previously created one.
+        //set the spinners adapter to the previously created one.
         dropdown.setAdapter(adapter);
 
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 state = items[pos];
-
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
                 state = items[0];
             }
         });
-
-
         return view;
     }
-
 
     public String getVolMode() {
         return state;

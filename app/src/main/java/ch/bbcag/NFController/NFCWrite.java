@@ -24,14 +24,11 @@ public class NFCWrite extends NFCBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nfc_write);
         initViews();
-
-
     }
 
     @Override
     protected void initViews() {
         evTagMessage = findViewById(R.id.evTagMessage);
-
         this.mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
 
@@ -45,10 +42,7 @@ public class NFCWrite extends NFCBase {
                 if (!ndef.isWritable() || ndef.getMaxSize() < size) {
                     return false;
                 }
-
                 ndef.writeNdefMessage(message);
-
-
                 return true;
             } else {
                 NdefFormatable format = NdefFormatable.get(tag);
@@ -84,7 +78,6 @@ public class NFCWrite extends NFCBase {
                 NdefRecord record = NdefRecord.createMime(messageToWrite, messageToWrite.getBytes());
                 NdefMessage message = new NdefMessage(new NdefRecord[]{record});
 
-
                 if (writeTag(tag, message)) {
                     Toast.makeText(this, (getString(R.string.Tag_write_success)), Toast.LENGTH_SHORT).show();
                     finish();
@@ -92,10 +85,8 @@ public class NFCWrite extends NFCBase {
                     Toast.makeText(this, (getString(R.string.Tag_write_error)), Toast.LENGTH_SHORT).show();
                 }
             } else {
-                evTagMessage.setError("Please enter the text to write");
+                evTagMessage.setError(getApplicationContext().getResources().getString(R.string.please_enter_text_error));
             }
-
         }
     }
-
 }
