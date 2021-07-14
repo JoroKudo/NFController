@@ -36,8 +36,8 @@
         android:layout_height="wrap_content"
         android:gravity="top"
         android:imeOptions="actionDone"
-        android:inputType="text"
         android:importantForAutofill="no"
+        android:inputType="text"
         tools:ignore="LabelFor" />
 
 </LinearLayout>

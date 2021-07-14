@@ -11,15 +11,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:contentDescription="@string/next"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.861"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.928"
-        app:srcCompat="@drawable/ic_baseline_arrow_forward_24"
-        android:contentDescription="@string/next"
-        android:focusable="true" />
+        app:srcCompat="@drawable/ic_baseline_arrow_forward_24" />
 
     <EditText
         android:id="@+id/radius_input_field"
@@ -27,6 +27,7 @@
         android:layout_height="50dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="#2E2E2E"
@@ -36,7 +37,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no"
         tools:ignore="LabelFor" />
 
     <TextView

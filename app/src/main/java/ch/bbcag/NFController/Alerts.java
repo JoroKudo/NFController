@@ -27,8 +27,8 @@ public class Alerts {
     public void diplayNoGeofenceActiveAlert(Context context) {
         AlertDialog noGeofenceActiveAlert = new AlertDialog.Builder(context).setTitle("No Geofences active")
                 .setMessage("There are currently no geofences active. " +
-                "You can add Geofences in ADD TASKS or you can get information about a Geofence through scanning a NFC Tag. ")
-                .setPositiveButton("got it", (dialog, which) -> dialog.cancel()).setNegativeButton("cancel", (dialog, which) -> context.startActivity(new Intent(context ,NfcHome.class)))
+                        "You can add Geofences in ADD TASKS or you can get information about a Geofence through scanning a NFC Tag. ")
+                .setPositiveButton("got it", (dialog, which) -> dialog.cancel()).setNegativeButton("cancel", (dialog, which) -> context.startActivity(new Intent(context, NfcHome.class)))
                 .show();
         noGeofenceActiveAlert.setCanceledOnTouchOutside(false);
     }

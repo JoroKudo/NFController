@@ -13,7 +13,7 @@ public class ApplicationOpener {
     }
 
     public void openApp(String packageName) {
-        
+
         Intent launch = context.getPackageManager().getLaunchIntentForPackage(packageName);
 
         if (launch == null) {

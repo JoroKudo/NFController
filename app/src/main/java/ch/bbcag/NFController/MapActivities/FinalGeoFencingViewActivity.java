@@ -22,6 +22,7 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
+
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 

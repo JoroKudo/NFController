@@ -46,18 +46,17 @@ import static android.graphics.Color.TRANSPARENT;
 @SuppressWarnings("deprecation")
 public class MapsActivity extends SecurityFragmentActivity implements OnMapReadyCallback {
 
-    private EditText editText;
-    private Marker marker;
-    private Double radius;
-    private GoogleMap mMap;
-    private FloatingActionButton floatingActionButton;
-
     @Inject
     PermissionSecurityManager permissionSecurityManager; // TODO make private if possible
     @Inject
     Alerts alerts;
     @Inject
     AppDataManager appDataManager;
+    private EditText editText;
+    private Marker marker;
+    private Double radius;
+    private GoogleMap mMap;
+    private FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

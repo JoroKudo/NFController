@@ -27,14 +27,13 @@ import ch.bbcag.NFController.PermissionSecurityManager;
 
 public class GeofencingActivity extends AppCompatActivity {
 
+    private final List<Geofence> geofenceList = new ArrayList<>();
     @Inject
     AppDataManager appDataManager;
     @Inject
     PermissionSecurityManager permissionSecurityManager;
-
-    List<Geofence> geofenceList = new ArrayList<>();
     private PendingIntent geofencePendingIntent;
-    GeofencingClient geofencingClient;
+    private GeofencingClient geofencingClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +67,6 @@ public class GeofencingActivity extends AppCompatActivity {
 
     }
 
-    private void removeGeofence() {
-        geofencingClient.removeGeofences(getGeofencePendingIntent())
-                .addOnSuccessListener(this, aVoid -> Toast.makeText(getApplicationContext(), ("Geofence removed successfully"), Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(this, e -> Toast.makeText(getApplicationContext(), ("failed to remove Geofence"), Toast.LENGTH_SHORT).show());
-    }
 
     private GeofencingRequest getGeofencingRequest() {
         GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
@@ -103,6 +97,7 @@ public class GeofencingActivity extends AppCompatActivity {
         }
         String ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
         String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+        assert ACCESS_BACKGROUND_LOCATION != null;
         return (ContextCompat.checkSelfPermission(this, ACCESS_BACKGROUND_LOCATION) +
                 ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) +
                 ContextCompat.checkSelfPermission(this, ACCESS_COARSE_LOCATION))
@@ -115,11 +110,5 @@ public class GeofencingActivity extends AppCompatActivity {
         addGeofence();
     }
 
-    private void stopGeoFencingMonitoring() {
-        try {
-            removeGeofence();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 }

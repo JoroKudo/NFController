@@ -18,13 +18,12 @@ import javax.inject.Inject;
 
 public class PermissionSecurityManager {
 
+    public static final int PERMISSIONS_MULTIPLE_REQUEST = 1;
     private static final String ACCESS_BACKGROUND_LOCATION = android.Manifest.permission.ACCESS_BACKGROUND_LOCATION;
     private static final String ACCESS_FINE_LOCATION = android.Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    public static final int PERMISSIONS_MULTIPLE_REQUEST = 1;
-    public final int BACKGROUND_PERMISSION_REQUEST = 2;
     private static boolean hasThePermissionAlreadyBeenDenied = false;
-
+    public final int BACKGROUND_PERMISSION_REQUEST = 2;
     private final String[] permissions = new String[]{ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION};
 
 
@@ -86,9 +85,6 @@ public class PermissionSecurityManager {
                 == PackageManager.PERMISSION_GRANTED;
     }
 
-    public boolean isBackgroundPermissionGranted(Activity activity) {
-        return ContextCompat.checkSelfPermission(activity.getApplicationContext(), ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED;
-    }
 
     public boolean hasThePermissionAlreadyBeenDenied() {
         return hasThePermissionAlreadyBeenDenied;
@@ -98,11 +94,5 @@ public class PermissionSecurityManager {
         PermissionSecurityManager.hasThePermissionAlreadyBeenDenied = hasThePermissionAlreadyBeenDenied;
     }
 
-    public int getPERMISSIONS_MULTIPLE_REQUEST() {
-        return PERMISSIONS_MULTIPLE_REQUEST;
-    }
 
-    public int getBACKGROUND_PERMISSION_REQUEST() {
-        return BACKGROUND_PERMISSION_REQUEST;
-    }
 }

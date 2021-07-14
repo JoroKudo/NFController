@@ -2,6 +2,8 @@ package ch.bbcag.NFController.CustomLists;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import ch.bbcag.NFController.Const;
 import ch.bbcag.NFController.R;
+import ch.bbcag.NFController.TaskAdder;
 
 
 @SuppressWarnings("rawtypes")
@@ -19,8 +23,10 @@ public class CustomList extends ArrayAdapter {
 
     private final Drawable[] icons;
     private final Activity context;
+    private final int layout;
 
-    public CustomList(Activity context, String[] countryNames, Drawable[] icons) {
+
+    public CustomList(Activity context, String[] countryNames, Drawable[] icons, int layout) {
         //noinspection unchecked
         super(context, R.layout.custom_list_item, countryNames);
         this.context = context;
@@ -28,7 +34,9 @@ public class CustomList extends ArrayAdapter {
 
         this.icons = icons;
 
+        this.layout = layout;
     }
+
 
     @SuppressLint("InflateParams")
     @Override
@@ -36,14 +44,38 @@ public class CustomList extends ArrayAdapter {
         View row = convertView;
         LayoutInflater inflater = context.getLayoutInflater();
         if (convertView == null)
-            row = inflater.inflate(R.layout.custom_list_item, null, true);
+            row = inflater.inflate(layout, null, true);
         TextView textViewCountry = row.findViewById(R.id.TV_ListEntry);
 
         ImageView imageFlag = row.findViewById(R.id.ImgV_icon);
 
         textViewCountry.setText(listEntries[position]);
-
-        imageFlag.setImageDrawable(icons[position]);
+        if (icons.length == 1) {
+            imageFlag.setImageDrawable(icons[0]);
+            imageFlag.setOnClickListener(v -> deletedialog(position));
+        } else {
+            imageFlag.setImageDrawable(icons[position]);
+        }
         return row;
+    }
+
+    private void deletedialog(int position) {
+        new AlertDialog.Builder(getContext())
+                .setTitle("NFC is disabled")
+                .setMessage("You must enable NFC to use this app.")
+
+                .setPositiveButton("delete", (dialog, which) -> {
+
+
+                    Const.taskcontainer.remove(position);
+                    Intent intent = new Intent(getContext(), TaskAdder.class);
+
+                    context.startActivity(intent);
+                    context.finish();
+                })
+
+                .setNegativeButton("edit", (dialog, which) -> context.startActivity(new Intent(android.provider.Settings.ACTION_NFC_SETTINGS)))
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }

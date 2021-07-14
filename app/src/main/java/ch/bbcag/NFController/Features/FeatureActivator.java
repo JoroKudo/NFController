@@ -10,7 +10,7 @@ import ch.bbcag.NFController.Util;
 
 @Singleton
 public class FeatureActivator {
-    AppDataManager appDataManager;
+    private final AppDataManager appDataManager;
 
     @Inject
     public FeatureActivator(AppDataManager appDataManager) {
@@ -67,6 +67,7 @@ public class FeatureActivator {
                 Website website = new Website(context);
                 website.opensite(splitted[subFeaturePosition + 1]);
                 break;
+
         }
     }
 

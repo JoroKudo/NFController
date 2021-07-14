@@ -2,6 +2,7 @@ package ch.bbcag.NFController;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.Arrays;
 
-import ch.bbcag.NFController.CustomLists.MyCustomAdapter;
+import ch.bbcag.NFController.CustomLists.CustomList;
 
 public class TaskAdderList extends Fragment {
 
@@ -34,7 +35,7 @@ public class TaskAdderList extends Fragment {
         ListView listView = view.findViewById(R.id.mobile_list);
         updatelist();
         @SuppressLint("UseCompatLoadingForDrawables")
-        MyCustomAdapter appList = new MyCustomAdapter(getActivity(), taskListNames, getResources().getDrawable(R.drawable.trash), R.layout.added_task_list_item);
+        CustomList appList = new CustomList(getActivity(), taskListNames, new Drawable[]{getResources().getDrawable(R.drawable.trash)}, R.layout.added_task_list_item);
         listView.setAdapter(appList);
         return view;
     }

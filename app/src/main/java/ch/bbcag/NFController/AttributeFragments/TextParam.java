@@ -33,7 +33,7 @@ public class TextParam extends Fragment {
     }
 
 
-    public String getTextinput() {
+    public String getTextparam() {
         return textInput.getText().toString();
 
     }

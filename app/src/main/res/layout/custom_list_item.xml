@@ -5,26 +5,26 @@
 
     <ImageView
 
-        android:layout_rowSpan="2"
+        android:id="@+id/ImgV_icon"
         android:layout_width="70dp"
         android:layout_height="70dp"
 
-        android:scaleType="fitXY"
-        android:id="@+id/ImgV_icon"
         android:layout_row="0"
+        android:layout_rowSpan="2"
         android:layout_column="0"
-        android:contentDescription="@string/app_icon" />
+        android:contentDescription="@string/app_icon"
+        android:scaleType="fitXY" />
 
     <TextView
+        android:id="@+id/TV_ListEntry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="1"
         android:layout_columnWeight="1"
         android:layout_marginStart="@dimen/_10sdp"
-        android:textSize="@dimen/_30sdp"
         android:textColor="#1E90FF"
-        android:id="@+id/TV_ListEntry"
-        android:layout_row="0"
-        android:layout_column="1" />
+        android:textSize="@dimen/_30sdp" />
 
 
 </GridLayout>

@@ -10,7 +10,6 @@ import android.nfc.tech.Ndef;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
 
@@ -86,7 +85,7 @@ public class NFCRead extends NFCBase {
                                 NdefRecord record = ndefMessages[i].getRecords()[j];
                                 byte[] payload = record.getPayload();
 
-                                whichActionIsOnTag(payload, record);
+                                whichActionIsOnTag(payload);
                             }
                         }
                         ndef.close();
@@ -103,13 +102,12 @@ public class NFCRead extends NFCBase {
         }
     }
 
-    private void whichActionIsOnTag(byte[] payload, NdefRecord record) throws UnsupportedEncodingException {
+    private void whichActionIsOnTag(byte[] payload) throws UnsupportedEncodingException {
         //Encode Message manually because otherwise the bytes could be interpreted as chinese characters
         String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-8";
         String text = new String(payload, textEncoding);
 
-        byte[] type = record.getType();
-        String mimetype = new String(type);
+
         appDataManager.setSplitted(text.split(Const.SPACER));
 
         startFinalGeofencingViewIfNeeded();
@@ -166,7 +164,7 @@ public class NFCRead extends NFCBase {
                 if (isAnyInformationInSplittedAvailable()) {
                     startFinalGeofencingView();
                 }
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 alerts.diplayNoGeofenceActiveAlert(this);
             }
 

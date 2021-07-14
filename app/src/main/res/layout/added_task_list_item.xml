@@ -12,18 +12,18 @@
         android:layout_row="0"
         android:layout_rowSpan="2"
         android:layout_column="1"
-        android:scaleType="fitXY"
-        android:contentDescription="@string/delete" />
+        android:contentDescription="@string/delete"
+        android:scaleType="fitXY" />
 
     <TextView
+        android:id="@+id/TV_ListEntry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_columnWeight="1"
-        android:textSize="@dimen/_30sdp"
-        android:textColor="#1E90FF"
-        android:id="@+id/TV_ListEntry"
         android:layout_row="0"
-        android:layout_column="0" />
+        android:layout_column="0"
+        android:layout_columnWeight="1"
+        android:textColor="#1E90FF"
+        android:textSize="@dimen/_30sdp" />
 
 
 </GridLayout>

@@ -20,15 +20,14 @@ import ch.bbcag.NFController.R;
 public class GeofencingFeatureSelector extends Fragment {
     private final String[] entries = {"Bluetooth off", "Bluetooth on", "WiFi off ", "WiFi on ", "TONE", "MUTE",
             "VIBRATE", "VOL", "OpenApp", "FLASHLIGHT", "OpenWebsite"};
-    private int option;
-
     @Inject
     AppDataManager appDataManager;
+    private int option;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        ((NFControllerApplication) getContext().getApplicationContext()).appComponent.inject(this);
+        ((NFControllerApplication) requireContext().getApplicationContext()).appComponent.inject(this);
 
         super.onCreate(savedInstanceState);
     }

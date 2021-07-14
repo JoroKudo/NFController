@@ -36,7 +36,8 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         Intent intent;
         if (fragment instanceof TextParam) {
-            ((TextParam) fragment).getTextinput();
+            fulltask[1] = ((TextParam) fragment).getTextparam();
+
 
         } else if (fragment instanceof AlarmAttribute) {
             for (int i = 0; i < ((AlarmAttribute) fragment).setAlarm().length; i++) {
@@ -63,12 +64,14 @@ public class AttributeSetter extends AppCompatActivity implements View.OnClickLi
             fulltask[0] = ((VolumeModeParam) fragment).getVolMode();
 
         }
+
         Const.taskcontainer.add(fulltask);
 
         if (view.getId() == R.id.rlAddTask) {
             intent = new Intent(this, TaskAdder.class);
             startActivity(intent);
         }
+
     }
 
     protected void initViews() {

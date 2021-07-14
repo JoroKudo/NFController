@@ -6,16 +6,23 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.NumberPicker;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.Arrays;
+
 import javax.inject.Inject;
+
 import ch.bbcag.NFController.AppDataManager;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.R;
 
 public class SelectGeofencingExpirationTimeActivity extends AppCompatActivity {
 
+    @Inject
+    AppDataManager appDataManager;
     private Intent intent;
     private NumberPicker numberPickerHours;
     private NumberPicker numberPickerMinutes;
@@ -24,9 +31,6 @@ public class SelectGeofencingExpirationTimeActivity extends AppCompatActivity {
     private int m;
     private int s;
     private long expirationTimeInMilliseconds;
-
-    @Inject
-    AppDataManager appDataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

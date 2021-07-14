@@ -20,9 +20,10 @@
         android:focusable="false"
         android:hint="@string/search"
         android:iconifiedByDefault="false"
+        android:importantForAutofill="no"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp"
 
+        android:paddingEnd="16dp"
         android:text="@string/search"
         android:textColor="#705A5A5A"
         android:textSize="22sp"
@@ -32,8 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/map"
         app:layout_constraintVertical_bias="0.05"
-        tools:ignore="MissingConstraints,TextFields"
-        android:importantForAutofill="no" />
+        tools:ignore="MissingConstraints,TextFields" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
@@ -53,14 +53,14 @@
         android:clickable="true"
         android:contentDescription="@string/next"
 
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.861"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.928"
-        app:srcCompat="@drawable/ic_baseline_arrow_forward_24"
 
-        android:focusable="true" />
+        app:srcCompat="@drawable/ic_baseline_arrow_forward_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

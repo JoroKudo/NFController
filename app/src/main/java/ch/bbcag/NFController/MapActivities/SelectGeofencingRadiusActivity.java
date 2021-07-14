@@ -1,23 +1,27 @@
 package ch.bbcag.NFController.MapActivities;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import javax.inject.Inject;
+
 import ch.bbcag.NFController.AppDataManager;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.R;
 
 public class SelectGeofencingRadiusActivity extends AppCompatActivity {
 
+    @Inject
+    AppDataManager appDataManager;
     private Intent intent;
     private EditText editText;
     private int radius;
-
-    @Inject
-    AppDataManager appDataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -16,8 +16,8 @@ import ch.bbcag.NFController.Database.RequestHandler;
 
 public class TaskAdder extends AppCompatActivity implements View.OnClickListener {
 
-    EditText etProcName;
     private final RequestHandler r = new RequestHandler();
+    EditText etProcName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

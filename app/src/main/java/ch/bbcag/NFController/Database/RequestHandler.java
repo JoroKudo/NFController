@@ -28,10 +28,10 @@ import ch.bbcag.NFController.Const;
 import static android.content.ContentValues.TAG;
 
 public class RequestHandler {
+    private static final ArrayList<String[]> procedures = new ArrayList<>();
+    private static final List<String> proclist = new ArrayList<>();
     private final FirebaseDatabase database = FirebaseDatabase.getInstance("https://nfcontroller-default-rtdb.europe-west1.firebasedatabase.app/");
     private int entries;
-    public static ArrayList<String[]> ayy = new ArrayList<>();
-    public static List<String> insanee = new ArrayList<>();
 
     public void SaveTagdata(Ndef ndef, Parcelable[] messages, NdefRecord[] records) {
         String e = ndef.toString();
@@ -56,7 +56,7 @@ public class RequestHandler {
             public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                 entries = (int) dataSnapshot.getChildrenCount();
                 for (int i = 0; i < entries; i++) {
-                    RequestHandler.ayy.add(i, Objects.requireNonNull(dataSnapshot.child(String.valueOf(i)).getValue(String.class)).split(Const.SPACER));
+                    procedures.add(i, Objects.requireNonNull(dataSnapshot.child(String.valueOf(i)).getValue(String.class)).split(Const.SPACER));
                 }
             }
 
@@ -64,7 +64,7 @@ public class RequestHandler {
             public void onCancelled(@NotNull DatabaseError error) {
             }
         });
-        return ayy;
+        return procedures;
     }
 
     public void addProcedure(String ProcedureName) {
@@ -78,17 +78,16 @@ public class RequestHandler {
         }
     }
 
-    public List<String> insane() {
-        insanee.clear();
-        database.getReference("www")
-                .setValue("1");
+    public List<String> getprocedureList() {
+        proclist.clear();
+
         DatabaseReference chilcountdref = database.getReference("Procedures");
         chilcountdref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot booksSnapshot : dataSnapshot.getChildren()) {
                     //loop 2 to go through all the child nodes of books node
-                    RequestHandler.insanee.add(booksSnapshot.getKey());
+                    proclist.add(booksSnapshot.getKey());
                 }
             }
 
@@ -98,7 +97,7 @@ public class RequestHandler {
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
             }
         });
-        return RequestHandler.insanee;
+        return proclist;
     }
 
     public String now() {

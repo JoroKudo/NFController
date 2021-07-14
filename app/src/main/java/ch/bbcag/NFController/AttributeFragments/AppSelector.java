@@ -21,10 +21,10 @@ import ch.bbcag.NFController.R;
 
 public class AppSelector extends Fragment {
 
+    String app;
     private String[] pkgNames;
     private String[] appNames;
     private Drawable[] appIcons;
-    String app;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class AppSelector extends Fragment {
 
 
         // For populating list data
-        CustomList appList = new CustomList(getActivity(), appNames, appIcons);
+        CustomList appList = new CustomList(getActivity(), appNames, appIcons, R.layout.custom_list_item);
         listView.setAdapter(appList);
 
 
