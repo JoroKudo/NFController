@@ -15,10 +15,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -59,27 +57,20 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     private FloatingActionButton floatingActionButtonForNFCWrite;
     private FloatingActionButton floatingActionButtonForNFCHome;
 
-    private Marker marker;
-    private Circle circle;
     private int h;
     private int m;
     private int s;
-    private String address;
-
-    private ActivityFinalGeoFencingViewBinding binding;
-
-    private GoogleMap mMap;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
 
-        address = appDataManager.getSplitted()[4];
+        String address = appDataManager.getSplitted()[4];
         double radius = Double.parseDouble(appDataManager.getSplitted()[5]);
         long expirationTimeInMilliseconds = Long.parseLong(appDataManager.getSplitted()[6]);
         super.onCreate(savedInstanceState);
-        binding = ActivityFinalGeoFencingViewBinding.inflate(getLayoutInflater());
+        ch.bbcag.NFController.databinding.ActivityFinalGeoFencingViewBinding binding = ActivityFinalGeoFencingViewBinding.inflate(getLayoutInflater());
         ConstraintLayout root = binding.getRoot();
         setContentView(root);
         Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
@@ -115,16 +106,14 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
             });
         }
 
-
     }
 
     @Override
     public void onMapReady(@NotNull GoogleMap googleMap) {
-        mMap = googleMap;
         LatLng tempLatLng = new LatLng(Double.parseDouble(appDataManager.getSplitted()[2]), Double.parseDouble(appDataManager.getSplitted()[3]));
-        marker = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(appDataManager.getSplitted()[4]));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(tempLatLng, 17));
-        circle = mMap.addCircle(new CircleOptions().center(tempLatLng).radius(Double.parseDouble(appDataManager.getSplitted()[5])).strokeColor(TRANSPARENT).fillColor(0x50021CDE));
+        googleMap.addMarker(new MarkerOptions().position(tempLatLng).title(appDataManager.getSplitted()[4]));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(tempLatLng, 17));
+        googleMap.addCircle(new CircleOptions().center(tempLatLng).radius(Double.parseDouble(appDataManager.getSplitted()[5])).strokeColor(TRANSPARENT).fillColor(0x50021CDE));
     }
 
     private void loadMap() {
@@ -145,12 +134,13 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         convertMillisecondsToTime(expirationTimeInMilliseconds);
 
         addressText.setText(address);
-        radiusText.setText(String.valueOf(radius) + "m");
+        radiusText.setText(radius + "m");
         timeText.setText(h + "h " + m + "m " + s + "s");
         featureText.setText(appDataManager.getSplitted()[9]);
     }
 
-    private void calculateExpirationTime() {
+    //For When the project is finished.
+/*    private void calculateExpirationTime() {
         long expirationTime = new SelectGeofencingExpirationTimeActivity().getExpirationTimeInMilliseconds();
         long expirationTimeInSeconds = expirationTime / 1000;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -159,7 +149,7 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
             LocalDateTime currentTimeAndDate = LocalDateTime.of(currentDate, currentTime);
             LocalDateTime timeAndDateWhenExpired = currentTimeAndDate.plusSeconds(expirationTimeInSeconds);
         }
-    }
+    }*/
 
     private void convertMillisecondsToTime(long expirationTimeInMilliseconds) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -169,7 +159,6 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         }
 
     }
-
 
     private void initializeViewContent() {
         addressText = findViewById(R.id.address);

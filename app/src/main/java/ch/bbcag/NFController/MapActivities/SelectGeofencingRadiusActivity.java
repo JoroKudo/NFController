@@ -1,16 +1,11 @@
 package ch.bbcag.NFController.MapActivities;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import javax.inject.Inject;
-
 import ch.bbcag.NFController.AppDataManager;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.R;
@@ -49,12 +44,6 @@ public class SelectGeofencingRadiusActivity extends AppCompatActivity {
             } catch (NumberFormatException e) {
                 Toast.makeText(getApplicationContext(), getResources().getString(R.string.geofencing_wrong_data_type_toast), Toast.LENGTH_SHORT).show();
             }
-
-
         });
-    }
-
-    public int getRadius() {
-        return radius;
     }
 }

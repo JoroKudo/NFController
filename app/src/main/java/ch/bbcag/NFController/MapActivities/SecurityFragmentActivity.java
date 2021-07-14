@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Inject;
 
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
@@ -19,8 +21,8 @@ public class SecurityFragmentActivity extends FragmentActivity {
     PermissionSecurityManager permissionSecurityManager;
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String @NotNull [] permissions,
+                                           int @NotNull [] grantResults) {
         ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -31,8 +33,6 @@ public class SecurityFragmentActivity extends FragmentActivity {
                     Snackbar.LENGTH_INDEFINITE).setAction("ok",
                     v -> this.startActivity(new Intent(this, TaskAdder.class))).show();
             permissionSecurityManager.setIfThePermissionHasAlreadyBeenDenied(true);
-
-
         }
     }
 }

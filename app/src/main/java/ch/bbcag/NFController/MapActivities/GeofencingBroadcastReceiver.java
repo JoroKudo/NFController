@@ -22,8 +22,6 @@ import static android.content.ContentValues.TAG;
 
 public class GeofencingBroadcastReceiver extends BroadcastReceiver {
 
-    private final int subFeaturePosition = 7;
-
     @Inject
     FeatureActivator featureActivator;
 
@@ -40,38 +38,28 @@ public class GeofencingBroadcastReceiver extends BroadcastReceiver {
             return;
         }
 
-        // Get the transition type.
         int geofenceTransition = geofencingEvent.getGeofenceTransition();
 
-        // Test that the reported transition was of interest.
         if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
                 geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
 
             if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER) {
+                int subFeaturePosition = 7;
                 featureActivator.activateFeature(context, subFeaturePosition, featureActivator.getAppDataManager().getSplitted());
             }
-            // Get the geofences that were triggered. A single event can trigger
-            // multiple geofences.
             List<Geofence> triggeringGeofences = geofencingEvent.getTriggeringGeofences();
 
-            // Get the transition details as a String.
             String geofenceTransitionDetails = this.toString() + geofenceTransition + triggeringGeofences;
 
-            // Send notification and log the transition details.
             Log.i(TAG, geofenceTransitionDetails);
             Toast.makeText(context.getApplicationContext(), "Youre in", Toast.LENGTH_SHORT).show();
             Intent homeIntent = new Intent(context.getApplicationContext(), NfcHome.class);
             homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(homeIntent);
         } else {
-            // Log the error.
             Toast.makeText(context.getApplicationContext(), TAG + (geofenceTransition), Toast.LENGTH_SHORT).show();
 
         }
-    }
-
-    private String getGeofenceTransitionDetails(GeofencingBroadcastReceiver geofencingBroadcastReceiver, int geofenceTransition, List<Geofence> triggeringGeofences) {
-        return getGeofenceTransitionDetails(geofencingBroadcastReceiver, geofenceTransition, triggeringGeofences);
     }
 }
 

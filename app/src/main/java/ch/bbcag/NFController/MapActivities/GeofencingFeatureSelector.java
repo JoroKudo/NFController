@@ -31,7 +31,6 @@ public class GeofencingFeatureSelector extends Fragment {
         ((NFControllerApplication) getContext().getApplicationContext()).appComponent.inject(this);
 
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -41,7 +40,6 @@ public class GeofencingFeatureSelector extends Fragment {
                 false);
         ListView listView = view.findViewById(R.id.mobile_list);
 
-        // For populating list data
         ArrayAdapter<?> adapter = new ArrayAdapter<>(getContext(), R.layout.task_list_item, entries);
         listView.setAdapter(adapter);
 

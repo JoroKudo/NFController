@@ -42,7 +42,9 @@ public class NfcHome extends AppCompatActivity implements View.OnClickListener {
         Intent intent;
         switch (view.getId()) {
             case R.id.rlReadNFCTAG:
-                intent = new Intent(this, NFCRead.class);
+                intent = new Intent();
+                intent.setClass(this, NFCRead.class);
+                intent.putExtra("NFCRead", "From_NFCHome_For_Reading");
                 startActivity(intent);
                 break;
 
@@ -61,7 +63,7 @@ public class NfcHome extends AppCompatActivity implements View.OnClickListener {
 
                 intent = new Intent();
                 intent.setClass(this, NFCRead.class);
-                intent.putExtra("NFCRead", "From_NFCHome");
+                intent.putExtra("NFCRead", "From_NFCHome_For_Geofencing_Info");
                 startActivity(intent);
                 break;
             case R.id.rladdtask:

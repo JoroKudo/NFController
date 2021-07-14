@@ -6,15 +6,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.NumberPicker;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.Arrays;
-
 import javax.inject.Inject;
-
 import ch.bbcag.NFController.AppDataManager;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.R;
@@ -56,14 +51,10 @@ public class SelectGeofencingExpirationTimeActivity extends AppCompatActivity {
                 startActivity(intent);
             } else
                 Toast.makeText(getApplicationContext(), getResources().getString(R.string.geofencing_expiration_time_0_value_toast), Toast.LENGTH_SHORT).show();
-
         });
-
-
     }
 
     private void setMaxValueOfNumberPickers() {
-
         for (NumberPicker numberPicker : Arrays.asList(numberPickerHours, numberPickerMinutes, numberPickerSeconds)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 numberPicker.setTextColor(Color.WHITE);
@@ -87,20 +78,8 @@ public class SelectGeofencingExpirationTimeActivity extends AppCompatActivity {
         expirationTimeInMilliseconds = (60 * (h * 60 + m) + s) * 1000;
     }
 
-
     public long getExpirationTimeInMilliseconds() {
         return expirationTimeInMilliseconds;
     }
 
-    public int getH() {
-        return h;
-    }
-
-    public int getM() {
-        return m;
-    }
-
-    public int getS() {
-        return s;
-    }
 }
