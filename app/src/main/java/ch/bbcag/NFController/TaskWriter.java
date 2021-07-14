@@ -6,6 +6,7 @@ import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
+import android.nfc.tech.IsoDep;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ public class TaskWriter extends NFCBase {
         this.mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
 
-    public boolean writeTag(Tag tag, NdefMessage message) {
+    private boolean writeTag(Tag tag, NdefMessage message) {
         int size = message.toByteArray().length;
         try {
             Ndef ndef = Ndef.get(tag);
@@ -41,9 +42,7 @@ public class TaskWriter extends NFCBase {
                 if (!ndef.isWritable() || ndef.getMaxSize() < size) {
                     return false;
                 }
-
                 ndef.writeNdefMessage(message);
-
 
                 return true;
             } else {
@@ -90,13 +89,11 @@ public class TaskWriter extends NFCBase {
                         + Const.SPACER + Const.taskcontainer.get(i)[7]
                         + Const.SPACER + Const.taskcontainer.get(i)[8]
                         + Const.SPACER + Const.taskcontainer.get(i)[9];
-                rec2[i] = NdefRecord.createMime("ee/11", messageToWrite.getBytes());
-                rec2[i + 1] = NdefRecord.createMime("android.com:pkg", "ch.bbcag.NFController".getBytes());
-
-                NdefRecord nder = new NdefRecord((short) 2, "ee/11".getBytes(), rec2[i].getId(), messageToWrite.getBytes());
-                NdefRecord nder2 = new NdefRecord((short) 4, "android.com:pkg".getBytes(), rec2[i + 1].getId(), "ch.bbcag.NFController".getBytes());
-
-                rec[i] = nder;
+                rec2[i] = NdefRecord.createMime("my/tag", messageToWrite.getBytes());
+                rec2[i + 1] = NdefRecord.createMime("my/tag", "wow".getBytes());
+                NdefRecord nder = new NdefRecord((short) 2, "my/tag".getBytes(), rec2[i].getId(), messageToWrite.getBytes());
+                NdefRecord nder2 = new NdefRecord((short) 4, "my/tag".getBytes(), rec2[i + 1].getId(), "wow".getBytes());
+                         rec[i] = nder;
                 rec[i + 1] = nder2;
 
 

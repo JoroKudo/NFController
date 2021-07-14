@@ -120,7 +120,7 @@ public class NFCRead extends NFCBase {
         } else {
 
             listTitle.setText(text);
-            Log.e("MIMETYPE", mimetype);
+
         }
     }
 
