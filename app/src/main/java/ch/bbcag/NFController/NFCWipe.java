@@ -14,16 +14,12 @@ import android.widget.Toast;
 
 public class NFCWipe extends NFCBase {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nfc_wipe);
         initViews();
-
-
     }
-
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -50,8 +46,6 @@ public class NFCWipe extends NFCBase {
                     })
                     .setNegativeButton(R.string.cancel, (dialog, id) -> finish());
             builder.show();
-
-
         }
     }
 }

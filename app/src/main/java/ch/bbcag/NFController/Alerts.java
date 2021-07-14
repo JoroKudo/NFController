@@ -14,7 +14,6 @@ public class Alerts {
     }
 
     public void displayPermissionAlert(Context context) {
-
         AlertDialog permissionAlert = new AlertDialog.Builder(context)
                 .setTitle(R.string.permission_alert_title)
                 .setMessage(R.string.permission_alert_message)
@@ -24,11 +23,11 @@ public class Alerts {
         permissionAlert.setCanceledOnTouchOutside(false);
     }
 
-    public void diplayNoGeofenceActiveAlert(Context context) {
-        AlertDialog noGeofenceActiveAlert = new AlertDialog.Builder(context).setTitle("No Geofences active")
-                .setMessage("There are currently no geofences active. " +
-                        "You can add Geofences in ADD TASKS or you can get information about a Geofence through scanning a NFC Tag. ")
-                .setPositiveButton("got it", (dialog, which) -> dialog.cancel()).setNegativeButton("cancel", (dialog, which) -> context.startActivity(new Intent(context, NfcHome.class)))
+    public void displayNoGeofenceActiveAlert(Context context) {
+        AlertDialog noGeofenceActiveAlert = new AlertDialog.Builder(context).setTitle(context.getResources().getString(R.string.no_geofence_active_alert_title))
+                .setMessage(context.getResources().getString(R.string.no_geofence_active_alert_message))
+                .setPositiveButton(context.getResources().getString(R.string.no_geofence_active_alert_positive_button), (dialog, which) -> dialog.cancel())
+                .setNegativeButton(context.getResources().getString(R.string.no_geofence_active_alert_negative_button), (dialog, which) -> context.startActivity(new Intent(context, NfcHome.class)))
                 .show();
         noGeofenceActiveAlert.setCanceledOnTouchOutside(false);
     }

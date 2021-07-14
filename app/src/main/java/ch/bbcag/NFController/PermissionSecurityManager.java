@@ -1,6 +1,7 @@
 package ch.bbcag.NFController;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -18,19 +19,18 @@ import javax.inject.Inject;
 
 public class PermissionSecurityManager {
 
-    public static final int PERMISSIONS_MULTIPLE_REQUEST = 1;
+    @SuppressLint("InlinedApi")
     private static final String ACCESS_BACKGROUND_LOCATION = android.Manifest.permission.ACCESS_BACKGROUND_LOCATION;
+    public static final int PERMISSIONS_MULTIPLE_REQUEST = 1;
     private static final String ACCESS_FINE_LOCATION = android.Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static boolean hasThePermissionAlreadyBeenDenied = false;
     public final int BACKGROUND_PERMISSION_REQUEST = 2;
     private final String[] permissions = new String[]{ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION};
 
-
     @Inject
     public PermissionSecurityManager() {
     }
-
 
     public void checkIfNotificationPermissionIsGranted(Activity activity, NotificationManager notificationManager) {
         if (Build.VERSION.SDK_INT >= 23) {
@@ -38,23 +38,20 @@ public class PermissionSecurityManager {
                 activity.startActivityForResult(new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
             }
         } else {
-            Toast.makeText(activity, ("This function is not working on this version of android"), Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, (activity.getApplicationContext().getResources().getString(R.string.version_not_compatible_info)), Toast.LENGTH_SHORT).show();
         }
     }
 
     public void requestMultiplePermissions(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            //LUEGT EB D PERMISSIONS SCHO ERTEILT WORDE SIND
             if ((ContextCompat.checkSelfPermission(activity.getApplicationContext(), ACCESS_FINE_LOCATION) +
                     ContextCompat.checkSelfPermission(activity.getApplicationContext(), ACCESS_COARSE_LOCATION))
                     != PackageManager.PERMISSION_GRANTED) {
-                //LUEGT EB D PERMISSION EN REQUEST IM UI BRUUCHT
                 if (ActivityCompat.shouldShowRequestPermissionRationale(activity, ACCESS_FINE_LOCATION) ||
                         ActivityCompat.shouldShowRequestPermissionRationale(activity, ACCESS_COARSE_LOCATION)) {
-                    //ZEIGT S UI FÜR DE REQUEST AH
                     Snackbar.make(activity.findViewById(android.R.id.content),
-                            "Please grant the required permissions to use the geofencing feature",
-                            Snackbar.LENGTH_INDEFINITE).setAction("Continue",
+                            activity.getApplicationContext().getResources().getString(R.string.please_grant_location_persmissions_message),
+                            Snackbar.LENGTH_INDEFINITE).setAction(activity.getApplicationContext().getResources().getString(R.string.request_multiple_permissions_button),
                             v -> activity.requestPermissions(
                                     permissions, PERMISSIONS_MULTIPLE_REQUEST)).show();
                 }
@@ -64,16 +61,12 @@ public class PermissionSecurityManager {
 
     public void requestBackgroundLocation(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            //LUEGT EB D PERMISSIONS SCHO ERTEILT WORDE SIND
             if (ContextCompat.checkSelfPermission(activity.getApplicationContext(), ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                //LUEGT EB D PERMISSION EN REQUEST IM UI BRUUCHT
                 if (ActivityCompat.shouldShowRequestPermissionRationale(activity, ACCESS_BACKGROUND_LOCATION)) {
-                    //ZEIGT S UI FÜR DE REQUEST AH
                     Snackbar.make(activity.findViewById(android.R.id.content),
-                            "Please change your Location settings to ALLOW ALL THE TIME to use the geofencing feature.",
-                            Snackbar.LENGTH_INDEFINITE).setAction("Continue",
+                            activity.getApplicationContext().getResources().getString(R.string.please_change_location_settings_message),
+                            Snackbar.LENGTH_INDEFINITE).setAction(activity.getApplicationContext().getResources().getString(R.string.request_multiple_permissions_button),
                             v -> activity.requestPermissions(new String[]{ACCESS_BACKGROUND_LOCATION}, BACKGROUND_PERMISSION_REQUEST)).show();
-
                 }
             }
         }
@@ -85,7 +78,6 @@ public class PermissionSecurityManager {
                 == PackageManager.PERMISSION_GRANTED;
     }
 
-
     public boolean hasThePermissionAlreadyBeenDenied() {
         return hasThePermissionAlreadyBeenDenied;
     }
@@ -93,6 +85,4 @@ public class PermissionSecurityManager {
     public void setIfThePermissionHasAlreadyBeenDenied(boolean hasThePermissionAlreadyBeenDenied) {
         PermissionSecurityManager.hasThePermissionAlreadyBeenDenied = hasThePermissionAlreadyBeenDenied;
     }
-
-
 }

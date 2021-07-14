@@ -25,7 +25,6 @@ public class CustomList extends ArrayAdapter {
     private final Activity context;
     private final int layout;
 
-
     public CustomList(Activity context, String[] countryNames, Drawable[] icons, int layout) {
         //noinspection unchecked
         super(context, R.layout.custom_list_item, countryNames);
@@ -36,7 +35,6 @@ public class CustomList extends ArrayAdapter {
 
         this.layout = layout;
     }
-
 
     @SuppressLint("InflateParams")
     @Override
@@ -52,20 +50,19 @@ public class CustomList extends ArrayAdapter {
         textViewCountry.setText(listEntries[position]);
         if (icons.length == 1) {
             imageFlag.setImageDrawable(icons[0]);
-            imageFlag.setOnClickListener(v -> deletedialog(position));
+            imageFlag.setOnClickListener(v -> deleteDialog(position));
         } else {
             imageFlag.setImageDrawable(icons[position]);
         }
         return row;
     }
 
-    private void deletedialog(int position) {
+    private void deleteDialog(int position) {
         new AlertDialog.Builder(getContext())
-                .setTitle("NFC is disabled")
-                .setMessage("You must enable NFC to use this app.")
+                .setTitle(getContext().getResources().getString(R.string.NFC_disabled_Info))
+                .setMessage(getContext().getResources().getString(R.string.NFC_must_be_enabled_message))
 
-                .setPositiveButton("delete", (dialog, which) -> {
-
+                .setPositiveButton(context.getResources().getString(R.string.delete_dialog_positive_button), (dialog, which) -> {
 
                     Const.taskcontainer.remove(position);
                     Intent intent = new Intent(getContext(), TaskAdder.class);
@@ -74,7 +71,7 @@ public class CustomList extends ArrayAdapter {
                     context.finish();
                 })
 
-                .setNegativeButton("edit", (dialog, which) -> context.startActivity(new Intent(android.provider.Settings.ACTION_NFC_SETTINGS)))
+                .setNegativeButton(context.getResources().getString(R.string.delete_dialog_negative_button), (dialog, which) -> context.startActivity(new Intent(android.provider.Settings.ACTION_NFC_SETTINGS)))
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }

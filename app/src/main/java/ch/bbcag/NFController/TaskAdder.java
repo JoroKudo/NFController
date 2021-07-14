@@ -32,10 +32,7 @@ public class TaskAdder extends AppCompatActivity implements View.OnClickListener
         tvaddtask.setOnClickListener(this);
 
         Util.fragmentLauncher(new TaskAdderList(), R.id.list_here, this);
-
-
     }
-
 
     @Override
     public void onPause() {
@@ -51,18 +48,12 @@ public class TaskAdder extends AppCompatActivity implements View.OnClickListener
                 startActivity(intent);
                 break;
 
-
             case R.id.rlWriteTask:
-
 
                 r.addProcedure(etProcName.getText().toString());
 
                 intent = new Intent(this, TaskWriter.class);
                 startActivity(intent);
-
-
         }
-
-
     }
 }

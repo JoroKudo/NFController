@@ -15,7 +15,6 @@ public class AlarmAttribute extends Fragment {
     EditText alertMessage;
     TimePicker timePicker;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,13 +25,10 @@ public class AlarmAttribute extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.attribute_alarm, container,
                 false);
-
         timePicker = view.findViewById(R.id.timePicker1);
         alertMessage = view.findViewById(R.id.AlertMessage);
 
-
         return view;
-
     }
 
     public String[] setAlarm() {
@@ -40,8 +36,5 @@ public class AlarmAttribute extends Fragment {
                 {timePicker.getCurrentHour().toString(),
                         timePicker.getCurrentMinute().toString(),
                         alertMessage.getText().toString()};
-
     }
-
-
 }

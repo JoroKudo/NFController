@@ -29,11 +29,11 @@ import static android.content.ContentValues.TAG;
 
 public class RequestHandler {
     private static final ArrayList<String[]> procedures = new ArrayList<>();
-    private static final List<String> proclist = new ArrayList<>();
-    private final FirebaseDatabase database = FirebaseDatabase.getInstance("https://nfcontroller-default-rtdb.europe-west1.firebasedatabase.app/");
+    private static final List<String> procedureList = new ArrayList<>();
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance(Const.databaseURL);
     private int entries;
 
-    public void SaveTagdata(Ndef ndef, Parcelable[] messages, NdefRecord[] records) {
+    public void SaveTagData(Ndef ndef, Parcelable[] messages, NdefRecord[] records) {
         String e = ndef.toString();
         e = e.replaceAll("\\.", "_");
         e = e.split("_")[3];
@@ -78,16 +78,16 @@ public class RequestHandler {
         }
     }
 
-    public List<String> getprocedureList() {
-        proclist.clear();
+    public List<String> getProcedureList() {
+        procedureList.clear();
 
-        DatabaseReference chilcountdref = database.getReference("Procedures");
-        chilcountdref.addValueEventListener(new ValueEventListener() {
+        DatabaseReference childCountDatabaseReference = database.getReference("Procedures");
+        childCountDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot booksSnapshot : dataSnapshot.getChildren()) {
                     //loop 2 to go through all the child nodes of books node
-                    proclist.add(booksSnapshot.getKey());
+                    procedureList.add(booksSnapshot.getKey());
                 }
             }
 
@@ -97,10 +97,10 @@ public class RequestHandler {
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
             }
         });
-        return proclist;
+        return procedureList;
     }
 
-    public String now() {
+    private String now() {
         TimeZone tz = TimeZone.getTimeZone("UTC");
         @SuppressLint("SimpleDateFormat") DateFormat df = new SimpleDateFormat(" dd-MM-yyyy HH:mm");
         df.setTimeZone(tz);

@@ -12,7 +12,6 @@ public class WhatsappTexter {
         this.context = context;
     }
 
-
     public void sendWhatsapp(String nr, String message) {
         Intent In_Whats = new Intent(Intent.ACTION_VIEW);
         In_Whats.setData(Uri.parse("http://api.whatsapp.com/send?phone=" + nr + "&&text=" + message));

@@ -1,6 +1,7 @@
 package ch.bbcag.NFController.AttributeFragments;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,6 @@ public class TimerAttribute extends Fragment {
     NumberPicker secondPicker;
     EditText timerMessage;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +37,10 @@ public class TimerAttribute extends Fragment {
         secondPicker = view.findViewById(R.id.NPseconds);
         timerMessage = view.findViewById(R.id.Timermessage);
 
-
         for (NumberPicker numberPicker : Arrays.asList(hourPicker, minutePicker, secondPicker)) {
-            numberPicker.setTextColor(Color.WHITE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                numberPicker.setTextColor(Color.WHITE);
+            }
             numberPicker.setMinValue(0);
             if (numberPicker == hourPicker) {
                 numberPicker.setMaxValue(23);
@@ -47,20 +48,14 @@ public class TimerAttribute extends Fragment {
                 numberPicker.setMaxValue(59);
             }
         }
-
-
         return view;
-
     }
 
     public String[] getTimer() {
-
         return new String[]
                 {Integer.toString(hourPicker.getValue()),
                         Integer.toString(minutePicker.getValue()),
                         Integer.toString(secondPicker.getValue()),
                         timerMessage.getText().toString()};
     }
-
-
 }

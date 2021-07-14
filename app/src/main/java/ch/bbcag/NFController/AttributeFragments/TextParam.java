@@ -13,11 +13,9 @@ import ch.bbcag.NFController.R;
 public class TextParam extends Fragment {
     EditText textInput;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -26,16 +24,10 @@ public class TextParam extends Fragment {
         View view = inflater.inflate(R.layout.attribute_text, container,
                 false);
         textInput = view.findViewById(R.id.wowidc);
-
-
         return view;
-
     }
 
-
-    public String getTextparam() {
+    public String getTextParam() {
         return textInput.getText().toString();
-
     }
-
 }
