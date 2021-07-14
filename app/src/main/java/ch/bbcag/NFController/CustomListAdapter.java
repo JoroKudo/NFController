@@ -2,8 +2,6 @@ package ch.bbcag.NFController;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +46,7 @@ public class CustomListAdapter extends ArrayAdapter {
         textViewCountry.setText(listEntries[position]);
         if (icons.length == 1) {
             imageFlag.setImageDrawable(icons[0]);
-            imageFlag.setOnClickListener(v -> new Alerts().deletedialog(position,act));
+            imageFlag.setOnClickListener(v -> new Alerts().deletedialog(position, act));
         } else {
             imageFlag.setImageDrawable(icons[position]);
         }

@@ -35,7 +35,7 @@ public class Alerts {
                     act.finish();
                 })
 
-                .setNegativeButton("dont delete", (dialog, which) ->dialog.cancel())
+                .setNegativeButton("dont delete", (dialog, which) -> dialog.cancel())
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
