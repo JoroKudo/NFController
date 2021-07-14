@@ -40,4 +40,5 @@ public interface ApplicationComponent {
 
     void inject(GeofencingFeatureSelector geofencingFeatureSelector);
 
+
 }
