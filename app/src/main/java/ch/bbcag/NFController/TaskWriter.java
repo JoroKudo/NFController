@@ -61,6 +61,7 @@ public class TaskWriter extends NFCBase {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }

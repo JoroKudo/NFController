@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
 
@@ -29,6 +30,8 @@ public class NFCRead extends NFCBase {
     public AppDataManager appDataManager;
     @Inject
     public FeatureActivator featureActivator;
+    @Inject
+    Alerts alerts;
 
     private TextView listTitle;
 
@@ -39,6 +42,8 @@ public class NFCRead extends NFCBase {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nfc_read);
+
+        startFinalGeofencingViewIfNeeded();
 
         initViews();
     }
@@ -101,7 +106,7 @@ public class NFCRead extends NFCBase {
     }
 
     private void whichActionIsOnTag(byte[] payload, NdefRecord record) throws UnsupportedEncodingException {
-        //Encode Message mannually because otherwhise the bytes could be interpreted as chinese characters
+        //Encode Message manually because otherwise the bytes could be interpreted as chinese characters
         String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-8";
         String text = new String(payload, textEncoding);
 
@@ -109,8 +114,8 @@ public class NFCRead extends NFCBase {
         String mimetype = new String(type);
         appDataManager.setSplitted(text.split(Const.SPACER));
 
-        isTheGeoFencingFeatureSelected();
-        isGeofencingInformationRequested();
+        startFinalGeofencingViewIfNeeded();
+        startGeofencingActivityIfNeeded();
         int subFeaturePosition = 0;
 
         featureActivator.activateFeature(this, subFeaturePosition, appDataManager.getSplitted());
@@ -124,21 +129,50 @@ public class NFCRead extends NFCBase {
         }
     }
 
-    public void isTheGeoFencingFeatureSelected() {
-        if (appDataManager.getSplitted()[0].equals("geofencing")) {
-            Intent intent = new Intent(getApplicationContext(), GeofencingActivity.class);
-            startActivity(intent);
+    private boolean isTheGeoFencingFeatureSelected() {
+        return appDataManager.getSplitted()[0].equals("geofencing");
+    }
+
+    private boolean isGeofencingInformationRequested() {
+        Intent intent = this.getIntent();
+        String extraInformation = intent.getExtras().getString("NFCRead");
+        return extraInformation.equals("From_NFCHome_For_Geofencing_Info");
+    }
+
+    private boolean isAnyInformationInSplittedAvailable() {
+        return appDataManager.getSplitted()[0].equals("geofencing");
+    }
+
+
+    private void startFinalGeofencingView() {
+        Intent geofencingInfoIntent = new Intent();
+        geofencingInfoIntent.setClass(this, FinalGeoFencingViewActivity.class);
+        geofencingInfoIntent.putExtra("FinalView", "From_NFCRead");
+        startActivity(geofencingInfoIntent);
+    }
+
+    private void startGeofencingActivity() {
+        Intent intent = new Intent(getApplicationContext(), GeofencingActivity.class);
+        startActivity(intent);
+    }
+
+    private void startGeofencingActivityIfNeeded() {
+        if (isTheGeoFencingFeatureSelected()) {
+            startGeofencingActivity();
         }
     }
 
-    public void isGeofencingInformationRequested() {
-        Intent intent = this.getIntent();
-        String extraInformation = intent.getExtras().getString("NFCRead");
-        if (extraInformation.equals("From_NFCHome")) {
-            Intent geofencingInfoIntent = new Intent();
-            geofencingInfoIntent.setClass(this, FinalGeoFencingViewActivity.class);
-            geofencingInfoIntent.putExtra("FinalView", "From_NFCRead");
-            startActivity(geofencingInfoIntent);
+    private void startFinalGeofencingViewIfNeeded() {
+        if (isGeofencingInformationRequested()) {
+            try {
+                if (isAnyInformationInSplittedAvailable()) {
+                    startFinalGeofencingView();
+                }
+            }catch (NullPointerException e){
+                alerts.diplayNoGeofenceActiveAlert(this);
+            }
+
         }
+
     }
 }

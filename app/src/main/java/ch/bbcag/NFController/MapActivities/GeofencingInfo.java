@@ -11,6 +11,5 @@ public class GeofencingInfo extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.geofencing_info);
-
     }
 }

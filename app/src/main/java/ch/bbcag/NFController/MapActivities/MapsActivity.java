@@ -36,7 +36,6 @@ import javax.inject.Inject;
 
 import ch.bbcag.NFController.Alerts;
 import ch.bbcag.NFController.AppDataManager;
-import ch.bbcag.NFController.Const;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.PermissionSecurityManager;
 import ch.bbcag.NFController.R;
@@ -49,13 +48,8 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
 
     private EditText editText;
     private Marker marker;
-    private Place place;
     private Double radius;
-    private FragmentMapsBinding binding;
     private GoogleMap mMap;
-    private double placeLatitude;
-    private double placeLongitude;
-    private String address;
     private FloatingActionButton floatingActionButton;
 
     @Inject
@@ -71,7 +65,7 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
 
         super.onCreate(savedInstanceState);
 
-        binding = FragmentMapsBinding.inflate(getLayoutInflater());
+        ch.bbcag.NFController.databinding.FragmentMapsBinding binding = FragmentMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
         loadMap();
@@ -92,15 +86,15 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == RESULT_OK) {
             assert data != null;
-            place = Autocomplete.getPlaceFromIntent(data);
+            Place place = Autocomplete.getPlaceFromIntent(data);
 
             editText.setText(place.getAddress());
 
             LatLng placeLatLng = place.getLatLng();
             assert placeLatLng != null;
-            placeLatitude = placeLatLng.latitude;
-            placeLongitude = placeLatLng.longitude;
-            address = place.getAddress();
+            double placeLatitude = placeLatLng.latitude;
+            double placeLongitude = placeLatLng.longitude;
+            String address = place.getAddress();
 
             appDataManager.getSplitted()[0] = "geofencing";
             appDataManager.getSplitted()[2] = String.valueOf(placeLatitude);
@@ -156,8 +150,6 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
         Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fieldList).build(getApplicationContext());
 
         startActivityForResult(intent, 100);
-
-
     }
 
     private void loadMap() {
@@ -180,7 +172,7 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
 
     private void showAlertIfNeeded() {
         if (permissionSecurityManager.hasThePermissionAlreadyBeenDenied()) {
-            alerts.DisplayPermissionAlert(this);
+            alerts.displayPermissionAlert(this);
         }
     }
 

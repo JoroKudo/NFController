@@ -22,6 +22,7 @@ import javax.inject.Inject;
 
 import ch.bbcag.NFController.AppDataManager;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
+import ch.bbcag.NFController.NfcHome;
 import ch.bbcag.NFController.PermissionSecurityManager;
 
 public class GeofencingActivity extends AppCompatActivity {
@@ -30,10 +31,6 @@ public class GeofencingActivity extends AppCompatActivity {
     AppDataManager appDataManager;
     @Inject
     PermissionSecurityManager permissionSecurityManager;
-
-    private final String ACCESS_BACKGROUND_LOCATION = Manifest.permission.ACCESS_BACKGROUND_LOCATION;
-    private final String ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private final String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
 
     List<Geofence> geofenceList = new ArrayList<>();
     private PendingIntent geofencePendingIntent;
@@ -49,7 +46,6 @@ public class GeofencingActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
     }
-
 
     private PendingIntent getGeofencePendingIntent() {
         if (geofencePendingIntent != null) {
@@ -67,16 +63,16 @@ public class GeofencingActivity extends AppCompatActivity {
                     .addOnSuccessListener(this, aVoid -> Toast.makeText(getApplicationContext(), ("Geofence added"), Toast.LENGTH_SHORT).show())
                     .addOnFailureListener(this, e -> Toast.makeText(getApplicationContext(), ("failed to add Geofence"), Toast.LENGTH_SHORT).show());
         }
+        Intent NFCHomeIntent = new Intent(this, NfcHome.class);
+        startActivity(NFCHomeIntent);
 
     }
-
 
     private void removeGeofence() {
         geofencingClient.removeGeofences(getGeofencePendingIntent())
                 .addOnSuccessListener(this, aVoid -> Toast.makeText(getApplicationContext(), ("Geofence removed successfully"), Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(this, e -> Toast.makeText(getApplicationContext(), ("failed to remove Geofence"), Toast.LENGTH_SHORT).show());
     }
-
 
     private GeofencingRequest getGeofencingRequest() {
         GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
@@ -100,8 +96,13 @@ public class GeofencingActivity extends AppCompatActivity {
         geofenceList.add(build);
     }
 
-
     public boolean checkForMyRequiredLocationPermissions() {
+        String ACCESS_BACKGROUND_LOCATION = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            ACCESS_BACKGROUND_LOCATION = Manifest.permission.ACCESS_BACKGROUND_LOCATION;
+        }
+        String ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+        String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
         return (ContextCompat.checkSelfPermission(this, ACCESS_BACKGROUND_LOCATION) +
                 ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) +
                 ContextCompat.checkSelfPermission(this, ACCESS_COARSE_LOCATION))
@@ -121,6 +122,4 @@ public class GeofencingActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
 }

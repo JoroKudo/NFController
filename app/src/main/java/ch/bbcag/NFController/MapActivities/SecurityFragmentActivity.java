@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Inject;
 
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
@@ -19,20 +21,18 @@ public class SecurityFragmentActivity extends FragmentActivity {
     PermissionSecurityManager permissionSecurityManager;
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String @NotNull [] permissions,
+                                           int @NotNull [] grantResults) {
         ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (grantResults.length <= 0 ||
                 grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Snackbar.make(this.findViewById(android.R.id.content),
-                            "Without the needed permissions, the geofencing feature will not be available",
-                            Snackbar.LENGTH_INDEFINITE).setAction("ok",
-                            v -> this.startActivity(new Intent(this, TaskAdder.class))).show();
-                    permissionSecurityManager.setIfThePermissionHasAlreadyBeenDenied(true);
-
-
-                }
+            Snackbar.make(this.findViewById(android.R.id.content),
+                    "Without the needed permissions, the geofencing feature will not be available",
+                    Snackbar.LENGTH_INDEFINITE).setAction("ok",
+                    v -> this.startActivity(new Intent(this, TaskAdder.class))).show();
+            permissionSecurityManager.setIfThePermissionHasAlreadyBeenDenied(true);
+        }
     }
 }
