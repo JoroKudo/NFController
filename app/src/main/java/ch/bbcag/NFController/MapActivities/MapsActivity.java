@@ -136,8 +136,8 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
             }
             marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latLng.latitude, latLng.longitude)).title(latLng.latitude + ", " + latLng.longitude));
             appDataManager.getSplitted()[0] = "geofencing";
-            appDataManager.getSplitted()[2] = String.valueOf(placeLatitude);
-            appDataManager.getSplitted()[3] = String.valueOf(placeLongitude);
+            appDataManager.getSplitted()[2] = String.valueOf(marker.getPosition().latitude);
+            appDataManager.getSplitted()[3] = String.valueOf(marker.getPosition().longitude);
 
             try {
                 List<Address> addresses = new Geocoder(getApplicationContext()).getFromLocation(latLng.latitude, latLng.longitude, 1);

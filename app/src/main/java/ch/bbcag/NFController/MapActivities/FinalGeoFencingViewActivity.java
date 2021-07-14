@@ -56,18 +56,15 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     private TextView radiusText;
     private TextView timeText;
     private TextView featureText;
+    private FloatingActionButton floatingActionButtonForNFCWrite;
+    private FloatingActionButton floatingActionButtonForNFCHome;
 
     private Marker marker;
     private Circle circle;
     private int h;
     private int m;
     private int s;
-
-    //TODO
-    //Differentiate between latitude when FinalView is launched from NFCRead or from FeatureSelector
-    //Problem will be solved when refactoring code and using AppDataManager as main data source.
-
-
+    private String address;
 
     private ActivityFinalGeoFencingViewBinding binding;
 
@@ -78,8 +75,9 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     protected void onCreate(Bundle savedInstanceState) {
         ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
 
-
-
+         address = appDataManager.getSplitted()[4];
+        double radius = Double.parseDouble(appDataManager.getSplitted()[5]);
+        long expirationTimeInMilliseconds = Long.parseLong(appDataManager.getSplitted()[6]);
         super.onCreate(savedInstanceState);
         binding = ActivityFinalGeoFencingViewBinding.inflate(getLayoutInflater());
         ConstraintLayout root = binding.getRoot();
@@ -94,24 +92,24 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         Intent intentBefore = this.getIntent();
         String extraInformation = intentBefore.getExtras().getString("FinalView");
         initializeViewContent();
-        setText();
+        setText(address, radius, expirationTimeInMilliseconds);
+
+        appDataManager.getSplitted()[1] = "ID";
+
+        createAndHideFloatingActionButtons();
 
         if (extraInformation.equals("FromFeatureSelector")) {
             initializeViewContent();
-            FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_NFC_writer);
-            floatingActionButton.setOnClickListener(v -> {
-
-                appDataManager.getSplitted()[1] = "ID";
-
+            floatingActionButtonForNFCWrite.show();
+            floatingActionButtonForNFCWrite.setOnClickListener(v -> {
                 Collections.addAll(Const.taskcontainer, appDataManager.getSplitted());
-
                 Intent intent = new Intent(getApplicationContext(), TaskWriter.class);
                 startActivity(intent);
             });
         } else if (extraInformation.equals("From_NFCRead")) {
             initializeViewContent();
-            FloatingActionButton floatingActionButton = findViewById(R.id.continue_to_NFC_Home);
-            floatingActionButton.setOnClickListener(v -> {
+            floatingActionButtonForNFCHome.show();
+            floatingActionButtonForNFCHome.setOnClickListener(v -> {
                 Intent homeIntent = new Intent(this, NfcHome.class);
                 startActivity(homeIntent);
             });
@@ -123,9 +121,10 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     @Override
     public void onMapReady(@NotNull GoogleMap googleMap) {
         mMap = googleMap;
-        marker = mMap.addMarker(new MarkerOptions().position(placeLatLng).title(address));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(placeLatLng, 17));
-        circle = mMap.addCircle(new CircleOptions().center(placeLatLng).radius(radius).strokeColor(TRANSPARENT).fillColor(0x50021CDE));
+        LatLng tempLatLng = new LatLng(Double.parseDouble(appDataManager.getSplitted()[2]), Double.parseDouble(appDataManager.getSplitted()[3]));
+        marker = mMap.addMarker(new MarkerOptions().position(tempLatLng).title(appDataManager.getSplitted()[4]));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(tempLatLng, 17));
+        circle = mMap.addCircle(new CircleOptions().center(tempLatLng).radius(Double.parseDouble(appDataManager.getSplitted()[5])).strokeColor(TRANSPARENT).fillColor(0x50021CDE));
     }
 
     private void loadMap() {
@@ -141,16 +140,14 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     }
 
     @SuppressLint("SetTextI18n")
-    private void setText() {
+    private void setText(String address, double radius, long expirationTimeInMilliseconds) {
 
-
-        convertMillisecondsToTime();
+        convertMillisecondsToTime(expirationTimeInMilliseconds);
 
         addressText.setText(address);
-        radiusText.setText(String.valueOf(radius));
+        radiusText.setText(String.valueOf(radius)+ "m");
         timeText.setText(h + "h " + m + "m " + s + "s");
         featureText.setText(appDataManager.getSplitted()[9]);
-
     }
 
     private void calculateExpirationTime() {
@@ -164,7 +161,7 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         }
     }
 
-    private void convertMillisecondsToTime() {
+    private void convertMillisecondsToTime(long expirationTimeInMilliseconds) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             h = Math.toIntExact(TimeUnit.MILLISECONDS.toHours(expirationTimeInMilliseconds));
             m = Math.toIntExact(TimeUnit.MILLISECONDS.toMinutes(expirationTimeInMilliseconds) - TimeUnit.HOURS.toMinutes(h));
@@ -179,6 +176,13 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         radiusText = findViewById(R.id.radius);
         timeText = findViewById(R.id.time);
         featureText = findViewById(R.id.feature);
+    }
+
+    private void createAndHideFloatingActionButtons() {
+        floatingActionButtonForNFCWrite = findViewById(R.id.continue_to_NFC_writer);
+        floatingActionButtonForNFCHome = findViewById(R.id.continue_to_NFC_Home);
+        floatingActionButtonForNFCWrite.hide();
+        floatingActionButtonForNFCHome.hide();
     }
 
 }

@@ -110,7 +110,7 @@ public class NFCRead extends NFCBase {
         appDataManager.setSplitted(text.split(Const.SPACER));
 
         isTheGeoFencingFeatureSelected();
-        //isGeofencingInformationRequested();
+        isGeofencingInformationRequested();
         int subFeaturePosition = 0;
 
         featureActivator.activateFeature(this, subFeaturePosition, appDataManager.getSplitted());
