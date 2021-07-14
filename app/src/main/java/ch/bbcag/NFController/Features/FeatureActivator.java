@@ -1,16 +1,22 @@
 package ch.bbcag.NFController.Features;
+
 import android.content.Context;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
 import ch.bbcag.NFController.AppDataManager;
 import ch.bbcag.NFController.Util;
+
 @Singleton
 public class FeatureActivator {
     AppDataManager appDataManager;
+
     @Inject
     public FeatureActivator(AppDataManager appDataManager) {
         this.appDataManager = appDataManager;
     }
+
     public void activateFeature(Context context, int subFeaturePosition, String[] splitted) {
         switch (splitted[subFeaturePosition]) {
             case "blue":
@@ -63,9 +69,11 @@ public class FeatureActivator {
                 break;
         }
     }
+
     public AppDataManager getAppDataManager() {
         return appDataManager;
     }
+
     private Volume getVolume(Context context) {
         return new Volume(Util.getAudioManager(context));
     }

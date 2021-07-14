@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import ch.bbcag.NFController.R;
 
-public  class TextParam extends Fragment {
+public class TextParam extends Fragment {
     EditText textInput;
 
 

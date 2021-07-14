@@ -13,7 +13,6 @@ import javax.inject.Inject;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 
 
-
 public class NfcHome extends AppCompatActivity implements View.OnClickListener {
 
     @Inject

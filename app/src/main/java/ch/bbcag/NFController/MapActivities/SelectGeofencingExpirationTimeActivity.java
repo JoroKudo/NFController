@@ -16,7 +16,6 @@ import java.util.Arrays;
 import javax.inject.Inject;
 
 import ch.bbcag.NFController.AppDataManager;
-import ch.bbcag.NFController.Const;
 import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.R;
 

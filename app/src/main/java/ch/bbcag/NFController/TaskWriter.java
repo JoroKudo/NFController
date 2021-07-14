@@ -6,7 +6,6 @@ import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
-import android.nfc.tech.IsoDep;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
@@ -93,7 +92,7 @@ public class TaskWriter extends NFCBase {
                 rec2[i + 1] = NdefRecord.createMime("my/tag", "wow".getBytes());
                 NdefRecord nder = new NdefRecord((short) 2, "my/tag".getBytes(), rec2[i].getId(), messageToWrite.getBytes());
                 NdefRecord nder2 = new NdefRecord((short) 4, "my/tag".getBytes(), rec2[i + 1].getId(), "wow".getBytes());
-                         rec[i] = nder;
+                rec[i] = nder;
                 rec[i + 1] = nder2;
 
 

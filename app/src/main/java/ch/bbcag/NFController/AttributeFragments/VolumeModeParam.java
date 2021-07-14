@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import ch.bbcag.NFController.R;
 
-public  class VolumeModeParam extends Fragment {
+public class VolumeModeParam extends Fragment {
     String state;
 
     @Override

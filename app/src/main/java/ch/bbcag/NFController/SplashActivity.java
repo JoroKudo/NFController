@@ -1,15 +1,12 @@
 package ch.bbcag.NFController;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,10 +20,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
         if (intent != null && NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
-            Log.e("uhkjhkjhukjhukj","iozhinjhuiknlguihkjz");
-        }
-        else{
-            Log.e("11111111111111111","555555555555555555555555");
+            Log.e("uhkjhkjhukjhukj", "iozhinjhuiknlguihkjz");
+        } else {
+            Log.e("11111111111111111", "555555555555555555555555");
         }
         super.onCreate(savedInstanceState);
 
@@ -40,6 +36,7 @@ public class SplashActivity extends AppCompatActivity {
             finish();
         }, 2000);
     }
+
     @Override
     protected void onNewIntent(Intent intent) {
         setIntent(intent);

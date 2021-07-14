@@ -75,7 +75,7 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
     protected void onCreate(Bundle savedInstanceState) {
         ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
 
-         address = appDataManager.getSplitted()[4];
+        address = appDataManager.getSplitted()[4];
         double radius = Double.parseDouble(appDataManager.getSplitted()[5]);
         long expirationTimeInMilliseconds = Long.parseLong(appDataManager.getSplitted()[6]);
         super.onCreate(savedInstanceState);
@@ -145,7 +145,7 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         convertMillisecondsToTime(expirationTimeInMilliseconds);
 
         addressText.setText(address);
-        radiusText.setText(String.valueOf(radius)+ "m");
+        radiusText.setText(String.valueOf(radius) + "m");
         timeText.setText(h + "h " + m + "m " + s + "s");
         featureText.setText(appDataManager.getSplitted()[9]);
     }

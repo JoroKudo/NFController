@@ -24,6 +24,7 @@ public class Util {
     public static NotificationManager getNotificationManager(Context context) {
         return (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
+
     public static void fragmentLauncher(Fragment fragment, int layout, AppCompatActivity apac) {
         FragmentManager fm = apac.getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();

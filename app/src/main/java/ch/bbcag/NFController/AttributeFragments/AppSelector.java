@@ -19,7 +19,7 @@ import java.util.List;
 import ch.bbcag.NFController.CustomLists.CustomList;
 import ch.bbcag.NFController.R;
 
-public  class AppSelector extends Fragment {
+public class AppSelector extends Fragment {
 
     private String[] pkgNames;
     private String[] appNames;

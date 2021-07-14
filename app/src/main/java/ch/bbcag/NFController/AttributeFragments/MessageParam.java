@@ -12,7 +12,7 @@ import com.hbb20.CountryCodePicker;
 
 import ch.bbcag.NFController.R;
 
-public  class MessageParam extends Fragment {
+public class MessageParam extends Fragment {
     EditText msgInput;
     CountryCodePicker ccp;
 

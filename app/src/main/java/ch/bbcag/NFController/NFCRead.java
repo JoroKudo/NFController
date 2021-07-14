@@ -9,7 +9,6 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.util.Log;
 import android.widget.TextView;
 
 import java.io.UnsupportedEncodingException;

@@ -11,6 +11,7 @@ import ch.bbcag.NFController.MapActivities.MapsActivity;
 
 public class TaskSelector extends AppCompatActivity {
     final String[] fulltask = {"", "", "", "", "", "", "", "", "", ""};
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

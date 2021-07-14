@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import ch.bbcag.NFController.R;
 
-public  class AlarmAttribute extends Fragment {
+public class AlarmAttribute extends Fragment {
     EditText alertMessage;
     TimePicker timePicker;
 

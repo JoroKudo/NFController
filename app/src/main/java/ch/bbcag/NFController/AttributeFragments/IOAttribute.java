@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import ch.bbcag.NFController.R;
 
-public  class IOAttribute extends Fragment implements View.OnClickListener {
+public class IOAttribute extends Fragment implements View.OnClickListener {
     String state;
 
     @Override

@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 import ch.bbcag.NFController.R;
 
-public  class TimerAttribute extends Fragment {
+public class TimerAttribute extends Fragment {
 
     NumberPicker hourPicker;
     NumberPicker minutePicker;
