@@ -9,7 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import javax.inject.Inject;
+
+import ch.bbcag.NFController.AppDataManager;
 import ch.bbcag.NFController.Const;
+import ch.bbcag.NFController.Dagger2.NFControllerApplication;
 import ch.bbcag.NFController.R;
 
 public class SelectGeofencingRadiusActivity extends AppCompatActivity {
@@ -18,11 +22,14 @@ public class SelectGeofencingRadiusActivity extends AppCompatActivity {
     private EditText editText;
     private int radius;
 
-    public SelectGeofencingRadiusActivity() {
-    }
+    @Inject
+    AppDataManager appDataManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ((NFControllerApplication) getApplicationContext()).appComponent.inject(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_geofencing_radius);
         editText = findViewById(R.id.radius_input_field);
@@ -35,7 +42,7 @@ public class SelectGeofencingRadiusActivity extends AppCompatActivity {
             try {
                 radius = Integer.parseInt(temp);
                 if (radius >= 100) {
-                    Const.fulltask[5] = String.valueOf(radius);
+                    appDataManager.getSplitted()[5] = String.valueOf(radius);
                     intent = new Intent(SelectGeofencingRadiusActivity.this, SelectGeofencingExpirationTimeActivity.class);
                     startActivity(intent);
                 } else
