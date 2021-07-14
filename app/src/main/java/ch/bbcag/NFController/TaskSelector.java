@@ -19,7 +19,7 @@ public class TaskSelector extends AppCompatActivity {
         ListView listView = findViewById(R.id.mobile_list);
         ArrayAdapter<?> adapter = new ArrayAdapter<>(this, R.layout.task_list_item, Const.tasknames);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener((parent, viewv, position, id) -> {
+        listView.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent;
             if (Const.tasknames[position].equals("Custom procedure")) {
                 fulltask[0] = "blue";

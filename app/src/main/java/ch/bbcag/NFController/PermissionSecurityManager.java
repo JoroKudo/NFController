@@ -50,7 +50,7 @@ public class PermissionSecurityManager {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(activity, ACCESS_FINE_LOCATION) ||
                         ActivityCompat.shouldShowRequestPermissionRationale(activity, ACCESS_COARSE_LOCATION)) {
                     Snackbar.make(activity.findViewById(android.R.id.content),
-                            activity.getApplicationContext().getResources().getString(R.string.please_grant_location_persmissions_message),
+                            activity.getApplicationContext().getResources().getString(R.string.please_grant_location_permissions_message),
                             Snackbar.LENGTH_INDEFINITE).setAction(activity.getApplicationContext().getResources().getString(R.string.request_multiple_permissions_button),
                             v -> activity.requestPermissions(
                                     permissions, PERMISSIONS_MULTIPLE_REQUEST)).show();

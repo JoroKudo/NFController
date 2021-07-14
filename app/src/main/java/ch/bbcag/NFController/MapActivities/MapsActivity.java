@@ -45,7 +45,7 @@ import ch.bbcag.NFController.databinding.FragmentMapsBinding;
 public class MapsActivity extends SecurityFragmentActivity implements OnMapReadyCallback {
 
     @Inject
-    PermissionSecurityManager permissionSecurityManager; // TODO make private if possible
+    public PermissionSecurityManager permissionSecurityManager;
     @Inject
     Alerts alerts;
     @Inject

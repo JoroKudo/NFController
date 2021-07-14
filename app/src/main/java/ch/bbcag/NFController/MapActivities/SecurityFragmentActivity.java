@@ -2,6 +2,7 @@ package ch.bbcag.NFController.MapActivities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -34,6 +35,9 @@ public class SecurityFragmentActivity extends FragmentActivity {
                     Snackbar.LENGTH_INDEFINITE).setAction("ok",
                     v -> this.startActivity(new Intent(this, TaskAdder.class))).show();
             permissionSecurityManager.setIfThePermissionHasAlreadyBeenDenied(true);
-        }
+        } else
+        Toast.makeText(this, "successfully changed location permissions", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
     }
 }

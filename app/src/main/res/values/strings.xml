@@ -67,10 +67,10 @@
     <string name="no_geofence_active_alert_message">Without the needed permissions, the geofencing feature will not be available</string>
     <string name="no_geofence_active_alert_title">No Geofences active</string>
     <string name="no_geofence_active_alert_positive_button">got it</string>
-    <string name="no_geofence_active_alert_negative_button">cancel</string>
+    <string name="no_geofence_active_alert_negative_button">Cancel</string>
     <string name="please_enter_text_error">Please enter the text to write</string>
     <string name="version_not_compatible_info">This function is not working on this version of android</string>
-    <string name="please_grant_location_persmissions_message">Please grant the required permissions to use the geofencing feature</string>
+    <string name="please_grant_location_permissions_message">Please grant the required permissions to use the geofencing feature</string>
     <string name="request_multiple_permissions_button">continue</string>
     <string name="please_change_location_settings_message">Please change your Location settings to ALLOW ALL THE TIME to use the geofencing feature.</string>
 </resources>

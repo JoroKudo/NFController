@@ -38,12 +38,7 @@ public class Alerts {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
-
-    public void diplayNoGeofenceActiveAlert(Context context) {
-        AlertDialog noGeofenceActiveAlert = new AlertDialog.Builder(context).setTitle("No Geofences active")
-                .setMessage("There are currently no geofences active. " +
-                        "You can add Geofences in ADD TASKS or you can get information about a Geofence through scanning a NFC Tag. ")
-                .setPositiveButton("got it", (dialog, which) -> dialog.cancel()).setNegativeButton("cancel", (dialog, which) -> context.startActivity(new Intent(context, NfcHome.class)))
+    
     public void displayNoGeofenceActiveAlert(Context context) {
         AlertDialog noGeofenceActiveAlert = new AlertDialog.Builder(context).setTitle(context.getResources().getString(R.string.no_geofence_active_alert_title))
                 .setMessage(context.getResources().getString(R.string.no_geofence_active_alert_message))
