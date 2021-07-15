@@ -56,7 +56,7 @@ public class GeofencingFeatureSelector extends Fragment {
     }
 
     private void areOptionsAvailable(int position) {
-        if (appDataManager.getSplitted()[7].equals("blue") || appDataManager.getSplitted()[7].equals("wifi")) {
+        if (appDataManager.getSplitted()[7].equals("blue") || appDataManager.getSplitted()[7].equals("wifi") || appDataManager.getSplitted()[7].equals("flash")) {
             setOption(position);
         }
     }
@@ -64,7 +64,7 @@ public class GeofencingFeatureSelector extends Fragment {
     private void setOption(int position) {
         if (position == 0 || position == 2) {
             option = 0;
-        } else if (position == 1 || position == 3) {
+        } else if (position == 1 || position == 3 || position == 9) {
             option = 1;
         }
         appDataManager.getSplitted()[8] = Integer.toString(option);

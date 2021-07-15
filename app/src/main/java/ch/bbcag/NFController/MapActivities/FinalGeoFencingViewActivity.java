@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +67,7 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         double radius = Double.parseDouble(appDataManager.getSplitted()[5]);
         long expirationTimeInMilliseconds = Long.parseLong(appDataManager.getSplitted()[6]);
         super.onCreate(savedInstanceState);
-        ch.bbcag.NFController.databinding.ActivityFinalGeoFencingViewBinding binding = ActivityFinalGeoFencingViewBinding.inflate(getLayoutInflater());
+        ActivityFinalGeoFencingViewBinding binding = ActivityFinalGeoFencingViewBinding.inflate(getLayoutInflater());
         ConstraintLayout root = binding.getRoot();
         setContentView(root);
         Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
@@ -166,5 +168,23 @@ public class FinalGeoFencingViewActivity extends FragmentActivity implements OnM
         floatingActionButtonForNFCHome = findViewById(R.id.continue_to_NFC_Home);
         floatingActionButtonForNFCWrite.hide();
         floatingActionButtonForNFCHome.hide();
+    }
+    @SuppressLint("ResourceType")
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.layout.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.delete:
+                // Red item was selected
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

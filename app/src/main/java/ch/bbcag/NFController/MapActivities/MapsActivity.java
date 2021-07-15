@@ -172,11 +172,16 @@ public class MapsActivity extends SecurityFragmentActivity implements OnMapReady
     }
 
     private void startActivityIfPlaceSelected() {
-        if (appDataManager.getSplitted()[0].isEmpty() || appDataManager.getSplitted()[2].isEmpty() || appDataManager.getSplitted()[3].isEmpty() || appDataManager.getSplitted()[4].isEmpty()) {
+        try {
+            if (appDataManager.getSplitted()[0].isEmpty() || appDataManager.getSplitted()[2].isEmpty() || appDataManager.getSplitted()[3].isEmpty() || appDataManager.getSplitted()[4].isEmpty()) {
+                Toast.makeText(this, getApplicationContext().getResources().getString(R.string.no_place_selected_toast), Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(getApplicationContext(), SelectGeofencingRadiusActivity.class);
+                startActivity(intent);
+            }
+        }catch (NullPointerException e){
             Toast.makeText(this, getApplicationContext().getResources().getString(R.string.no_place_selected_toast), Toast.LENGTH_SHORT).show();
-        } else {
-            Intent intent = new Intent(getApplicationContext(), SelectGeofencingRadiusActivity.class);
-            startActivity(intent);
         }
+
     }
 }

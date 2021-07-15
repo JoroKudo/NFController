@@ -34,7 +34,7 @@ public class TaskWriter extends NFCBase {
 
         if (tag != null) {
 
-            NdefRecord[] rec = new NdefRecord[Const.taskcontainer.size() + 1];
+            NdefRecord[] rec = new NdefRecord[Const.taskcontainer.size()];
             NdefRecord[] rec2 = new NdefRecord[Const.taskcontainer.size() + 1];
 
             for (int i = 0; i < Const.taskcontainer.size(); i++) {
@@ -51,9 +51,9 @@ public class TaskWriter extends NFCBase {
                 rec2[i] = NdefRecord.createMime("my/tag", messageToWrite.getBytes());
                 rec2[i + 1] = NdefRecord.createMime("my/tag", "wow" .getBytes());
                 NdefRecord nder = new NdefRecord((short) 2, "my/tag" .getBytes(), rec2[i].getId(), messageToWrite.getBytes());
-                NdefRecord nder2 = new NdefRecord((short) 4, "my/tag" .getBytes(), rec2[i + 1].getId(), "wow" .getBytes());
+                //NdefRecord nder2 = new NdefRecord((short) 4, "my/tag" .getBytes(), rec2[i + 1].getId(), "wow" .getBytes());
                 rec[i] = nder;
-                rec[i + 1] = nder2;
+                //rec[i + 1] = nder2;
             }
             NdefMessage message = new NdefMessage(rec);
 

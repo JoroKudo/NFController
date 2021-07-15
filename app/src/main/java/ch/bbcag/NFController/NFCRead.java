@@ -81,8 +81,8 @@ public class NFCRead extends NFCBase {
                         for (int i = 0; i < messages.length; i++) {
                             ndefMessages[i] = (NdefMessage) messages[i];
                         }
-                        for (int i = 0; i <= ndefMessages.length; i++) {
-                            for (int j = 0; j <= ndefMessages[i].getRecords().length; j++) {
+                        for (int i = 0; i <= ndefMessages.length -1; i++) {
+                            for (int j = 0; j <= ndefMessages[i].getRecords().length -1; j++) {
                                 NdefRecord record = ndefMessages[i].getRecords()[j];
                                 byte[] payload = record.getPayload();
 

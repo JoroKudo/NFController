@@ -21,6 +21,7 @@ public class PermissionSecurityManager {
 
     @SuppressLint("InlinedApi")
     private static final String ACCESS_BACKGROUND_LOCATION = android.Manifest.permission.ACCESS_BACKGROUND_LOCATION;
+    private static final String CAMERA = android.Manifest.permission.CAMERA;
     public static final int PERMISSIONS_MULTIPLE_REQUEST = 1;
     private static final String ACCESS_FINE_LOCATION = android.Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
